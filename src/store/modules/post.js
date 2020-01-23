@@ -1,9 +1,15 @@
 import {createAction, handleAction} from 'redux-actions';
 
-import {map} from 'immutable';
-import {pender} from 'redux-pender'
+import { Map } from 'immutable';
+import { pender } from 'redux-pender'
 
+//action type
+
+// actoin creator
 
 const initialSate = Map({});
 
-export default handleAction({},initialSate);
+// reducer
+export default handleAction({
+
+},initialSate);

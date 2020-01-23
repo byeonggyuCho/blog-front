@@ -6,7 +6,7 @@ const reducers = combineReducers(modules);
 const middlewares = [penderMiddleware()];
 
 
-// 개발 모드 일 때만 Redux Devtools fmf wjrdydgksek.
+// 개발 모드 일 때만 Redux Devtools를 적용합니다..
 
 const isDev = process.env.NODE_ENV === 'development';
 const devtools = isDev && window.__REDUX_DEVTOOLS_EXETENSION_COMPOSE__;
