@@ -1,0 +1,69 @@
+@import 'utils';
+
+.post-info {
+    background: $oc-blue-6;
+    height: 24rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .info {
+        margin-top: -5rem;
+        width: 1024px;
+        padding: 1rem;
+        color: white;
+        h1 {
+            font-weight: 300;
+            font-size: 3rem;
+            margin:0;
+            word-wrap: break-word; //내용이 너무 많으면 다음줄에 작성
+        }
+        .tags {
+            margin-top: 1rem;
+            font-size:1.24rem;
+            font-weight:  500;
+            a {
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+            a + a {
+                margin-left: 0.25rem; // 사이 여백
+            }
+        }
+        .date {
+            text-align: right;
+            opacity: 0.75;
+            font-style: italic;
+            font-size: 1.24rem;
+        }
+    }
+
+
+    @include media("<large") {
+        .info {
+            h1 {
+                font-size: 2rem;
+            }
+            .tags, .date {
+                font-size: 1rem;
+            }
+            width:768px;
+        }
+    }
+
+    @include media("<medium") {
+        height: auto;
+        padding-bottom: 4rem;
+
+        .info {
+            padding-top: 0;
+            margin: 0;
+            .tags {
+                margin-top:0.25rem;
+            }
+            .tags, date {
+                font-size: 0.85rem;
+            }
+        }
+    }
+}
