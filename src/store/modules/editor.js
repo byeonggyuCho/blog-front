@@ -4,6 +4,27 @@ import {Map} from 'immutable';
 import {pender} from 'redux-pender'
 
 
-const initialSate = Map({});
+// action type
+const INITIALIZE = 'editor/INITALIZE';
+const CHANGE_INPUT = 'editor/CHANGE_INPUT';
 
-export default handleAction({},initialSate);
+// action creators
+export const initialize = createAction(INITIALIZE);
+export const changeInput = createAction(CHANGE_INPUT);
+
+
+// initial state
+const initialSate = Map({
+    title: '',
+    markdown: '',
+    tags:''
+});
+
+export default handleAction({
+    [INITIALIZE]: (state, action) => initialSate,
+    [CHANGE_INPUT]: (state, action) => {
+        const {name, value } = action.payload;
+        return state.set(name, value);
+    }
+
+},initialSate);
