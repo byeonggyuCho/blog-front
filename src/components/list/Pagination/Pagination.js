@@ -1,23 +1,29 @@
 import React from 'react';
 import styles from './Paginatoin.scss';
 import classNames from 'classnames/bind';
-import Buton from '../../common/Button';
+import Button from '../../common/Button';
 
 const cx = classNames.bind(styles);
 
-const Paginatoin = () => (
-    <div classname={cx('pagination')}>
-        <Button disabled>
-            이전 페이지
-        </Button>
+const Paginatoin = ({page, lastPage, tag}) => {
+    
+    const createpagePath = (page) => {
+        return tag ? `/tag/${tag}/${page}` : `/page/${page}`;
+    }
 
-        <div className={cx('number')}>
-            페이지 1
+    return (
+        <div classname={cx('pagination')}>
+            <Button disable={page === 1} to={createpagePath(page - 1)}>
+                이전 페이지
+            </Button>
+            <div className={cx('number')}>
+                페이지 {page}
+            </div>
+            <Button disabled={page === lastPage} to={createpagePath(page + 1)}>
+                다음 페이지
+            </Button>
         </div>
-        <Button>
-            다음 페이지
-        </Button>
-    </div>
-);
+    );
+};
 
 export default Paginatoin;
