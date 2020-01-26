@@ -16,7 +16,7 @@
             position: absolute;
             transform:  translate(-50%);        //자신의 50%만큼 왼쪽으로 이동한다.
             cursor: col-resize; //리사이즈 커서
-            background: black;  // dlatl.
+           // background: black;  // 임시.
         }
 
         @include media("<medium") {

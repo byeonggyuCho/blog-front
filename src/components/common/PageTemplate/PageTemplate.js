@@ -1,19 +1,18 @@
 import React from 'react';
 import styles from './PageTemplate.scss';
 import classNames from 'classnames/bind';
-import Header from '../Header';
-import Footer from '../Footer';
-
+import Headercontainer from 'containers/common/Headercontainer';
+import FooterContainer from 'containers/commons/FooterContainer';
 
 const cx = classNames.bind(styles);
 
 const PageTemplate = ({children}) => (
     <div className={cx('page-template')}>
-        <Header/>
+        <Headercontainer/>
         <main>
             {children}
         </main>
-        <Footer/>
+        <FooterContainer/>
     </div>
 );
 

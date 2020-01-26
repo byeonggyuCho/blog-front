@@ -43,7 +43,7 @@ class EditorTemplate extends Component {
         };
 
         // separator 위치 설정
-        const rightStyle = {
+        const separatorStyle = {
             left: `${leftPercentage * 100}%`
         };
 
