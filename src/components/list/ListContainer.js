@@ -9,7 +9,7 @@ class ListContainer extends Component {
     getPostList = () => {
         // 페이지와 태그 값을 부모에서 받아온다.
         const { tag, page, ListActions } = this.props;
-        ListActoins.getPostList({
+        ListActions.getPostList({
             page,
             tag
         });
@@ -37,7 +37,7 @@ class ListContainer extends Component {
         return (
             <div>
                 <PostList posts={posts}/>
-                <Paginatoin page={page} lastPage={lastPage} tag={tag}/>
+                <Pagination page={page} lastPage={lastPage} tag={tag}/>
             </div>
         )
     }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PostInfo from 'components/post/PostInfo';
 import PostBody from 'components/post/PostBody';
-import * as postAcions from 'store/modules/post';
+import * as postActions from 'store/modules/post';
 import { connect } from 'react-redux';
 import {  bindActionCreators } from 'redux';
 
@@ -22,14 +22,14 @@ class Post extends Component {
     }
 
     render() {
-        const { loading, post } = this.props;
+        const { loading, post ,title,tgas ,publishedDate} = this.props;
 
         if(loading) return null;    // 로딩 중일 때는 아무것도 보여주지 않음.
 
         return (
             <div>
                 <PostInfo title={title} publishedDate={publishedDate} tags={tgas}/>
-                <PostBody body={body}/>
+                <PostBody body={post}/>
             </div>
         )
     }

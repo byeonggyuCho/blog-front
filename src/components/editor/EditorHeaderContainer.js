@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import EditorHeader from 'commpnents/editor/EditorHeader';
+import EditorHeader from './EditorHeader';
 import { connect } from 'react-redux';
-import { bindActionCreattors } from 'redux';
+import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
 import queryString from 'query-string';
 
-import * as editorAction from '../../store/modules/editor';
+import * as editorActions from '../../store/modules/editor';
 
 class EditorHeaderContainer extends Component {
     componentDidMount() {
@@ -26,7 +26,7 @@ class EditorHeaderContainer extends Component {
     }
 
     handleSubmit = async () => {
-        const { title, markdown, tags, EditorActions, history } = this.props;
+        const { title, markdown, tags, EditorActions, history, location } = this.props;
         const post = {
             title,
             body: markdown,
@@ -73,6 +73,6 @@ export default connect(
         postid: state.editor.get('postId')
     }),
     (dispatch) => ({
-        EditorActions: bindActionCreattors(editorActions, dispatch)
+        EditorActions: bindActionCreators(editorActions, dispatch)
     })
 )(withRouter(EditorHeaderContainer))

@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Paginatoin.scss';
+import styles from './Pagination.scss';
 import classNames from 'classnames/bind';
 import Button from '../../common/Button';
 

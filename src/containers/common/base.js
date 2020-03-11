@@ -6,7 +6,7 @@
  import LoginModalContainer from 'containers/modal/LoginModalContainer';
  import { connect } from 'react-redux';
  import { bindActionCreators } from 'redux';
- import * as baseActions from 'store/moudles/base';
+ import * as baseActions from '@/store/moudles/base';
 
  class Base extends Component {
     initialize = () => {

@@ -9,7 +9,7 @@ class EditorPaneContainer extends Component {
 
     handleChangeInput = ({name, value}) => {
         const { EditorActions } = this.props;
-        EditorActions.changeInput({name, vlaue});
+        EditorActions.changeInput({name, value});
     }
 
     render() {
@@ -19,7 +19,7 @@ class EditorPaneContainer extends Component {
         return (
             <EditorPane
                 title={title}
-                markdown={markdwon}
+                markdown={markdown}
                 tags={tags}
                 onChangeInput={handleChangeInput}
             />
@@ -31,7 +31,7 @@ export default connect(
     (state) => ({
         title: state.editor.get('titile'),
         markdown: state.editor.get('markdown'),
-        tags= state.editor.get('tags')
+        tags: state.editor.get('tags')
     }),
     (dispatch) =>({
         EditorActions: bindActionCreators(editorActions, dispatch)

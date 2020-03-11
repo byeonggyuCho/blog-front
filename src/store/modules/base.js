@@ -45,7 +45,7 @@ export default handleAction({
         return state.setIn(['modal', modalName], true);
     },
     [HIDE_MODAL]: (state, action) => {
-        const { payload: modal } = action;
+        const { payload: modalName } = action;
         return state.setIn(['modal', modalName], false);
     },
     ...pender({

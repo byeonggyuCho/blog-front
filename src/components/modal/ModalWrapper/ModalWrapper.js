@@ -19,7 +19,7 @@ class ModalWrapper extends Component {
         setTimeout(() => {
             // animate 값을 true로 설정 후
             this.setState({
-                animate: flase
+                animate: false
             });
         }, 250)
     }

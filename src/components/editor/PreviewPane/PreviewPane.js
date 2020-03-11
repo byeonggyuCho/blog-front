@@ -7,8 +7,8 @@ const cx = classNames.bind(styles);
 
 const PreviewPane = ({markdown, title}) => (
     <div className={cx('preview-pane')}>
-        <h1 className={cx('titile')}>
-            {titile}
+        <h1 className={cx('title')}>
+            {title}
         </h1>
         <div>
             <MarkdwonRender markdown={markdown}/>

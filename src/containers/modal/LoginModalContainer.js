@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import LoginModal from 'components/modal/LoginModal';
 import { connect } from 'react-redux';
-import { bindActionsCreators} from 'redux';
-import * as baseActions from 'store/module/base';
+import { bindActionCreators} from 'redux';
+import * as baseActions from '@/store/module/base';
 
 class LoginModalContainer extends Component {
     handleLogin = async() => {
@@ -55,6 +55,6 @@ export default connect(
         error: state.base.getIn(['loginModal', 'error'])
     }),
     (dispatch) => ({
-        BaseActions: bindActionsCreators(baseActions, dispatch)
+        BaseActions: bindActionCreators(baseActions, dispatch)
     })
 )(LoginModalContainer);

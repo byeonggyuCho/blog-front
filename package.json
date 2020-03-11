@@ -20,6 +20,7 @@
     "case-sensitive-paths-webpack-plugin": "2.2.0",
     "classnames": "^2.2.6",
     "codemirror": "^5.51.0",
+    "cross-env": "^7.0.2",
     "css-loader": "3.2.0",
     "dotenv": "8.2.0",
     "dotenv-expand": "5.1.0",
@@ -79,8 +80,8 @@
     "workbox-webpack-plugin": "4.3.1"
   },
   "scripts": {
-    "start": "cross-env NODE_PATH=src react-scripts start",
-    "build": "cross-env NODE_PATH=src react-scripts build",
+    "start": "cross-env node scripts/start.js",
+    "build": "cross-env  node scripts/build.js",
     "test": "node scripts/test.js"
   },
   "eslintConfig": {

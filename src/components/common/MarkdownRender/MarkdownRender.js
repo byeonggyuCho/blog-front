@@ -27,13 +27,13 @@ class MarkdownRender extends Component {
         const { markdown } = this.props;
 
         //마크다운이 존재하지 않는다면 공백처리를 한다.
-        if(!markdwon) {
+        if(!markdown) {
             this.setState({ html : ''});
             return;
         }
 
         this.setState({
-            html: marked(markdwon, {
+            html: marked(markdown, {
                 breaks: true,   // 일반 엔터로 새 줄 입력
                 sanitize: true  //마크다운 내부 html 무시
             })

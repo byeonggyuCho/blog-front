@@ -3,7 +3,7 @@ import styles from './EditorHeader.scss';
 import classNames from 'classnames/bind';
 import Button from 'components/common/Button';
 
-const cx = classNames.bind(sytles);
+const cx = classNames.bind(styles);
 
 const EditorHeader = ({onGoBack, onSubmit, isEdit}) => {
     return (
