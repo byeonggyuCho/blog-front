@@ -125,7 +125,8 @@ checkBrowsers(paths.appPath, isInteractive)
             'Setting NODE_PATH to resolve modules absolutely has been deprecated in favor of setting baseUrl in jsconfig.json (or tsconfig.json if you are using TypeScript) and will be removed in a future major release of create-react-app.'
           )
         );
-        console.log();
+      }else {
+        console.log("NODE_PATH 없음!!")
       }
 
       console.log(chalk.cyan('Starting the development server...\n'));

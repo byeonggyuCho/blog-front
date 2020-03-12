@@ -1,5 +1,4 @@
-import {createAction, handleAction} from 'redux-actions';
-
+import {createAction, handleActions} from 'redux-actions';
 import * as api from 'lib/api';
 import {Map} from 'immutable';
 import {pender} from 'redux-pender'
@@ -39,7 +38,7 @@ const initialSate = Map({
 });
 
 // reducer
-export default handleAction({
+export default handleActions({
     [SHOW_MODAL]: (state, action) => {
         const { payload: modalName } = action;
         return state.setIn(['modal', modalName], true);
@@ -69,7 +68,7 @@ export default handleAction({
         const { payload: value } = action;
         return state.setIn(['loginModal', 'password'], value);
     },
-    [INITIALIZE_LOGIN_MODAL]: (state, actoin) => {
+    [INITIALIZE_LOGIN_MODAL]: (state, action) => {
         // 로그인 모달의 상태를 초기 상태로 설정 (텍스트/오류 초기화)
         return state.set('loginModal', initialSate.get('loginModal'));
     },

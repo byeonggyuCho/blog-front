@@ -1,4 +1,4 @@
-import React, { Compnent } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as baseActions from 'store/modules/base';
@@ -6,7 +6,7 @@ import * as postActions from 'store/modules/post';
 import AskRemoveModal from 'components/modal/AskRemoveModal';
 import { withRouter } from 'react-router-dom';
 
-class AskRemoveModalContainer extends Compnent {
+class AskRemoveModalContainer extends Component {
     handleCancle = () => {
         const { BaseActions } = this.props;
         BaseActions.handleCancle('remove');

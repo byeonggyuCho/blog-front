@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Header from 'components/common/Header';
 import { withRouter } from 'react-router-dom';
-import * as baseActions from 'store/modules/base';
+import * as BaseActions from 'store/modules/base';
 import { connect } from 'react-redux';
-import { bindActoinCreators} from 'redux';
+import { bindActionCreators} from 'redux';
 
 
 class HeaderContainer extends Component {
@@ -33,6 +33,6 @@ export default connect(
         logged: state.base.get('logged')
     }),
     (dispatch) => ({
-        BaseActions: bindActoinCreators(baseActions. dispatch)
+        BaseActions: bindActionCreators(dispatch)
     })
 )(withRouter(HeaderContainer));

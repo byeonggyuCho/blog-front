@@ -6,6 +6,7 @@ import Button from 'components/common/Button';
 
 const cx = classNames.bind(styles);
 
+
 const AskRemoveModal = ({visible, onConfirm, onCancle}) => (
     <ModalWrapper visible={visible}>
         <div className={cx('question')}>

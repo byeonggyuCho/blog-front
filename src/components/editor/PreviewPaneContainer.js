@@ -1,8 +1,8 @@
-import React, { Compnent } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PreviewPane from './PreviewPane';
 
-class PreviewPaneContainer extends Compnent {
+class PreviewPaneContainer extends Component {
     render() {
         const { markdwon, titile } = this.props;
 

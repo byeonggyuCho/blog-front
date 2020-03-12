@@ -17,7 +17,7 @@ const Header = ({postId, onRemove, logged}) => (
                 {
                     // 조건에 따라 버튼 렌더링
                     // flex를 유지하려고 배열 형태로 랜더링합니다.
-                    postid && 
+                    postId && 
                     [
                         <Button key="edit" theme="outline" to={`/editor?id${postId}`}>수정</Button>,
                         <Button key="remove" theme="outline" onClick={onRemove}>삭제</Button>

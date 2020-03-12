@@ -8,8 +8,8 @@ import * as listActions from 'store/modules/list';
 class ListContainer extends Component {
     getPostList = () => {
         // 페이지와 태그 값을 부모에서 받아온다.
-        const { tag, page, ListActions } = this.props;
-        ListActions.getPostList({
+        const { tag, page, ListAction } = this.props;
+        ListAction.getPostList({
             page,
             tag
         });
@@ -43,13 +43,14 @@ class ListContainer extends Component {
     }
 }
 
-export default connect(
-    (state) =>({
-        lastPage: state.list.get('lastPage'),
-        posts: state.list.get('posts'),
-        loading: state.pender.pending['list/GET_POST_LIST']
-    }),
-    (dispatch) => ({
-        ListAction: bindActionCreators(listActions, dispatch)
-    })
-)(ListContainer);
+const mapStateToProp = (state) =>({
+    lastPage: state.list.get('lastPage'),
+    posts: state.list.get('posts'),
+    loading: state.pender.pending['list/GET_POST_LIST']
+})
+
+const mapDispatchToProp = (dispatch) => ({
+    ListAction: bindActionCreators(listActions, dispatch)
+})
+
+export default connect( mapStateToProp,mapDispatchToProp)(ListContainer);

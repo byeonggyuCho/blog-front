@@ -4,7 +4,7 @@ import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import removeMd from 'remove-markdown';
-import post from '../../../store/modules/post';
+import post from 'store/modules/post';
 
 const cx = classNames.bind(styles);
 
@@ -26,7 +26,7 @@ const PostItem = ({title, body, publishedDate, tags, id}) => {
 }
 
 const PostList = ({posts}) => {
-    const postList = post.map(
+    const postList = posts.map(
         (post)=> {
             const { _id, title, body, publishedDate, tags } = post.toJS();
             return (

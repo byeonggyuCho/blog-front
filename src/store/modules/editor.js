@@ -1,4 +1,4 @@
-import {createAction, handleAction} from 'redux-actions';
+import {createAction, handleActions} from 'redux-actions';
 
 import {Map} from 'immutable';
 import {pender} from 'redux-pender';
@@ -28,7 +28,7 @@ const initialSate = Map({
 });
 
 // reducer
-export default handleAction({
+export default handleActions({
     [INITIALIZE]: (state, action) => initialSate,
     [CHANGE_INPUT]: (state, action) => {
         const {name, value } = action.payload;

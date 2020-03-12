@@ -1,4 +1,4 @@
-import {createAction, handleAction} from 'redux-actions';
+import {createAction, handleActions} from 'redux-actions';
 
 import { Map, fromJS } from 'immutable';
 import { pender } from 'redux-pender'
@@ -19,7 +19,7 @@ const initialSate = Map({
 });
 
 // reducer
-export default handleAction({
+export default handleActions({
     ...pender({
         type: GET_POST,
         onSuccess: (state, action) => {
