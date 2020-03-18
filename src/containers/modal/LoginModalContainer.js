@@ -23,12 +23,12 @@ class LoginModalContainer extends Component {
     handleChange = (e) => {
         const { value } = e.target;
         const { BaseActions } = this.props;
-        BaseActions.chagepasswordInput(value);
+        BaseActions.changePasswordInput(value);
     }
     handleKeyPress = (e) => {
         // 인터 키를 누르면 로그인 호출
         if(e.key === 'Enter') {
-            this.handlelogin();
+            this.handleLogin();
         }
     }
 

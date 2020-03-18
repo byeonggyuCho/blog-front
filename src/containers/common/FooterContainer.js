@@ -17,7 +17,7 @@ class FooterContainer extends Component {
             return;
         }
         BaseActions.showModal('login');
-        BaseActions.initalizeLoginModal();
+        BaseActions.initializeLoginModal();
     }
     render() {
         const { handleLoginClick } = this;

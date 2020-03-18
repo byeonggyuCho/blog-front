@@ -9,14 +9,15 @@ import { all } from 'redux-saga/effects';
 import loading from './loading'
 import post from './post'
 import list, {listSaga} from './list'
+import editor, {editorSaga} from './editor'
 import base  from './base';
 
 const rootReducer = combineReducers({
-    list, base
+    list, base, editor
 })
 
 export function* rootSaga() {
-    yield all([listSaga()])
+    yield all([listSaga(), editorSaga()])
 }
 
 export default rootReducer;

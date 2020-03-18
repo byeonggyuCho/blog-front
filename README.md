@@ -1,5 +1,10 @@
 ## ReadMe
 
+## feat
+1. CRUD
+2. 로그인
+
+
 
 ## TODO
 1. saga를 적용한다.
@@ -22,6 +27,7 @@
     - dispatch 메서드를 주입하기 위해서
 7. redux-devtools-extension 사용법 
     - __REDUX_DEVTOOLS_EXETENSION_COMPOSE__랑 차이가 뭔지
+8. 설계관점에서 생각하는 연습.
 
 - scss
 - media

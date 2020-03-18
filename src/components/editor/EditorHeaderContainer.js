@@ -9,11 +9,11 @@ import * as editorActions from '../../store/modules/editor';
 
 class EditorHeaderContainer extends Component {
     componentDidMount() {
-        const { EditorActions, loaction } = this.props;
+        const { EditorActions, location } = this.props;
         EditorActions.initialize(); // 에디터를 초기화
 
         // 쿼리 파싱
-        const { id } = queryString.parse(loaction.search);
+        const { id } = queryString.parse(location.search);
         if(id) {
             // id가 존재하면 포스트 불러오기
             EditorActions.getPost(id);
@@ -26,7 +26,9 @@ class EditorHeaderContainer extends Component {
     }
 
     handleSubmit = async () => {
-        const { title, markdown, tags, EditorActions, history, location } = this.props;
+        const { title, markdown, tags = '', EditorActions, history, location } = this.props;
+
+        console.log('HD',tags)
         const post = {
             title,
             body: markdown,
@@ -54,7 +56,7 @@ class EditorHeaderContainer extends Component {
 
     render() {
         const { handleGoBack, handleSubmit } = this;
-        const { id } = queryString.parse(this.props.loaction.search);
+        const { id } = queryString.parse(this.props.location.search);
         return (
             <EditorHeader
                 onGoBack={handleGoBack}
@@ -67,10 +69,10 @@ class EditorHeaderContainer extends Component {
 
 export default connect(
     (state) => ({
-        title: state.editor.get('title'),
-        markdown: state.editor.get('markdown'),
-        tags: state.editor.get('tags'),
-        postid: state.editor.get('postId')
+        title: state.title,
+        markdown: state.markdown,
+        tags: state.tags,
+        postid: state.postId
     }),
     (dispatch) => ({
         EditorActions: bindActionCreators(editorActions, dispatch)

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import EditorPane from 'components/editor/EditorPane';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as editorActions from '../../store/modules/editor'
+import * as editorActions from 'store/modules/editor'
 
 
 class EditorPaneContainer extends Component {
@@ -13,8 +13,9 @@ class EditorPaneContainer extends Component {
     }
 
     render() {
-        const { title, tags, markdown } = this.props;
+        const { title= '', tags= '', markdown = '' } = this.props;
         const { handleChangeInput } = this;
+
 
         return (
             <EditorPane
@@ -29,9 +30,9 @@ class EditorPaneContainer extends Component {
 
 export default connect(
     (state) => ({
-        title: state.editor.get('titile'),
-        markdown: state.editor.get('markdown'),
-        tags: state.editor.get('tags')
+        title: state.editor.title,
+        markdown: state.editor.markdown,
+        tags: state.editor.tags,
     }),
     (dispatch) =>({
         EditorActions: bindActionCreators(editorActions, dispatch)

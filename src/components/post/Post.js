@@ -37,7 +37,7 @@ class Post extends Component {
 
 export default connect(
     (state) => ({
-        post: state.post.get('post'),
+        post: state.post,
         loading: state.pender.pending['post/GET_POST']  // 로딩실패
     }),
     (dispatch) => ({

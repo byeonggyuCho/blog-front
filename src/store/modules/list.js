@@ -26,9 +26,7 @@ export const listPosts = createAction(
     ({ tag,username, page}) => ({ tag, username, page})
 )
 
-
 const listPostsSaga = createRequestSaga(LIST_POSTS, postsAPI.listposts)
-
 
 export function* listSaga() {
     yield takeLatest(LIST_POSTS, listPostsSaga);

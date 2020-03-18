@@ -22,7 +22,6 @@ export const checkLogin = createAction(CHECK_LOGIN, api.checkLogin);
 export const changePasswordInput = createAction(CHANGE_PASSWORD_INPUT);
 export const initializeLoginModal = createAction(INITIALIZE_LOGIN_MODAL);
 export const tempLogin = createAction(TEMP_LOGIN);
-
 // initial state
 const initialSate = Map({
     // 모달의 가시성 상태
