@@ -4,7 +4,7 @@ import ListWrapper from '../components/list/ListWrapper';
 import ListContainer from '../components/list/ListContainer';
 
 
-const ListPage  = ({page, tag}) => {
+const ListPage  = ({page=1, tag}) => {
     // page의 기본 값을 1로 설정
     return (
 

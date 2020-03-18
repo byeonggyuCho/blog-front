@@ -28,11 +28,22 @@ class HeaderContainer extends Component {
     }
 }
 
+
+const mapDipatchToProp =  (dispatch) => ({
+    BaseActions: bindActionCreators(BaseActions,dispatch)
+})
+
+// const mapStateToProp = (state) => ({
+//     logged: state.base.get('logged')
+// })
+const mapStateToProp = (state) => {
+
+    return {
+        logged:""
+    }
+}
+
 export default connect(
-    (state) => ({
-        logged: state.base.get('logged')
-    }),
-    (dispatch) => ({
-        BaseActions: bindActionCreators(dispatch)
-    })
+    mapStateToProp,
+    mapDipatchToProp
 )(withRouter(HeaderContainer));

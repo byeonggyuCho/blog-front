@@ -37,9 +37,11 @@
    }
 }
 
+const mapDispatchToProp =  (dispatch) => ({
+    BaseActions: bindActionCreators(baseActions, dispatch)
+})
+
 export default connect(
     null,
-    (dispatch) => ({
-        BaseActions: bindActionCreators(baseActions, dispatch)
-    })
+    mapDispatchToProp
 )(Base)

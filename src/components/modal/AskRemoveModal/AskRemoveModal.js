@@ -13,7 +13,7 @@ const AskRemoveModal = ({visible, onConfirm, onCancle}) => (
             <div className={cx('title')}>포스트 삭제</div>
             <div className={cx('description')}>이 포스트를 정말로 삭제하시겠습니까?</div>
         </div>
-        <div classname={cx('options')}>
+        <div className={cx('options')}>
             <Button theme="gray" onClick={onCancle}>취소</Button>
             <Button onClick={onConfirm}>삭제</Button>
         </div>
