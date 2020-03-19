@@ -1,16 +1,16 @@
-import {createAction, handleActions} from 'redux-actions';
-
 import * as api from 'lib/api';
+import {createAction, handleActions} from 'redux-actions';
 import { takeLatest } from 'redux-saga/effects';
-import createRequestSaga from 'lib/createRequestSaga'
+import createRequestSaga, {createRequestActionTypes} from 'lib/createRequestSaga'
 
 // action type
-const GET_POST = 'post/GET_POST';
-const GET_POST_SUCCESS = 'post/GET_POST_SUCCESS';
-const GET_POST_FAILURE = 'post/GET_POST_FAILURE';
-const REMOVE_POST = 'post/REMOVE_POST';
-const REMOVE_POST_SUCCESS = 'post/REMOVE_POST_SUCCESS';
-const REMOVE_POST_FAILURE = 'post/REMOVE_POST_FAILURE';
+const [GET_POST, GET_POST_SUCCESS, GET_POST_FAILURE] = createRequestActionTypes(
+    'post/GET_POST'
+);
+
+const [REMOVE_POST, REMOVE_POST_SUCCESS, REMOVE_POST_FAILURE] = createRequestActionTypes(
+    'post/REMOVE_POST'
+);
 
 // actoin creator
 export const getPost = createAction(GET_POST);

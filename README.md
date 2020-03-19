@@ -7,7 +7,6 @@
 
 
 ## TODO
-1. saga를 적용한다.
 2. hooks로 전환한다
 3. 타입스크립트를 적용한다.
     - [참고](https://github.com/velopert/ts-react-redux-tutorial)

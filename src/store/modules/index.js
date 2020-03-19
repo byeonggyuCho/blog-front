@@ -4,7 +4,7 @@ import loading from './loading'
 import post, {postSaga} from './post'
 import list, {listSaga} from './list'
 import editor, {editorSaga} from './editor'
-import base  from './base';
+import base , {baseSaga} from './base';
 
 const rootReducer = combineReducers({
     list, base, editor, post, loading
@@ -12,6 +12,7 @@ const rootReducer = combineReducers({
 
 export function* rootSaga() {
     yield all([
+        baseSaga(),
         listSaga(), 
         editorSaga(),
         postSaga()

@@ -1,8 +1,4 @@
 import {createAction, handleActions} from 'redux-actions';
-
-// import {Map} from 'immutable';
-// import {pender} from 'redux-pender';
-// import { write } from 'fs';
 import * as api from 'lib/api';
 import createRequestSaga from 'lib/createRequestSaga' 
 import { takeLatest } from 'redux-saga/effects';

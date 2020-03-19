@@ -32,7 +32,6 @@ class HeaderContainer extends Component {
 const mapDipatchToProp =  (dispatch) => ({
     BaseActions: bindActionCreators(BaseActions,dispatch)
 })
-
 const mapStateToProp = (state) => ({
     logged: state.base.get('logged')
 })

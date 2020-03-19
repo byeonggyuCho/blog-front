@@ -5,16 +5,7 @@ import createRequestSaga, {
 } from 'lib/createRequestSaga';
 import * as postsAPI from 'lib/api/posts.js';
 import { takeLatest } from 'redux-saga/effects';
-// import { List } from 'immutable';
-// import * as api from 'lib/api';
-/* 
 
-// action types
-const GET_POST_LIST = 'list/GET_POST_LIST';
-
-// action creators
-export const getPostList = createAction(GET_POST_LIST, api.getPostList, meta => meta);
- */
 const [
     LIST_POSTS,
     LIST_POSTS_SUCCESS,
@@ -53,16 +44,6 @@ const list = handleActions(
             error,
         })
     },
-    // ...pender({
-    //     type: GET_POST_LIST,
-    //     onSuccess: (state, action) => {
-    //         const { data: posts } = action.payload;
-    //         const lastPage = action.payload.headers['last-page']
-    //         return state.set('posts', fromJS(posts))
-    //                     .set('lastPage', parseInt(lastPage, 10));
-    //     }
-    // })
-  //  },
 initialSate
 );
 

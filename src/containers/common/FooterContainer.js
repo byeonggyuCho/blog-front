@@ -5,11 +5,11 @@ import { bindActionCreators } from 'redux';
 import * as baseActions from 'store/modules/base';
 
 class FooterContainer extends Component {
-    handleLoginClick = async () => {
+    handleLoginClick = () => {
         const { BaseActions, logged } = this.props;
         if(logged) {
             try {
-                await BaseActions.logout();
+                BaseActions.logout();
                 window.location.reload(); // 페이지 새로고침
             } catch(e) {
                 console.error(e);
@@ -30,9 +30,10 @@ class FooterContainer extends Component {
 }
 
 export default connect(
-    (state) => ({
-        logged: state.base.get('logged')
-    }),
+    (state) => {
+
+        return {logged: state.base.get('logged')}
+    },
     (dispatch) => ({
         BaseActions: bindActionCreators(baseActions, dispatch)
     })
