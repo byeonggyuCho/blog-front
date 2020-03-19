@@ -13,7 +13,7 @@ const ListContainer = ({location, match}) => {
         ({ list, loading, user }) => ({
             posts: list.posts,
             error: list.error,
-            // loading: loading['posts/LIST_POSTS'],
+            loading: loading['posts/LIST_POSTS'],
             // user: user.user,
         }),
     );

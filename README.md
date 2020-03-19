@@ -17,10 +17,12 @@
 7. d3를 이용한 리포팅 페이지를 만든다.
 
 
+
 ## 정리
 1. 사가 플로우
 2. 리액트 라우터
 3. d3
+- [참고](https://riptutorial.com/ko/d3-js/example/8402/%EC%A2%8C%ED%91%9C%EA%B3%84)
 4. 코드 스플리트
 5. redux without react
 6. 스토어를 왜 각 컴포넌트에 제공하는지?
@@ -28,6 +30,8 @@
 7. redux-devtools-extension 사용법 
     - __REDUX_DEVTOOLS_EXETENSION_COMPOSE__랑 차이가 뭔지
 8. 설계관점에서 생각하는 연습.
+9. 리액트 디버깅툴, 리덕스 디버깅툴 도구 분석.
+10. onchange시 여러번 호출되는것 최적화하기.
 
 - scss
 - media

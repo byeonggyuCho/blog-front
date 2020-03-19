@@ -26,6 +26,7 @@ class MarkdownRender extends Component {
     renderMarkdown = () => {
         const { markdown } = this.props;
 
+        console.log(markdown)
         //마크다운이 존재하지 않는다면 공백처리를 한다.
         if(!markdown) {
             this.setState({ html : ''});
@@ -35,7 +36,7 @@ class MarkdownRender extends Component {
         this.setState({
             html: marked(markdown, {
                 breaks: true,   // 일반 엔터로 새 줄 입력
-                sanitize: true  //마크다운 내부 html 무시
+                // sanitize: true  // 마크다운 내부 html 무시
             })
         });
     }
@@ -46,6 +47,7 @@ class MarkdownRender extends Component {
     constructor(props) {
         super(props);
         const { markdown } = props;
+        console.log('MK',props)
 
         //서버 사이드 랜더링에서도 마크다운 처리가 되도록 constructor쪽에서도 구현합니다.
         this.state = {
@@ -57,7 +59,7 @@ class MarkdownRender extends Component {
 
     componentDidUpdate(prevProps, prevState) {
         //markdown 값이 변겨오디면 renderMardown을 호출한다.
-        if(prevProps.markdown !== this.props.markdwon) {
+        if(prevProps.markdown !== this.props.markdown) {
             this.renderMarkdown();
         }
 
@@ -69,6 +71,7 @@ class MarkdownRender extends Component {
     }
 
     componentDidMount(){
+        this.renderMarkdown();
         Prism.highlightAll();
     }
 

@@ -1,31 +1,55 @@
 import {createAction, handleActions} from 'redux-actions';
 
-import { Map, fromJS } from 'immutable';
-import { pender } from 'redux-pender'
-import * as api from '../../lib/api';
+import * as api from 'lib/api';
+import { takeLatest } from 'redux-saga/effects';
+import createRequestSaga from 'lib/createRequestSaga'
 
 // action type
 const GET_POST = 'post/GET_POST';
+const GET_POST_SUCCESS = 'post/GET_POST_SUCCESS';
+const GET_POST_FAILURE = 'post/GET_POST_FAILURE';
 const REMOVE_POST = 'post/REMOVE_POST';
+const REMOVE_POST_SUCCESS = 'post/REMOVE_POST_SUCCESS';
+const REMOVE_POST_FAILURE = 'post/REMOVE_POST_FAILURE';
 
 // actoin creator
-export const getPost = createAction(GET_POST, api.getPost);
-export const removePost = createAction(REMOVE_POST, api.removePost);
+export const getPost = createAction(GET_POST);
+export const removePost = createAction(REMOVE_POST);
 
+const getPostSaga = createRequestSaga(GET_POST, api.getPost)
+const removePostSaga = createRequestSaga(REMOVE_POST, api.removePost)
+
+export const postSaga = function*(){
+    yield takeLatest(GET_POST,getPostSaga)
+    yield takeLatest(REMOVE_POST,removePostSaga)
+}
 
 // initial state
-const initialSate = Map({
-    post: Map({})
-});
+const initialSate = {
+    post:'',
+    tags:'',
+    body:'',
+    publishedDate:'',
+};
 
 // reducer
 export default handleActions({
-    ...pender({
-        type: GET_POST,
-        onSuccess: (state, action) => {
-            const { date: post } = action.payload;
-            return state.set('post', fromJS(post))
-        }
 
-    })
+    [GET_POST_SUCCESS]: (state, { payload: data, meta: response }) => ({
+        ...state,
+        ...data,
+    }),
+    [GET_POST_FAILURE]: (state, { payload: error }) => ({
+        ...state,
+        error,
+    }),
+    [REMOVE_POST_SUCCESS]: (state, { payload: data, meta: response }) => ({
+        ...state,
+        ...data,
+    }),
+    [REMOVE_POST_FAILURE]: (state, { payload: error }) => ({
+        ...state,
+        error,
+    }),
+
 },initialSate);

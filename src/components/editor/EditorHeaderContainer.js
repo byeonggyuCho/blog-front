@@ -22,13 +22,12 @@ class EditorHeaderContainer extends Component {
 
     handleGoBack = () => {
         const { history } = this.props;
-        history.goback();
+       history.goBack();
     }
 
     handleSubmit = async () => {
         const { title, markdown, tags = '', EditorActions, history, location } = this.props;
 
-        console.log('HD',tags)
         const post = {
             title,
             body: markdown,
@@ -69,10 +68,10 @@ class EditorHeaderContainer extends Component {
 
 export default connect(
     (state) => ({
-        title: state.title,
-        markdown: state.markdown,
-        tags: state.tags,
-        postid: state.postId
+        title: state.editor.title,
+        markdown: state.editor.markdown,
+        tags: state.editor.tags,
+        postid: state.editor.postId
     }),
     (dispatch) => ({
         EditorActions: bindActionCreators(editorActions, dispatch)

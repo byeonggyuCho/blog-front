@@ -8,7 +8,7 @@ const cx = classNames.bind(styles);
 const PostBody = ({body}) => (
     <div className={cx('post-body')}>
         <div className={cx('paper')}>
-            <MarkdownRender markdwon={body}/>
+            <MarkdownRender markdown={body}/>
         </div>
     </div>
 );

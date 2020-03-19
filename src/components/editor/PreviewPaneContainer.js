@@ -4,17 +4,18 @@ import PreviewPane from './PreviewPane';
 
 class PreviewPaneContainer extends Component {
     render() {
-        const { markdwon, titile } = this.props;
+        const { markdown,title } = this.props;
+        console.log('PRE',markdown, title)
 
         return (
-            <PreviewPane titile={titile} markdown={markdwon}/>
+            <PreviewPane titile={title} markdown={markdown}/>
         );
     }
 }
 
 export default connect(
     (state) => ({
-        titile: state.title,
-        makrdown: state.markdown
+        title: state.editor.title,
+        markdown: state.editor.markdown
     })
 )(PreviewPaneContainer);

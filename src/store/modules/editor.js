@@ -53,10 +53,10 @@ const initialSate = {
 // reducer
 export default handleActions({
     [INITIALIZE]: (state, action) => initialSate,
-    [CHANGE_INPUT]: (state, action) => {
-        const {name, value } = action.payload;
-       return {[name] : value}
-    },
+    [CHANGE_INPUT]: (state, { payload: data}) => ({
+        ...state,   
+        [data.name] : data.value
+    }),
 
     [WRITE_POST_SUCCESS]: (state, { payload: data, meta: response }) => ({
         ...state,
