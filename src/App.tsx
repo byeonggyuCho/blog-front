@@ -1,10 +1,12 @@
 import React from 'react';
 import { Route }  from 'react-router-dom';
-import { ListPage, PostPage, EditorPage, NotFoundPage } from 'pages';
-import Base from 'containers/common/Base';
+import { ListPage, PostPage, EditorPage, NotFoundPage } from './pages';
+import Base from './containers/common/Base';
+
+interface Props {}
 
 
-const App = () =>{
+const App = ({}: Props) =>{
     return (
         <>
             <Route path="/" exact component={ListPage}/>

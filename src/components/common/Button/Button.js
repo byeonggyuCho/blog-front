@@ -14,6 +14,7 @@ const Div = ({children, ...rest}) => <div {...rest}>{children}</div>
 
 
 const Button = ({
+    
     children, to, onClick, disabled, theme = 'default'
 }) => {
     // to 값이 존재하면 Link를 사용하고, 그렇지 않으면 div를 사용하빈다.
