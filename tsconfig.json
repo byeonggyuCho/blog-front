@@ -1,6 +1,12 @@
 {
     "compilerOptions": {
       "target": "es6",
+      "lib": [
+        "ES5", 
+        "ES2015", 
+        "ES2016", 
+        "ES2017", 
+        "DOM"],
       "module": "esnext",
       "moduleResolution": "node",
       "noResolve": false,
@@ -11,14 +17,13 @@
       "jsx": "react",
       "allowSyntheticDefaultImports": true,
       "keyofStringsOnly": true,
-      "rootDir": "./src",
       "baseUrl": "src",
-      "paths": {
-        "*": ["src/*"]
-      },
-      "outDir": "/build"
+      "outDir": "./build"
     },
-    "typeRoots": ["node_modules/@types", "src/@type"],
+    "typeRoots": [
+      "node_modules/@types", 
+      "./types"
+    ],
     "exclude": [
       "node_modules",
       "build",
@@ -29,6 +34,6 @@
       "src/setupTests.ts",
       "./node_modules/**/*"
     ],
-    "include": ["./src/**/*", "@type"]
+    "include": ["src", "@type"]
 }
   
