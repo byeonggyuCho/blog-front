@@ -6,7 +6,6 @@ import Button from 'components/common/Button';
 const cx = classNames.bind(styles);
 
 const EditorHeader = ({onGoBack, onSubmit, isEdit}) => {
-    console.log(isEdit)
     return (
         <div className={cx('editor-header')}>
             <div className={cx('back')}>

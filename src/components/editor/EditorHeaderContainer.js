@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { useState, useEffect} from 'react';
 import EditorHeader from './EditorHeader';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -7,9 +7,9 @@ import queryString from 'query-string';
 
 import * as editorActions from '../../store/modules/editor';
 
-class EditorHeaderContainer extends Component {
-    componentDidMount() {
-        const { EditorActions, location } = this.props;
+const  EditorHeaderContainer = ({ postId, title, markdown, tags = '',history ,EditorActions, location}) => {
+
+    useEffect(() => {
         EditorActions.initialize(); // 에디터를 초기화
 
         // 쿼리 파싱
@@ -18,15 +18,14 @@ class EditorHeaderContainer extends Component {
             // id가 존재하면 포스트 불러오기
             EditorActions.getPost(id);
         }
-    }
+    },[])
 
-    handleGoBack = () => {
-        const { history } = this.props;
+
+    const handleGoBack = () => {
        history.goBack();
     }
 
-    handleSubmit = async () => {
-        const { title, markdown, tags = '', EditorActions, history, location } = this.props;
+    const handleSubmit = async () => {
 
         const post = {
             title,
@@ -47,23 +46,20 @@ class EditorHeaderContainer extends Component {
             await EditorActions.writePost(post);
             // 페이지를 이동시킨다.posti는 위쪽에서 레퍼런스를 만들지 않고 이 자리에서 this.props.postId를 조회해야한다.
             // 현재값을 불러오기 위해서
-            history.push(`/post/${this.props.postId}`);
+            history.push(`/post/${postId}`);
         } catch(e) {
             console.error(e);
         }
     }
 
-    render() {
-        const { handleGoBack, handleSubmit } = this;
-        const { id } = queryString.parse(this.props.location.search);
-        return (
-            <EditorHeader
-                onGoBack={handleGoBack}
-                onSubmit={handleSubmit}
-                isEdit={id ? true : false}
-            />
-        );
-    }
+    const { id } = queryString.parse(location.search);
+    return (
+        <EditorHeader
+            onGoBack={handleGoBack}
+            onSubmit={handleSubmit}
+            isEdit={id ? true : false}
+        />
+    );
 }
 
 export default connect(

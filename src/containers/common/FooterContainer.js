@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import Footer from 'components/common/Footer';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as baseActions from 'store/modules/base';
 
-class FooterContainer extends Component {
-    handleLoginClick = () => {
-        const { BaseActions, logged } = this.props;
+const FooterContainer = ({ BaseActions, logged }) => {
+    const handleLoginClick = () => {
         if(logged) {
             try {
                 BaseActions.logout();
@@ -19,14 +18,10 @@ class FooterContainer extends Component {
         BaseActions.showModal('login');
         BaseActions.initializeLoginModal();
     }
-    render() {
-        const { handleLoginClick } = this;
-        const { logged } = this.props;
 
-        return (
-            <Footer onLoginClick={handleLoginClick} logged={logged}/>
-        );
-    }
+    return (
+        <Footer onLoginClick={handleLoginClick} logged={logged}/>
+    );
 }
 
 export default connect(

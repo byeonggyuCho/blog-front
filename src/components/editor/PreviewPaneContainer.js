@@ -1,16 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import PreviewPane from './PreviewPane';
 
-class PreviewPaneContainer extends Component {
-    render() {
-        const { markdown,title } = this.props;
-        console.log('PRE',markdown, title)
+const  PreviewPaneContainer = ({ markdown,title } ) =>  {
 
         return (
             <PreviewPane titile={title} markdown={markdown}/>
         );
-    }
 }
 
 export default connect(

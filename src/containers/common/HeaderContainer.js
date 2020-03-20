@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import Header from 'components/common/Header';
 import { withRouter } from 'react-router-dom';
 import * as BaseActions from 'store/modules/base';
@@ -6,35 +6,34 @@ import { connect } from 'react-redux';
 import { bindActionCreators} from 'redux';
 
 
-class HeaderContainer extends Component {
-    handleRemove = () => {
+const  HeaderContainer = ({ match, logged }) => {
+    const handleRemove = () => {
         const { BaseActions } = this.props;
         BaseActions.showModal('remove');
     }
 
+    const { id } = match.params;
 
-    render() {
-        const { handleRemove } = this;
-        const { match, logged } = this.props;
-        const { id } = match.params;
-
-        return (
-            <Header
-                postid={id}
-                logged={logged}
-                onRemove={handleRemove}
-            />
-        );
-    }
+    return (
+        <Header
+            postid={id}
+            logged={logged}
+            onRemove={handleRemove}
+        />
+    );
 }
 
 
 const mapDipatchToProp =  (dispatch) => ({
     BaseActions: bindActionCreators(BaseActions,dispatch)
 })
-const mapStateToProp = (state) => ({
-    logged: state.base.get('logged')
-})
+const mapStateToProp = (state) => {
+
+    if(typeof state.base.get !== 'function' )
+       debugger;
+
+    return {logged: state.base.get('logged')}
+}
 
 export default connect(
     mapStateToProp,

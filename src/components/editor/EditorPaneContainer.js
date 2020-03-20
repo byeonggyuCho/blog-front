@@ -1,31 +1,25 @@
-import React, { Component } from 'react';
+import React from 'react';
 import EditorPane from 'components/editor/EditorPane';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as editorActions from 'store/modules/editor'
 
 
-class EditorPaneContainer extends Component {
+const EditorPaneContainer = ({ title= '', tags= '', markdown = '',EditorActions } ) => {
 
-    handleChangeInput = ({name, value}) => {
-        const { EditorActions } = this.props;
+    const handleChangeInput = ({name, value}) => {
         EditorActions.changeInput({name, value});
     }
 
-    render() {
-        const { title= '', tags= '', markdown = '' } = this.props;
-        const { handleChangeInput } = this;
 
-
-        return (
-            <EditorPane
-                title={title}
-                markdown={markdown}
-                tags={tags}
-                onChangeInput={handleChangeInput}
-            />
-        );
-    }
+    return (
+        <EditorPane
+            title={title}
+            markdown={markdown}
+            tags={tags}
+            onChangeInput={handleChangeInput}
+        />
+    );
 }
 
 export default connect(

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './EditorPane.scss';
 import classNames from 'classnames/bind';
 import CodeMirror from 'codemirror';
@@ -18,38 +18,38 @@ const cx = classNames.bind(styles);
 
 //라이프라이클 메서드와 커스텀 메서드를 사용해야한다.
 // CodeMirror라이브러리를 연동해야한다.
+const EditorPane = ({ tags = '', title = '' ,markdown,onChangeInput, onChange}) =>  {
 
+    let editor = null;  //에디터 ref
+    let codeMirror = null; //CodeMirror  인스턴스
+    let cursor = null;
 
-
-class EditorPane extends Component {
-
-    editor = null;  //에디터 ref
-    codeMirror = null; //CodeMirror  인스턴스
-
-    initializeEditor = () => {
-        this.codeMirror = CodeMirror(this.editor, {
+    const initializeEditor = () => {
+        codeMirror = CodeMirror(editor, {
             mode: 'markdown',
             theme: 'monokai',
             lineNumbers: true, // 왼쪽에 라인넘버 표시여부
             lineWrapping: true // 개행 여부  
         })
-        this.codeMirror.on('change', this.handleChangeMardown)
+        codeMirror.on('change', handleChangeMardown)
     }
 
-    componentDidMount() {
-        this.initializeEditor();
-    }
+    useEffect(()=>{
+        initializeEditor();
+    },[])
+    // componentDidMount() {
+    //     this.initializeEditor();
+    // }
 
-    handleChange = (e) => {
-        const { onChangeInput } = this.props;
+    const handleChange = (e) => {
+        // const { onChangeInput } = this.props;
         const { value, name } = e.target;
         onChangeInput({name, value}); 
     }
 
-    handleChangeMardown = (doc) => {
-        console.log('1')
-        const { onChangeInput } = this.props;
-        this.cursor = doc.getCursor();      // 텍스트 커서 위치 저장.
+    const handleChangeMardown = (doc) => {
+        // const { onChangeInput } = this.props;
+        cursor = doc.getCursor();      // 텍스트 커서 위치 저장.
 
         onChangeInput({
             name : 'markdown',
@@ -57,6 +57,15 @@ class EditorPane extends Component {
         })
     }
 
+    useEffect(()=>{
+         // markdown이 변경되면 에디터 값도 변경합니다.
+        // 이 과정에서 텍스트 커서의 위치가 초기화 되기 때문에 저장한 커서의 위치가 있으면 해당 위치로 설정하빈다.
+        if(!codeMirror) return; //인스턴스가 생성되지 않았을 때
+        codeMirror.setValue(markdown);
+        if(!cursor) return; // 커서가 없을때
+        codeMirror.setCursor(cursor);
+    },[markdown])
+/* 
     componentDidUpdate(prevProps, prevState) {
         // markdown이 변경되면 에디터 값도 변경합니다.
         // 이 과정에서 텍스트 커서의 위치가 초기화 되기 때문에 저장한 커서의 위치가 있으면 해당 위치로 설정하빈다.
@@ -69,42 +78,31 @@ class EditorPane extends Component {
             if(!cursor) return; // 커서가 없을때
             codeMirror.setCursor(cursor);
         }
-    }
-
-    render() {
-        const { handleChange } = this;
-        const { tags = '', title = '' } = this.props;
+    } */
 
 
-        return (
-            <div className={cx('editor-pane')}>
+    return (
+        <div className={cx('editor-pane')}>
+            <input 
+                className={cx('title')} 
+                placeholder="Title" 
+                name="title"
+                value={title}
+                onChange={handleChange}
+            />
+            <div className={cx('code-editor')} ref={ref => editor=ref }/>
+
+            <div className={cx('tags')}>
+                <div className={cx('description')}>TAG</div>
                 <input 
-                    className={cx('title')} 
-                    placeholder="Title" 
-                    name="title"
-                    value={title}
+                    name="tags" 
+                    placeholder="태그를 입력하세요 (쉼표로 구분)"
+                    value={tags}
                     onChange={handleChange}
-                />
-                <div className={cx('code-editor')} ref={ref => this.editor=ref }>
-                    {/* <input
-                        name="markdown" 
-                        value={markdown} 
-                        onChange={handleChangeMardown} 
-                    /> */}
-
-                </div>
-                <div className={cx('tags')}>
-                    <div className={cx('description')}>TAG</div>
-                    <input 
-                        name="tags" 
-                        placeholder="태그를 입력하세요 (쉼표로 구분)"
-                        value={tags}
-                        onChange={handleChange}
-                        />
-                </div>
-            </div> 
-        )
-    }
+                    />
+            </div>
+        </div> 
+    )
 }
 
 export default EditorPane;

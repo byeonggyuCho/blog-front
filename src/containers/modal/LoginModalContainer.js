@@ -9,7 +9,7 @@ class LoginModalContainer extends Component {
         const { BaseActions, password } = this.props;
         try {
             // 로그인 시도, 성고하면 모달 닫기
-            await BaseActions.login(password);
+            BaseActions.login(password);
             BaseActions.hideModal('login');
             localStorage.logged = "true";
         } catch(e) {
