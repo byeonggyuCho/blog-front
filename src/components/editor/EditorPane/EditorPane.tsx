@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {  useEffect } from 'react';
 import styles from './EditorPane.scss';
 import classNames from 'classnames/bind';
 import CodeMirror from 'codemirror';

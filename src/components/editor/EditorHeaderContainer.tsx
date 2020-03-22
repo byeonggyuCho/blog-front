@@ -4,10 +4,20 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
 import queryString from 'query-string';
+import * as editorActions from 'store/modules/editor';
+import {ReduxState} from 'store/modules'
 
-import * as editorActions from '../../store/modules/editor';
+type PropsState = ReturnType<typeof mapStateToProps>
+type PropsDispatch = ReturnType<typeof mapDispatchToProps>
 
-const  EditorHeaderContainer = ({ postId, title, markdown, tags = '',history ,EditorActions, location}) => {
+interface Props extends PropsState, PropsDispatch {
+    postId: string,
+    history: any,
+    location: any
+}
+
+const  EditorHeaderContainer : React.FunctionComponent<Props>
+= ({ postId, title, markdown, tags = '',history ,EditorActions, location}) => {
 
     useEffect(() => {
         EditorActions.initialize(); // 에디터를 초기화
@@ -62,14 +72,17 @@ const  EditorHeaderContainer = ({ postId, title, markdown, tags = '',history ,Ed
     );
 }
 
+export const mapStateToProps =  (state: ReduxState) => ({
+    title: state.editor.title,
+    markdown: state.editor.markdown,
+    tags: state.editor.tags,
+    postid: state.editor.postId
+})
+export const mapDispatchToProps =  (dispatch) => ({
+    EditorActions: bindActionCreators(editorActions, dispatch)
+})
+
 export default connect(
-    (state) => ({
-        title: state.editor.title,
-        markdown: state.editor.markdown,
-        tags: state.editor.tags,
-        postid: state.editor.postId
-    }),
-    (dispatch) => ({
-        EditorActions: bindActionCreators(editorActions, dispatch)
-    })
+    mapStateToProps,
+    mapDispatchToProps
 )(withRouter(EditorHeaderContainer))

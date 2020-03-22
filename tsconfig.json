@@ -6,7 +6,8 @@
         "ES2015", 
         "ES2016", 
         "ES2017", 
-        "DOM"],
+        "DOM"
+      ],
       "module": "esnext",
       "moduleResolution": "node",
       "noResolve": false,
@@ -16,8 +17,12 @@
       "allowJs": true,
       "jsx": "react",
       "allowSyntheticDefaultImports": true,
-      "keyofStringsOnly": true,
+      "keyofStringsOnly": true, 
+      "rootDir": "src",
       "baseUrl": "src",
+      "paths": {
+        "*": ["*"]
+      },
       "outDir": "./build"
     },
     "typeRoots": [

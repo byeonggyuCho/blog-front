@@ -19,13 +19,9 @@ const cx = classNames.bind(styles);
 
 const MarkdownRender =  ({ markdown }) => {
 
-    // state = {
-    //     html:''
-    // }
-
     const [html, setHtml] = useState(
         markdown 
-        ? marked(markdown, {braeks: true, sanitize:true}) 
+        ? marked(markdown, {breaks: true, sanitize:true}) 
         : ''
     )
 

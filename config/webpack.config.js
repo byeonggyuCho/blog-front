@@ -467,7 +467,8 @@ module.exports = function(webpackEnv) {
                 { 
                   importLoaders: 2, 
                   sourceMap: isEnvProduction && shouldUseSourceMap 
-                }).concat({ 
+                }).concat(
+                  { 
                   loader: require.resolve('sass-loader'), 
                   options: { 
                     sassOptions: {

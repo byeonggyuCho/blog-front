@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './EditorHeader.scss';
 import classNames from 'classnames/bind';
 import Button from 'components/common/Button';
+// import Button from '../../../components/common/Button';
 
 const cx = classNames.bind(styles);
 

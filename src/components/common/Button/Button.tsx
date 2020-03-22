@@ -1,5 +1,7 @@
 import React from 'react';
 import styles from 'components/common/Button/Button.scss';
+
+
 import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
 const cx = classNames.bind(styles);
@@ -10,10 +12,10 @@ const cx = classNames.bind(styles);
 const Div = ({children, ...rest}) => <div {...rest}>{children}</div>
 
 interface Props {
-    children:string, 
-    to:string,
-    onClick, 
-    disabled: boolean, 
+    children?:string[] | string, 
+    to?:string,
+    onClick?, 
+    disabled?: boolean, 
     theme?: string
 }
 

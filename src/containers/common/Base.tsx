@@ -6,7 +6,7 @@
  import LoginModalContainer from 'containers/modal/LoginModalContainer';
  import { connect } from 'react-redux';
  import { bindActionCreators } from 'redux';
- import * as baseActions from 'store/modules/base.js';
+ import * as baseActions from 'store/modules/base';
 
  const Base = ({ BaseActions }) => {
     const initialize = () => {
