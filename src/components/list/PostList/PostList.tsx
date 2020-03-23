@@ -4,6 +4,7 @@ import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import removeMd from 'remove-markdown';
+import {Post} from 'store/models'
 
 const cx = classNames.bind(styles);
 
@@ -34,17 +35,17 @@ const PostItem = ({title, body, publishedDate, tags, id}) => {
 //     publishedDate: string
 // }
 
-
+// interface Post {
+//     _id: string,
+//     title: string,
+//     tags: string[],
+//     markdown: string,
+//     body?: string,
+//     publishedDate?: string
+// }
 interface PostListProps {
-    posts : {
-        _id : string,
-        title: string,
-        tags: string[],
-        body: string,
-        publishedDate?: string,
-        markdown?: string,
-        key?: string,
-    }[]
+
+    posts: Post[]
 }
 
 const PostList: React.FunctionComponent<PostListProps>= ({posts}) => {

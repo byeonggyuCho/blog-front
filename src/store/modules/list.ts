@@ -1,5 +1,4 @@
 
-// import { createAction, handleActions } from 'redux-actions';
 import createRequestSaga, {
   createRequestActionTypes,
 } from 'lib/createRequestSaga';
@@ -8,8 +7,8 @@ import { takeLatest } from 'redux-saga/effects';
 import {
     ActionType,
     createReducer,
-    createAction,
     createAsyncAction } from 'typesafe-actions'
+import { Post, Responce} from 'store/models'
 
 
 const [
@@ -17,22 +16,21 @@ const [
     LIST_POSTS_SUCCESS,
     LIST_POSTS_FAILURE,
   ] = createRequestActionTypes('posts/LIST_POSTS');
-  
-interface Post {
-    _id: string,
-    title: string,
-    tags: string[],
-    markdown: string,
-    body: string,
-    publishedDate: string
-}
 
+
+
+// interface temp {
+//     posts : Post[],
+//     lastPage : number,
+//     error: object
+//     [propName: string]: any
+// }
 
 export const listPosts = createAsyncAction(
     LIST_POSTS,
     LIST_POSTS_SUCCESS,
     LIST_POSTS_FAILURE,
-)<undefined, any,Error>();
+)<undefined, any, Error>();
 
 const listPostsSaga = createRequestSaga(LIST_POSTS, postsAPI.listposts)
 
@@ -40,11 +38,7 @@ export function* listSaga() {
     yield takeLatest(LIST_POSTS, listPostsSaga);
 }
 
-export interface stateList {
-    posts: object[],
-    error: object,
-    lastPage: number,
-}
+
 
 
 export interface SateList {

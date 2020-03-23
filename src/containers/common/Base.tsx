@@ -5,7 +5,6 @@
  import React, { useEffect } from 'react';
  import LoginModalContainer from 'containers/modal/LoginModalContainer';
  import { useDispatch} from 'react-redux';
- import { bindActionCreators } from 'redux';
  import * as baseActions from 'store/modules/base';
 
  const Base = () => {

@@ -35,36 +35,12 @@ const ListContainer = ({location, match}) => {
 
     return (
         <PostList
+            posts={posts}
             // loading={loading}
             // error={error}
-            posts={posts}
             // showWriteButton={user}
         />
     )
-/* 
-    componentDidMount() {
-        this.getPostList();
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-        // 페이지/태그가 바뀔 때 리스트를 다시 불러온다.
-        if(prevProps.page !== this.props.page || prevProps.tag !== this.props.tag) {
-            this.getPostList();
-        }
-    }
-
-
-    render() {
-        const { loading, posts, page, lastPage, tag } = this.props;
-
-        if(loading) return null;        // 로딩 중에는 아무것도 보여 주지 않습니다.
-        return (
-            <div>
-                <PostList posts={posts}/>
-                <Pagination page={page} lastPage={lastPage} tag={tag}/>
-            </div>
-        )
-    } */
 }
 
 export default withRouter(ListContainer)

@@ -1,6 +1,5 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import * as baseActions from 'store/modules/base';
 import * as postActions from 'store/modules/post';
 import AskRemoveModal from 'components/modal/AskRemoveModal';

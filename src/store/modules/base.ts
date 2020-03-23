@@ -1,7 +1,6 @@
 // import {createAction, handleActions} from 'redux-actions';
 import * as api from 'lib/api';
 import produce from 'immer';
-import {Map} from 'immutable';
 import createRequestSaga, {createRequestActionTypes} from 'lib/createRequestSaga' 
 import { takeLatest } from 'redux-saga/effects';
 import {
@@ -138,23 +137,23 @@ export default createReducer<StateBase, BaseAction>(initialSate, {
             draft.loginModal.password = '';
         })
     },
-    [LOGOUT_SUCCESS]: (state, {payload: data} ) => {
+    [LOGOUT_SUCCESS]: (state, {payload}) => {
         // return state.set('logged', false);
         return produce(state, draft => {
             draft.logged = false;
         })
     },
-    [LOGOUT_FAILURE]: (state, {payload: data} ) => {
+    [LOGOUT_FAILURE]: (state, {payload} ) => {
         // return state.set('logged', logged);
         return produce(state, draft => {
-            draft.logged = data.logged;
+            draft.logged = payload.data.logged;
         })
         
     },
-    [CHECK_LOGIN_SUCCESS]: (state, {payload: data}) => {
+    [CHECK_LOGIN_SUCCESS]: (state, {payload}) => {
         // return state.set('logged', data.logged);
         return produce(state, draft => {
-            draft.logged = data.logged;
+            draft.logged = payload.data.logged;
         })
     },
     [CHECK_LOGIN_FAILURE]: (state, {payload}) => {
@@ -164,10 +163,10 @@ export default createReducer<StateBase, BaseAction>(initialSate, {
         })
     },
 
-    [CHANGE_PASSWORD_INPUT]: (state, { payload: data }) => {
+    [CHANGE_PASSWORD_INPUT]: (state, { payload }) => {
       // return  state.setIn(['loginModal', 'password'], value)
         return produce(state, draft => {
-            draft.loginModal.password = data;
+            draft.loginModal.password =payload.data;
         })
     },
     [INITIALIZE_LOGIN_MODAL]: (state, action) => {

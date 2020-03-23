@@ -6,9 +6,6 @@ import list, {listSaga, SateList} from './list'
 import editor, {editorSaga, StateEditor} from './editor'
 import base , {baseSaga , StateBase} from './base';
 
-// const rootReducer = combineReducers({
-//     list, base, editor: editor, post, loading
-// })
 const rootReducer = combineReducers({
     list, base, editor, post, loading
 })

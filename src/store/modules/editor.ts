@@ -23,12 +23,6 @@ const EDIT_POST_SUCCESS = 'editor/EDIT_POST_SUCCESS';
 const EDIT_POST_FAILURE = 'editor/EDIT_POST_FAILURE' ;
 
 
-interface Post {
-    _id: string,
-    title: string,
-    tags: string[],
-    markdown: string
-}
 
 
 interface WritePost {
@@ -44,24 +38,24 @@ interface EditPost {
     tags: string[]
 }
 export const initialize =  createAction(INITIALIZE)();
-export const changeInput = createAction(CHANGE_INPUT)<{name:string, value: string}>();
+export const changeInput = createAction(CHANGE_INPUT)<any>();
 export const writePost =  createAsyncAction(
     WRITE_POST,
     WRITE_POST_SUCCESS,
     WRITE_POST_FAILURE
-)<WritePost, {_id:string}, Error >();
+)<WritePost, any, Error >();
 export const getPost =  createAsyncAction(
     GET_POST,
     GET_POST_SUCCESS,
     GET_POST_FAILURE
-)<string, Post, Error >();
+)<string, any, Error >();
 
 
 export const editPost= createAsyncAction(
     EDIT_POST,
     EDIT_POST_SUCCESS,
     EDIT_POST_FAILURE
-)<EditPost, Post, Error >();
+)<EditPost, any, Error >();
 
 const actions = { initialize, changeInput, writePost, getPost, editPost};
 type EditorAction = ActionType<typeof actions>
@@ -104,14 +98,14 @@ const initialSate : StateEditor = {
 // reducer
 export default createReducer<StateEditor,EditorAction>(initialSate,{
     [INITIALIZE]: (state, action) => initialSate,
-    [CHANGE_INPUT]: (state, { payload: data }) => ({
+    [CHANGE_INPUT]: (state, { payload }) => ({
         ...state,   
-        [data.name] : data.value
+        [payload.data.name] : payload.data.value
     }),
-    [WRITE_POST_SUCCESS]: (state, { payload: data }) => ({
+    [WRITE_POST_SUCCESS]: (state, { payload }) => ({
         ...state,
-        data,
-        id: data._id
+        payload: payload.data,
+        id: payload.data._id
     }),
   
     [WRITE_POST_FAILURE]: (state, { payload: error }) => ({
@@ -119,24 +113,24 @@ export default createReducer<StateEditor,EditorAction>(initialSate,{
         error,
     }),
 
-    [GET_POST_SUCCESS]: (state, { payload: data }) => ({
+    [GET_POST_SUCCESS]: (state, { payload }) => ({
         ...state,
-        data,
-        title: data.title,
-        markdown: data.markdown,
-        tags: data.tags.join(', ')
+        payload: payload.data,
+        title: payload.data.title,
+        markdown: payload.data.markdown,
+        tags: payload.data.tags.join(', ')
     }),
     [GET_POST_FAILURE]: (state, { payload: error }) => ({
         ...state,
         error,
     }),
 
-    [EDIT_POST_SUCCESS]: (state, { payload: data }) => ({
+    [EDIT_POST_SUCCESS]: (state, { payload }) => ({
         ...state,
-        data,
-        title: data.title,
-        markdown: data.markdown,
-        tags: data.tags.join(', ')
+        payload: payload.data,
+        title: payload.data.title,
+        markdown: payload.data.markdown,
+        tags: payload.data.tags.join(', ')
     }),
     [EDIT_POST_FAILURE]: (state, { payload: error }) => ({
         ...state,

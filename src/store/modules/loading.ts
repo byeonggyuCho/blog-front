@@ -3,8 +3,7 @@
 import {
   ActionType,
   createReducer,
-  createAction,
-  createAsyncAction } from 'typesafe-actions'
+  createAction } from 'typesafe-actions'
 
 
 const START_LOADING = 'loading/START_LOADING';
@@ -15,16 +14,12 @@ const FINISH_LOADING = 'loading/FINISH_LOADING';
 */
 export const startLoading = createAction(
   START_LOADING,
-  action => {
-    return (type:string) => action(type);
-  }
+  (type:string) => (type)
 );
 
 export const finishLoading = createAction(
   FINISH_LOADING,
-  action => {
-    return (type:string) => action(type);
-  }
+   (type:string) => (type)
 );
 
 
@@ -46,13 +41,13 @@ type LoadingAction = ActionType<typeof actions>;
 
 const loading = createReducer<StateLoading,LoadingAction >(initialState,
   {
-    [START_LOADING]: (state, action) => ({
+    [START_LOADING]: (state, {payload}) => ({
       ...state,
-      [action.payload]: true
+      [payload]: true
     }),
-    [FINISH_LOADING]: (state, action) => ({
+    [FINISH_LOADING]: (state, {payload}) => ({
       ...state,
-      [action.payload]: false
+      [payload]: false
     })
   }
 );

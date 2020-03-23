@@ -1,13 +1,12 @@
 import * as api from 'lib/api';
-// import {createAction, handleActions} from 'redux-actions';
 import { takeLatest } from 'redux-saga/effects';
 import createRequestSaga, {createRequestActionTypes} from 'lib/createRequestSaga'
 import {
     ActionType,
     createReducer,
-    createAction,
     createAsyncAction
 } from 'typesafe-actions'
+import { Post, Responce} from 'store/models'
 
 // action type
 const [GET_POST, GET_POST_SUCCESS, GET_POST_FAILURE] = createRequestActionTypes(
@@ -19,12 +18,6 @@ const [REMOVE_POST, REMOVE_POST_SUCCESS, REMOVE_POST_FAILURE] = createRequestAct
 );
 
 
-interface Post {
-    _id: string,
-    title: string,
-    tags: string[],
-    markdown: string
-}
 
 
 // actoin creator
@@ -32,7 +25,7 @@ export const getPost = createAsyncAction(
     GET_POST,  
     GET_POST_SUCCESS, 
     GET_POST_FAILURE
-) <string, any, Error>();
+) <string, Responce<Post>, Error>();
 
 export const removePost = createAsyncAction(
     REMOVE_POST, 
@@ -71,17 +64,17 @@ type PostAction = ActionType<typeof actions>;
 
 // reducer
 export default createReducer<StatePost, PostAction>(initialSate, {
-    [GET_POST_SUCCESS]: (state, { payload: data}) => ({
+    [GET_POST_SUCCESS]: (state, { payload}) => ({
         ...state,
-        ...data,
+        ...payload.data,
     }),
     [GET_POST_FAILURE]: (state, { payload: error }) => ({
         ...state,
         error,
     }),
-    [REMOVE_POST_SUCCESS]: (state, { payload: data }) => ({
+    [REMOVE_POST_SUCCESS]: (state, { payload }) => ({
         ...state,
-        ...data,
+        ...payload.data,
     }),
     [REMOVE_POST_FAILURE]: (state, { payload: error }) => ({
         ...state,

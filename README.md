@@ -13,8 +13,9 @@
 
 ## TODO
 3. 타입스크립트를 적용한다.
+    - [1](https://gist.github.com/Jonir227/b7fc8b5b0646b7a90c26bd73a70c12b9)
+    - [2](https://react.vlpt.us/using-typescript/06-ts-redux-middleware.html)
     - [참고](https://github.com/velopert/ts-react-redux-tutorial)
-    - https://react.vlpt.us/using-typescript/06-ts-redux-middleware.html
     - https://velog.io/@velopert/use-typescript-and-redux-like-a-pro
     - https://blog.woolta.com/categories/1/posts/197
     - https://jonir227.github.io/develop/2019/06/04/redux-saga%EC%99%80-typescript-%ED%8E%B8%ED%95%98%EA%B2%8C-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0.html
