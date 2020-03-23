@@ -4,13 +4,14 @@ import { withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import PostList from 'components/list/PostList';
 import { listPosts } from 'store/modules/list';
+import { RootState} from 'store/modules'
 
 // import Pagination from 'components/list/Pagination';
 
 const ListContainer = ({location, match}) => {
     const dispatch = useDispatch();
-    const { posts, error, loading, user } = useSelector(
-        ({ list, loading, user }) => ({
+    const { posts, error, loading } = useSelector(
+        ({ list, loading } :RootState) => ({
             posts: list.posts,
             error: list.error,
             loading: loading['posts/LIST_POSTS'],
@@ -28,16 +29,16 @@ const ListContainer = ({location, match}) => {
          // 스크롤바를 맨 위로 올립니다
          document.documentElement.scrollTop = 0;
 
-        dispatch(listPosts({ tag, username, page }));
+        dispatch(listPosts.request({ tag, username, page },null));
     }, [dispatch, location.search, match.params])
 
 
     return (
         <PostList
-            loaction={loading}
-            error={error}
+            // loading={loading}
+            // error={error}
             posts={posts}
-            showWriteButton={user}
+            // showWriteButton={user}
         />
     )
 /* 

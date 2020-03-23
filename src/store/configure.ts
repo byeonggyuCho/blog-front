@@ -25,7 +25,7 @@ const middlewares = [ pendderMiddleware, sagaMiddleware ];
 
 
 // preloadedState는 추후 서버사이드 랜더링을 했을 때 전달받는 초기 상태이다.
-const configure = (preloadedSate)  => {
+const configure = (preloadedSate?)  => {
     
     const store = createStore(
         rootReducer, 

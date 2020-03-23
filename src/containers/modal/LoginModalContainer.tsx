@@ -1,60 +1,55 @@
-import React, { Component } from 'react';
+import React from 'react';
 import LoginModal from 'components/modal/LoginModal';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { bindActionCreators} from 'redux';
 import * as baseActions from 'store/modules/base';
+import  {ReduxState} from 'store/modules'
 
-class LoginModalContainer extends Component {
-    handleLogin = async() => {
-        const { BaseActions, password } = this.props;
+const LoginModalContainer = () => {
+
+    const dispatch = useDispatch();
+    const {visible, password, error} = useSelector( 
+        (state: ReduxState) => ({
+            visible: state.base.modal.login,
+            password: state.base.loginModal.password,
+            error: state.base.loginModal.error
+        })
+    )
+
+
+    const handleLogin = async() => {
         try {
             // 로그인 시도, 성고하면 모달 닫기
-            BaseActions.login(password);
-            BaseActions.hideModal('login');
+            dispatch(baseActions.login.request(password))
+            dispatch(baseActions.hideModal<string>()('login'))
+
             localStorage.logged = "true";
         } catch(e) {
             console.log(e);
         }
     }
-    handleCancel = () => {
-        const {BaseActions } = this.props;
-        BaseActions.hideModal('login'); 
+    const handleCancel = () => {
+
+        dispatch(baseActions.hideModal<string>()('login'))
     }
-    handleChange = (e) => {
+    const handleChange = (e) => {
         const { value } = e.target;
-        const { BaseActions } = this.props;
-        BaseActions.changePasswordInput(value);
+        dispatch(baseActions.changePasswordInput<any>()(value))
     }
-    handleKeyPress = (e) => {
+    const handleKeyPress = (e) => {
         // 인터 키를 누르면 로그인 호출
         if(e.key === 'Enter') {
-            this.handleLogin();
+            handleLogin();
         }
     }
 
-    render() {
-        const {
-            handleLogin, handleCancel, handleChange, handleKeyPress
-        } = this;
 
-        const { visible, error, password } = this.props;
-
-        return (
-            <LoginModal
-                onLogin={handleLogin} onCancel={handleCancel} onChange={handleChange} onKeyPress={handleKeyPress}
-                visible={visible} error={error} password={password}
-            />
-        );
-    }
+    return (
+        <LoginModal
+            onLogin={handleLogin} onCancel={handleCancel} onChange={handleChange} onKeyPress={handleKeyPress}
+            visible={visible} error={error} password={password}
+        />
+    );
 }
 
-export default connect(
-    (state) => ({
-        visible: state.base.getIn(['modal', 'login']),
-        password: state.base.getIn(['loginModal', 'password']),
-        error: state.base.getIn(['loginModal', 'error'])
-    }),
-    (dispatch) => ({
-        BaseActions: bindActionCreators(baseActions, dispatch)
-    })
-)(LoginModalContainer);
+export default (LoginModalContainer);

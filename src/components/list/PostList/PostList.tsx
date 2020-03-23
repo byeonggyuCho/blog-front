@@ -24,7 +24,32 @@ const PostItem = ({title, body, publishedDate, tags, id}) => {
     )
 }
 
-const PostList = ({posts}) => {
+
+// interface Post {
+//     _id: string,
+//     title: string,
+//     tags: string[],
+//     markdown: string,
+//     body: string,
+//     publishedDate: string
+// }
+
+
+interface PostListProps {
+    posts : {
+        _id : string,
+        title: string,
+        tags: string[],
+        body: string,
+        publishedDate?: string,
+        markdown?: string,
+        key?: string,
+    }[]
+}
+
+const PostList: React.FunctionComponent<PostListProps>= ({posts}) => {
+
+    console.log(posts);
 
     const postList = posts.map(
         (post,i)=> {

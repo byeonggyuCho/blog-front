@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 import { all } from 'redux-saga/effects';
-import loading from './loading'
-import post, {postSaga} from './post'
-import list, {listSaga} from './list'
-import editor, {editorSaga, stateEditor} from './editor'
-import base , {baseSaga} from './base';
+import loading, {StateLoading} from './loading'
+import post, {postSaga, StatePost} from './post'
+import list, {listSaga, SateList} from './list'
+import editor, {editorSaga, StateEditor} from './editor'
+import base , {baseSaga , StateBase} from './base';
 
 // const rootReducer = combineReducers({
 //     list, base, editor: editor, post, loading
@@ -14,7 +14,11 @@ const rootReducer = combineReducers({
 })
 
 export interface ReduxState {
-    editor: stateEditor
+    editor: StateEditor,
+    list : SateList,
+    base : StateBase,
+    post : StatePost,
+    loading : StateLoading
 }
 
 export function* rootSaga() {

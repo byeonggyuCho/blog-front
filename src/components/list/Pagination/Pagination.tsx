@@ -10,10 +10,9 @@ const Pagination = ({page, lastPage, tag}) => {
     const createpagePath = (page) => {
         return tag ? `/tag/${tag}/${page}` : `/page/${page}`;
     }
-
     return (
         <div className={cx('pagination')}>
-            <Button disable={page === 1} to={createpagePath(page - 1)}>
+            <Button disabled={page === 1} to={createpagePath(page - 1)}>
                 이전 페이지
             </Button>
             <div className={cx('number')}>

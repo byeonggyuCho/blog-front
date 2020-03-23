@@ -18,7 +18,7 @@ const cx = classNames.bind(styles);
 
 //라이프라이클 메서드와 커스텀 메서드를 사용해야한다.
 // CodeMirror라이브러리를 연동해야한다.
-const EditorPane = ({ tags = '', title = '' ,markdown,onChangeInput, onChange}) =>  {
+const EditorPane = ({ tags = '', title = '' ,markdown,onChangeInput}) =>  {
 
     let editor = null;  //에디터 ref
     let codeMirror = null; //CodeMirror  인스턴스

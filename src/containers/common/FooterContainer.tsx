@@ -1,22 +1,28 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Footer from 'components/common/Footer';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as baseActions from 'store/modules/base';
+import { useDispatch, useSelector } from 'react-redux';
+// import { bindActionCreators } from 'redux';
+import base, * as baseActions from 'store/modules/base';
+import {ReduxState} from 'store/modules'
 
-const FooterContainer = ({ BaseActions, logged }) => {
+const FooterContainer = () => {
+    const dispatch = useDispatch();
+    const { logged } = useSelector( (state :ReduxState) =>({
+        logged : state.base.logged
+    }))
+
     const handleLoginClick = () => {
         if(logged) {
             try {
-                BaseActions.logout();
+                dispatch(baseActions.logout.request(null, null));
                 window.location.reload(); // 페이지 새로고침
             } catch(e) {
                 console.error(e);
             }
             return;
         }
-        BaseActions.showModal('login');
-        BaseActions.initializeLoginModal();
+        dispatch(baseActions.showModal<string>()('login'))
+        dispatch(baseActions.initializeLoginModal()())
     }
 
     return (
@@ -24,12 +30,4 @@ const FooterContainer = ({ BaseActions, logged }) => {
     );
 }
 
-export default connect(
-    (state) => {
-
-        return {logged: state.base.get('logged')}
-    },
-    (dispatch) => ({
-        BaseActions: bindActionCreators(baseActions, dispatch)
-    })
-)(FooterContainer);
+export default (FooterContainer);

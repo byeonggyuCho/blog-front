@@ -2,40 +2,34 @@ import React, { useEffect } from 'react';
 import Header from 'components/common/Header';
 import { withRouter } from 'react-router-dom';
 import * as BaseActions from 'store/modules/base';
-import { connect } from 'react-redux';
-import { bindActionCreators} from 'redux';
+import {  useDispatch, useSelector } from 'react-redux';
+import { RootState  } from "store/modules";
 
 
-const  HeaderContainer = ({ match, logged }) => {
+const  HeaderContainer = ({ match }) => {
+
+    const dispatch = useDispatch();
+    const {logged} = useSelector(
+        (state : RootState) =>({
+            logged : state.base.logged
+        })
+    )
+
+
+    // 이게 맞는지...
     const handleRemove = () => {
-        const { BaseActions } = this.props;
-        BaseActions.showModal('remove');
+        dispatch( BaseActions.showModal<'remove'>());
     }
 
     const { id } = match.params;
 
     return (
         <Header
-            postid={id}
+            postId={id}
             logged={logged}
             onRemove={handleRemove}
         />
     );
 }
 
-
-const mapDipatchToProp =  (dispatch) => ({
-    BaseActions: bindActionCreators(BaseActions,dispatch)
-})
-const mapStateToProp = (state) => {
-
-    if(typeof state.base.get !== 'function' )
-       debugger;
-
-    return {logged: state.base.get('logged')}
-}
-
-export default connect(
-    mapStateToProp,
-    mapDipatchToProp
-)(withRouter(HeaderContainer));
+export default withRouter(HeaderContainer)

@@ -1,4 +1,11 @@
-import { createAction, handleActions } from 'redux-actions';
+// import { createAction, handleActions } from 'redux-actions';
+
+import {
+  ActionType,
+  createReducer,
+  createAction,
+  createAsyncAction } from 'typesafe-actions'
+
 
 const START_LOADING = 'loading/START_LOADING';
 const FINISH_LOADING = 'loading/FINISH_LOADING';
@@ -8,17 +15,36 @@ const FINISH_LOADING = 'loading/FINISH_LOADING';
 */
 export const startLoading = createAction(
   START_LOADING,
-  requestType => requestType
+  action => {
+    return (type:string) => action(type);
+  }
 );
 
 export const finishLoading = createAction(
   FINISH_LOADING,
-  requestType => requestType
+  action => {
+    return (type:string) => action(type);
+  }
 );
 
-const initialState = {};
 
-const loading = handleActions(
+
+export interface StateLoading {
+  [propName: string]: boolean;
+}
+
+const initialState : StateLoading= {};
+
+const actions = {
+  startLoading,
+  finishLoading
+}
+
+type LoadingAction = ActionType<typeof actions>;
+
+
+
+const loading = createReducer<StateLoading,LoadingAction >(initialState,
   {
     [START_LOADING]: (state, action) => ({
       ...state,
@@ -28,8 +54,7 @@ const loading = handleActions(
       ...state,
       [action.payload]: false
     })
-  },
-  initialState
+  }
 );
 
 export default loading;

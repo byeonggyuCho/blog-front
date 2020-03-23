@@ -1,47 +1,42 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as baseActions from 'store/modules/base';
 import * as postActions from 'store/modules/post';
 import AskRemoveModal from 'components/modal/AskRemoveModal';
 import { withRouter } from 'react-router-dom';
+import {ReduxState} from 'store/modules'
 
-class AskRemoveModalContainer extends Component {
-    handleCancle = () => {
-        const { BaseActions } = this.props;
-        BaseActions.handleCancle('remove');
+
+const AskRemoveModalContainer = ({history, match }) => {
+
+    const dispatch = useDispatch();
+    const {visible} = useSelector( 
+        (state:ReduxState)=>({
+            visible: state.base.modal.remove
+        }) 
+    )
+
+    const handleCancle = () => {
+        dispatch(baseActions.hideModal<string>()('remove'))
     }
 
-    handleConfirm = async () => {
-        const { BaseActions, PostActions, history, match } = this.props;
+    const handleConfirm = () => {
         const { id } = match.params;
 
         try {
             // 포스트 삭제 후, 모달 닫고 웹사이트로 이동
-            await PostActions.removePost(id);
-            BaseActions.hideModal('remove');
+            dispatch(postActions.removePost.request(id))
+            dispatch(baseActions.hideModal<string>()("revmoe"))
             history.push('/');
         } catch(e) {
             console.error(e);
         }
     }
 
-    render() {
-        const { visible } = this.props;
-        const { handleCancle, handleConfirm } = this;
-
-        return (
-            <AskRemoveModal visible={visible} onCancel={handleCancle} onConfrim={handleConfirm}/>
-        );
-    }
+    return (
+        <AskRemoveModal visible={visible} onCancel={handleCancle} onConfirm={handleConfirm}/>
+    );
 }
 
-export default connect(
-    (state) => ({
-        visible: state.base.getIn(['modal', 'remove'])
-    }),
-    (dispatch) => ({
-        BaseActions: bindActionCreators(baseActions, dispatch),
-        PostActions: bindActionCreators(postActions, dispatch)
-    })
-)(withRouter(AskRemoveModalContainer));
+export default(withRouter(AskRemoveModalContainer));

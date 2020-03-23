@@ -1,64 +1,71 @@
-// import {
-//     ActionType,
-//     createReducer,
-//     createAction,
-//     createAsyncAction } from 'typesafe-actions'
+import {
+    ActionType,
+    createReducer,
+    createAction,
+    createAsyncAction} from 'typesafe-actions'
 
-import {createAction, createReducer} from 'lib/reduxUtil'
 import * as api from 'lib/api';
 import createRequestSaga from 'lib/createRequestSaga' 
 import { takeLatest } from 'redux-saga/effects';
 
 
 // action type
-const INITIALIZE = 'editor/INITALIZE'as const;
-const CHANGE_INPUT = 'editor/CHANGE_INPUT'as const;
-const WRITE_POST = 'editor/WRITE_POST'as const;
-const WRITE_POST_SUCCESS = 'editor/WRITE_POST_SUCCESS'as const;
-const WRITE_POST_FAILURE = 'editor/WRITE_POST_FAILURE'as const;
-const GET_POST = 'editor/GET_POST'as const;
-const GET_POST_SUCCESS = 'editor/GET_POST_SUCCESS'as const;
-const GET_POST_FAILURE = 'editor/GET_POST_FAILURE'as const;
-const EDIT_POST = 'editor/EDIT_POST'as const;
-const EDIT_POST_SUCCESS = 'editor/EDIT_POST_SUCCESS'as const;
-const EDIT_POST_FAILURE = 'editor/EDIT_POST_FAILURE' as const;
+const INITIALIZE = 'editor/INITALIZE';
+const CHANGE_INPUT = 'editor/CHANGE_INPUT';
+const WRITE_POST = 'editor/WRITE_POST';
+const WRITE_POST_SUCCESS = 'editor/WRITE_POST_SUCCESS';
+const WRITE_POST_FAILURE = 'editor/WRITE_POST_FAILURE';
+const GET_POST = 'editor/GET_POST';
+const GET_POST_SUCCESS = 'editor/GET_POST_SUCCESS';
+const GET_POST_FAILURE = 'editor/GET_POST_FAILURE';
+const EDIT_POST = 'editor/EDIT_POST';
+const EDIT_POST_SUCCESS = 'editor/EDIT_POST_SUCCESS';
+const EDIT_POST_FAILURE = 'editor/EDIT_POST_FAILURE' ;
 
 
-// interface Post {
-//     _id: string,
-//     title: string,
-//     tags: string[],
-//     markdown: string
-// }
+interface Post {
+    _id: string,
+    title: string,
+    tags: string[],
+    markdown: string
+}
 
 
-interface RequestPost {
+interface WritePost {
     title: string,
     body: string,
-    tags: string
+    tags: string[]
 }
 
 interface EditPost {
     id: string,
     title: string,
     body: string,
-    tags: string
+    tags: string[]
 }
+export const initialize =  createAction(INITIALIZE)();
+export const changeInput = createAction(CHANGE_INPUT)<{name:string, value: string}>();
+export const writePost =  createAsyncAction(
+    WRITE_POST,
+    WRITE_POST_SUCCESS,
+    WRITE_POST_FAILURE
+)<WritePost, {_id:string}, Error >();
+export const getPost =  createAsyncAction(
+    GET_POST,
+    GET_POST_SUCCESS,
+    GET_POST_FAILURE
+)<string, Post, Error >();
 
-// action creators
-export const initialize =  () => createAction(INITIALIZE);
-export const changeInput = (param: {name:string, value: string}) => createAction(CHANGE_INPUT, param);
-export const writePost =  (param: RequestPost) => createAction(WRITE_POST, param)
-export const getPost =  (id: string) => createAction(GET_POST, id)
-export const editPost=  (param: EditPost) => createAction( EDIT_POST, param)
 
+export const editPost= createAsyncAction(
+    EDIT_POST,
+    EDIT_POST_SUCCESS,
+    EDIT_POST_FAILURE
+)<EditPost, Post, Error >();
 
-export type EditorAction = 
-   | ReturnType<typeof initialize>
-   | ReturnType<typeof changeInput>
-   | ReturnType<typeof writePost>
-   | ReturnType<typeof getPost>
-   | ReturnType<typeof editPost>
+const actions = { initialize, changeInput, writePost, getPost, editPost};
+type EditorAction = ActionType<typeof actions>
+
 
 const getPostSaga = createRequestSaga(GET_POST, api.getPost)
 const editPostSaga = createRequestSaga(EDIT_POST, api.editPost)
@@ -72,23 +79,22 @@ export function* editorSaga() {
 }
 
 
-export interface stateEditor{
+export interface StateEditor{
     title: string,
     tags:string,
     markdown: string,
     postId: string,
-    _id: string
-    meta: object
+    id: string,
+    [propName: string]: any
 }
 
 // initial state
-const initialSate : stateEditor = {
+const initialSate : StateEditor = {
     title: '',
     tags:'',
     markdown: '',
     postId: '',
-    _id: '',
-    meta: null
+    id: '',
 };
 
 // interface stateAndPayload extends stateEditor{
@@ -96,7 +102,7 @@ const initialSate : stateEditor = {
 // }
 
 // reducer
-export default createReducer<stateEditor,EditorAction>(initialSate,{
+export default createReducer<StateEditor,EditorAction>(initialSate,{
     [INITIALIZE]: (state, action) => initialSate,
     [CHANGE_INPUT]: (state, { payload: data }) => ({
         ...state,   
@@ -105,7 +111,7 @@ export default createReducer<stateEditor,EditorAction>(initialSate,{
     [WRITE_POST_SUCCESS]: (state, { payload: data }) => ({
         ...state,
         data,
-        _id: data._id
+        id: data._id
     }),
   
     [WRITE_POST_FAILURE]: (state, { payload: error }) => ({
