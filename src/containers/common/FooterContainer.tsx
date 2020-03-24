@@ -14,15 +14,15 @@ const FooterContainer = () => {
     const handleLoginClick = () => {
         if(logged) {
             try {
-                dispatch(baseActions.logout.request(null, null));
+                dispatch(baseActions.logout.request());
                 window.location.reload(); // 페이지 새로고침
             } catch(e) {
                 console.error(e);
             }
             return;
         }
-        dispatch(baseActions.showModal<string>()('login'))
-        dispatch(baseActions.initializeLoginModal()())
+        dispatch(baseActions.showModal('login'))
+        dispatch(baseActions.initializeLoginModal())
     }
 
     return (

@@ -21,7 +21,7 @@ const LoginModalContainer = () => {
         try {
             // 로그인 시도, 성고하면 모달 닫기
             dispatch(baseActions.login.request(password))
-            dispatch(baseActions.hideModal<string>()('login'))
+            dispatch(baseActions.hideModal('login'))
 
             localStorage.logged = "true";
         } catch(e) {
@@ -30,11 +30,11 @@ const LoginModalContainer = () => {
     }
     const handleCancel = () => {
 
-        dispatch(baseActions.hideModal<string>()('login'))
+        dispatch(baseActions.hideModal('login'))
     }
     const handleChange = (e) => {
         const { value } = e.target;
-        dispatch(baseActions.changePasswordInput<any>()(value))
+        dispatch(baseActions.changePasswordInput(value))
     }
     const handleKeyPress = (e) => {
         // 인터 키를 누르면 로그인 호출

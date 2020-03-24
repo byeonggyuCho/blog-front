@@ -14,13 +14,13 @@ const FINISH_LOADING = 'loading/FINISH_LOADING';
 */
 export const startLoading = createAction(
   START_LOADING,
-  (type:string) => (type)
-);
+  action => (type:string) => action(type)
+)
 
 export const finishLoading = createAction(
   FINISH_LOADING,
-   (type:string) => (type)
-);
+   actoin => (type:string) => actoin(type)
+)
 
 
 

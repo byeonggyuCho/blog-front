@@ -10,7 +10,9 @@ export interface Post {
 
 
 
+
 export interface Responce<T> {
     data: T,
+    headers: object,
     [propName: string]: any
 }

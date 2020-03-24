@@ -16,11 +16,11 @@
          // checkLogin의 응답을 기다리기 전에 로그인인것으로 간주함.
          // 이는 임시적 단계를 넘기기 위한 방법이며 추후에 session의 저장값에 따라 로그인 비화성화 처리를 한다.
          if(localStorage.logged === "true") {
-             dispatch(baseActions.tempLogin()())
+             dispatch(baseActions.tempLogin())
          }
 
          // 확인요망... 왜 파라미터를 요구하느지?
-         dispatch(baseActions.checkLogin.request(null, null))
+         dispatch(baseActions.checkLogin.request())
     }
 
     useEffect(()=>{

@@ -19,18 +19,37 @@ const [
 
 
 
-// interface temp {
-//     posts : Post[],
-//     lastPage : number,
-//     error: object
-//     [propName: string]: any
-// }
+interface ResponsePayload {
+    payload: {
+        data: number
+    },
+    posts : Post[],
+    data:object,
+    headers : object,
+    // lastPage : number,
+    error: object,
+    [propName: string]: any
+}
+
+interface RequestPayload {
+    tag:string, 
+    username?:string, 
+    page?: number
+}
+
+interface Meta {
+    [propName: string]: any
+}
 
 export const listPosts = createAsyncAction(
     LIST_POSTS,
-    LIST_POSTS_SUCCESS,
-    LIST_POSTS_FAILURE,
-)<undefined, any, Error>();
+    LIST_POSTS_SUCCESS, 
+    LIST_POSTS_FAILURE, 
+)<RequestPayload, any, Meta>();
+
+
+
+
 
 const listPostsSaga = createRequestSaga(LIST_POSTS, postsAPI.listposts)
 
@@ -58,10 +77,10 @@ type ListAction = ActionType<typeof actions>;
 
 // reducer
 const list = createReducer<SateList,ListAction >(initialSate, {
-        [LIST_POSTS_SUCCESS]: (state, { payload}) => ({
+        [LIST_POSTS_SUCCESS]: (state, action) => ({
             ...state,
-            posts: payload.data,
-            lastPage: parseInt(payload.headers['last-page'],10), // 숫자로 형변환₩
+            posts: action.payload,
+            // lastPage: parseInt(action.payload.headers['last-page'],10), // 숫자로 형변환₩
         }),
         [LIST_POSTS_FAILURE]: (state, { payload: error }) => ({
             ...state,

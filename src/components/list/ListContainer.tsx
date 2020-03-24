@@ -29,7 +29,7 @@ const ListContainer = ({location, match}) => {
          // 스크롤바를 맨 위로 올립니다
          document.documentElement.scrollTop = 0;
 
-        dispatch(listPosts.request({ tag, username, page },null));
+        dispatch(listPosts.request({ tag, username, page }));
     }, [dispatch, location.search, match.params])
 
 

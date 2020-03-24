@@ -17,7 +17,7 @@ const AskRemoveModalContainer = ({history, match }) => {
     )
 
     const handleCancle = () => {
-        dispatch(baseActions.hideModal<string>()('remove'))
+        dispatch(baseActions.hideModal('remove'))
     }
 
     const handleConfirm = () => {
@@ -26,7 +26,7 @@ const AskRemoveModalContainer = ({history, match }) => {
         try {
             // 포스트 삭제 후, 모달 닫고 웹사이트로 이동
             dispatch(postActions.removePost.request(id))
-            dispatch(baseActions.hideModal<string>()("revmoe"))
+            dispatch(baseActions.hideModal("revmoe"))
             history.push('/');
         } catch(e) {
             console.error(e);

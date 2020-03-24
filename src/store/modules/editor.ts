@@ -7,7 +7,7 @@ import {
 import * as api from 'lib/api';
 import createRequestSaga from 'lib/createRequestSaga' 
 import { takeLatest } from 'redux-saga/effects';
-
+import {Post } from 'store/models'
 
 // action type
 const INITIALIZE = 'editor/INITALIZE';
@@ -37,28 +37,28 @@ interface EditPost {
     body: string,
     tags: string[]
 }
-export const initialize =  createAction(INITIALIZE)();
-export const changeInput = createAction(CHANGE_INPUT)<any>();
+
+export const initialize =  createAction(INITIALIZE);
+export const changeInput = createAction(CHANGE_INPUT, 
+    action => (payload : {name:string, value:string}) => action(payload)   
+);
 export const writePost =  createAsyncAction(
     WRITE_POST,
     WRITE_POST_SUCCESS,
     WRITE_POST_FAILURE
-)<WritePost, any, Error >();
+)<WritePost, Post, Error >();
+
 export const getPost =  createAsyncAction(
     GET_POST,
     GET_POST_SUCCESS,
     GET_POST_FAILURE
-)<string, any, Error >();
-
+)<string, Post, Error >();
 
 export const editPost= createAsyncAction(
     EDIT_POST,
     EDIT_POST_SUCCESS,
     EDIT_POST_FAILURE
-)<EditPost, any, Error >();
-
-const actions = { initialize, changeInput, writePost, getPost, editPost};
-type EditorAction = ActionType<typeof actions>
+)<EditPost, Post, Error >();
 
 
 const getPostSaga = createRequestSaga(GET_POST, api.getPost)
@@ -91,21 +91,22 @@ const initialSate : StateEditor = {
     id: '',
 };
 
-// interface stateAndPayload extends stateEditor{
-//     payload: Paylaod
-// }
+
+const actions = { initialize, changeInput, writePost, getPost, editPost};
+type EditorAction = ActionType<typeof actions>
+
 
 // reducer
 export default createReducer<StateEditor,EditorAction>(initialSate,{
     [INITIALIZE]: (state, action) => initialSate,
-    [CHANGE_INPUT]: (state, { payload }) => ({
+    [CHANGE_INPUT]: (state, actoin) => ({
         ...state,   
-        [payload.data.name] : payload.data.value
+        [actoin.payload.name] : actoin.payload.value
     }),
     [WRITE_POST_SUCCESS]: (state, { payload }) => ({
         ...state,
-        payload: payload.data,
-        id: payload.data._id
+        payload: payload,
+        id: payload._id
     }),
   
     [WRITE_POST_FAILURE]: (state, { payload: error }) => ({
@@ -115,10 +116,10 @@ export default createReducer<StateEditor,EditorAction>(initialSate,{
 
     [GET_POST_SUCCESS]: (state, { payload }) => ({
         ...state,
-        payload: payload.data,
-        title: payload.data.title,
-        markdown: payload.data.markdown,
-        tags: payload.data.tags.join(', ')
+        payload: payload,
+        title: payload.title,
+        markdown: payload.markdown,
+        tags: payload.tags.join(', ')
     }),
     [GET_POST_FAILURE]: (state, { payload: error }) => ({
         ...state,
@@ -127,10 +128,10 @@ export default createReducer<StateEditor,EditorAction>(initialSate,{
 
     [EDIT_POST_SUCCESS]: (state, { payload }) => ({
         ...state,
-        payload: payload.data,
-        title: payload.data.title,
-        markdown: payload.data.markdown,
-        tags: payload.data.tags.join(', ')
+        payload: payload,
+        title: payload.title,
+        markdown: payload.markdown,
+        tags: payload.tags.join(', ')
     }),
     [EDIT_POST_FAILURE]: (state, { payload: error }) => ({
         ...state,

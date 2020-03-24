@@ -50,8 +50,6 @@ interface PostListProps {
 
 const PostList: React.FunctionComponent<PostListProps>= ({posts}) => {
 
-    console.log(posts);
-
     const postList = posts.map(
         (post,i)=> {
             const { _id, title, body, publishedDate, tags } = post;

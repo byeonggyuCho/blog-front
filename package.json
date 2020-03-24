@@ -2,6 +2,7 @@
   "name": "blog-frontend",
   "version": "0.1.0",
   "private": true,
+  "main": "src/index.tsx",
   "dependencies": {
     "@babel/core": "7.7.4",
     "@babel/preset-typescript": "^7.9.0",
@@ -95,8 +96,8 @@
     "ts-pnp": "1.1.5",
     "tslint": "^6.1.0",
     "tslint-react": "^4.2.0",
-    "typesafe-actions": "^5.1.0",
-    "typescript": "^3.8.3",
+    "typesafe-actions": "4.4.2",
+    "typescript": "^3.7.5",
     "url-loader": "2.3.0",
     "webpack": "4.41.2",
     "webpack-dev-server": "3.9.0",
@@ -106,7 +107,9 @@
   "scripts": {
     "start": "cross-env node scripts/start.js",
     "build": "cross-env  node scripts/build.js",
-    "test": "node scripts/test.js"
+    "test": "node scripts/test.js",
+    "tsc": "tsc -p",
+    "tsc:watch": "tsc -p ./ --noEmit -w"
   },
   "eslintConfig": {
     "extends": "react-app"

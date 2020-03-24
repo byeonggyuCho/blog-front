@@ -1,25 +1,26 @@
 import React from 'react';
 import EditorPane from 'components/editor/EditorPane';
-import { connect, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import  { RootState } from 'store/modules'
 import { withRouter } from 'react-router-dom';
+import * as editorActoins from 'store/modules/editor'
 
 
 const EditorPaneContainer = ( ) => {
 
-    const { title, tags, markdown,EditorActions } = useSelector( 
+    const dispatch = useDispatch();
+    const { title, tags, markdown } = useSelector( 
         (state: RootState) => ({
             title : state.editor.title,
             tags : state.editor.tags,
-            markdown : state.editor.markdown,
-            EditorActions : state.editor.EditorActions,
+            markdown : state.editor.markdown
         })
     )
 
 
 
     const handleChangeInput = ({name, value}) => {
-        EditorActions.changeInput({name, value});
+        dispatch( editorActoins.changeInput({name, value}))
     }
     return (
         <EditorPane

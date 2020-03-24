@@ -21,7 +21,10 @@ const MarkdownRender =  ({ markdown }) => {
 
     const [html, setHtml] = useState(
         markdown 
-        ? marked(markdown, {breaks: true, sanitize:true}) 
+        ? marked(markdown, {
+            breaks: true, 
+        //    sanitize:true
+        }) 
         : ''
     )
 

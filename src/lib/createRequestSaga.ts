@@ -13,21 +13,24 @@ export default function createRequestSaga(type:string, request) {
 
 
   return function*(action) {
-    yield put(startLoading()(type)); // 로딩 시작
+
+    yield put(startLoading(type)); // 로딩 시작
     try {
       const response = yield call(request, action.payload);
+      console.log('lib',response.data)
       yield put({
         type: SUCCESS,
-        payload: response
+        payload: response.data
       });
     } catch (e) {
+      console.log('lib_ERR',e)
       yield put({
         type: FAILURE,
         payload: e,
         error: true,
       });
     }
-    yield put(finishLoading()(type)); // 로딩 끝
+    yield put(finishLoading(type)); // 로딩 끝
   };
 }
 

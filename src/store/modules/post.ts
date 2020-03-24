@@ -66,7 +66,7 @@ type PostAction = ActionType<typeof actions>;
 export default createReducer<StatePost, PostAction>(initialSate, {
     [GET_POST_SUCCESS]: (state, { payload}) => ({
         ...state,
-        ...payload.data,
+        ...payload,
     }),
     [GET_POST_FAILURE]: (state, { payload: error }) => ({
         ...state,
@@ -74,7 +74,7 @@ export default createReducer<StatePost, PostAction>(initialSate, {
     }),
     [REMOVE_POST_SUCCESS]: (state, { payload }) => ({
         ...state,
-        ...payload.data,
+        ...payload,
     }),
     [REMOVE_POST_FAILURE]: (state, { payload: error }) => ({
         ...state,

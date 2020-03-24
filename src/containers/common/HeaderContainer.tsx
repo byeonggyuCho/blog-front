@@ -18,7 +18,7 @@ const  HeaderContainer = ({ match }) => {
 
     // 이게 맞는지...
     const handleRemove = () => {
-        dispatch( BaseActions.showModal<'remove'>());
+        dispatch( BaseActions.showModal('remove'));
     }
 
     const { id } = match.params;
