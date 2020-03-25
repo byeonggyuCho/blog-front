@@ -3,8 +3,8 @@ import { startLoading, finishLoading } from 'store/modules/loading';
  
 export const createRequestActionTypes = (type:string )=> {
   const SUCCESS = `${type}_SUCCESS`;
-  const FAILURE = `${type}_FAILURE`;
-  return [type, SUCCESS, FAILURE];
+  const FAILURE = `${type}_FAILURE` ;
+  return [type, SUCCESS , FAILURE];
 };
 
 export default function createRequestSaga(type:string, request) {

@@ -103,10 +103,10 @@ export default createReducer<StateEditor,EditorAction>(initialSate,{
         ...state,   
         [actoin.payload.name] : actoin.payload.value
     }),
-    [WRITE_POST_SUCCESS]: (state, { payload }) => ({
+    [WRITE_POST_SUCCESS]: (state, action) => ({
         ...state,
-        payload: payload,
-        id: payload._id
+        payload: action.payload,
+        id: action.payload._id
     }),
   
     [WRITE_POST_FAILURE]: (state, { payload: error }) => ({

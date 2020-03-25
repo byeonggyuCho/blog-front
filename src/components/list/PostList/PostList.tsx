@@ -26,23 +26,6 @@ const PostItem = ({title, body, publishedDate, tags, id}) => {
 }
 
 
-// interface Post {
-//     _id: string,
-//     title: string,
-//     tags: string[],
-//     markdown: string,
-//     body: string,
-//     publishedDate: string
-// }
-
-// interface Post {
-//     _id: string,
-//     title: string,
-//     tags: string[],
-//     markdown: string,
-//     body?: string,
-//     publishedDate?: string
-// }
 interface PostListProps {
 
     posts: Post[]
