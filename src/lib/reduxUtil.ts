@@ -43,14 +43,14 @@ export function createAsyncAction(
                     payload
                 }
             },
-            sucess(payload?: TResponsePayload) {
+            success(payload?: TResponsePayload) {
 
                 return{
                     type: SUCCESS,
                     payload
                 }
             },
-            filure(payload? : TFailurePayload) {
+            failure(payload? : TFailurePayload) {
                 return {
                     type: FAILURE,
                     payload
@@ -72,6 +72,8 @@ export function createAction(type,payload?){
 }
 
 
+
+// payLaod 타입을 검증하기... 지금은 any로 들어간다.
 export function createReducer<S, A extends TypedAction<string>>(
     initialState:S,
     handleMap: {
