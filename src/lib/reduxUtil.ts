@@ -1,12 +1,24 @@
 import produce from 'immer';
+import { PayloadAction } from 'typesafe-actions';
+
 
 interface TypedAction<T extends string> {
     type: T,
 }
 
 interface TypedPayloadAction<T extends string, P> extends TypedAction<T> {
-    payload?: P
+    payload: P
 }
+
+interface ActionCreator<T extends string> {
+    () :TypedAction<T>
+}
+
+interface PayloadActionCreator<T extends string,P> {
+    (payload:P): TypedPayloadAction<T,P>
+}
+
+
 
 
 export type ActionType<T extends any > =  ReturnType<T[keyof T]>
@@ -23,37 +35,59 @@ export function actionBuilder(type, payload?) {
 }
 
 
+
+type NonUndefined<target, TCase, FCase> = target extends undefined ? TCase : FCase;
 // export const checkLogin = createAsyncAction(
 //     CHECK_LOGIN,
 //     CHECK_LOGIN_SUCCESS,
 //     CHECK_LOGIN_FAILURE
 // )<undefined, boolean, Error>();
-export function createAsyncAction(
-    REQUEST,
-    SUCCESS,
-    FAILURE,
+export function createAsyncAction<R extends string ,S extends string ,F extends string >(
+    REQUEST : R,
+    SUCCESS : S,
+    FAILURE : F,
     CANCEL?
 ){
     return function asyncActionBuilder<TRequestPayload, TResponsePayload, TFailurePayload>(){
         return {
-            request(payload?: TRequestPayload) {
+            // request(payload?: TRequestPayload | undefined) : NonUndefined<typeof payload, TypedAction<R>, PayloadAction<R,TRequestPayload>> {
+                request(payload? :TRequestPayload|undefined ) {//:  typeof  payload extends undefined ? TypedAction<R>  : PayloadAction<R,TRequestPayload> {
 
-                return{
-                    type: REQUEST,
-                    payload
+                if(typeof payload !== 'undefined'){
+                    return{
+                        type: REQUEST,
+                        payload
+                    }
+                }else{
+                    return{
+                        type: REQUEST,
+                    }
                 }
             },
-            success(payload?: TResponsePayload) {
+            success(payload?: TResponsePayload |undefined ) {
 
-                return{
-                    type: SUCCESS,
-                    payload
+
+                if(typeof payload !== 'undefined'){
+                    return{
+                        type: SUCCESS,
+                        payload
+                    }
+                }else{
+                    return{
+                        type: SUCCESS,
+                    }
                 }
             },
-            failure(payload? : TFailurePayload) {
-                return {
-                    type: FAILURE,
-                    payload
+            failure(payload? : TFailurePayload |undefined ) {
+                if(typeof payload !== 'undefined'){
+                    return{
+                        type: FAILURE,
+                        payload
+                    }
+                }else{
+                    return{
+                        type: FAILURE,
+                    }
                 }
             }
         }
