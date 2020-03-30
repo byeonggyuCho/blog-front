@@ -10,8 +10,8 @@ const ListPage  = ({page, tag}) => {
         <PageTemplate>
             <ListWrapper>
                 <ListContainer
-                    page={parseInt(page, 10)}
-                    tag={tag}
+                    // page={parseInt(page, 10)}
+                    // tag={tag}
                 />
             </ListWrapper>
         </PageTemplate>

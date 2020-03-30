@@ -1,7 +1,7 @@
 import produce from 'immer';
-import { action } from 'typesafe-actions';
-import { any } from 'prop-types';
-import { Type } from 'tern';
+// import { action } from 'typesafe-actions';
+// import { any } from 'prop-types';
+// import { Type } from 'tern';
 
 
 interface Action<T extends string> {
@@ -52,28 +52,25 @@ export function createAsyncAction<R extends string ,S extends string ,F extends 
 ){
     return function asyncActionBuilder<TRequestPayload, TResponsePayload, TFailurePayload>(){
         return {
-            // request(payload?: TRequestPayload | undefined) : NonUndefined<typeof payload, Action<R>, PayloadAction<R,TRequestPayload>> {
-                request(payload? :TRequestPayload | undefined ) {//:  typeof  payload extends undefined ? Action<R>  : PayloadAction<R,TRequestPayload> {
-
+                request(payload? :TRequestPayload | undefined ) {
                     return{
                         type: REQUEST,
                         payload : payload
                     }
-            },
-            success(payload?: TResponsePayload  ) {
+                },
+                success(payload?: TResponsePayload  ) {
 
-
-                    return{
-                        type: SUCCESS,
-                        payload
-                    }
-            },
-            failure(payload? : TFailurePayload  ) {
-                    return{
-                        type: FAILURE,
-                        payload
-                    }
-            }
+                        return{
+                            type: SUCCESS,
+                            payload
+                        }
+                },
+                failure(payload? : TFailurePayload  ) {
+                        return{
+                            type: FAILURE,
+                            payload
+                        }
+                }
         }
     }
 }
@@ -87,7 +84,7 @@ interface PayloadCreator<TreturnType> {
 // payload가 있을때 제네릭으로 페이로드 타입을 넘긴다.
 export function createAction<Ttype extends string>(type:Ttype) : () => {type:Ttype}
 export function createAction<Ttype extends string,TPayloadRequest,TPayloadResult>(type:Ttype ,
-    payloadCreator : (payload: TPayloadRequest) => (TPayloadResult) ): (type:Ttype)=>{type:Ttype, payload:TPayloadResult}
+    payloadCreator : (payload: TPayloadRequest) => (TPayloadResult) ): (payload:TPayloadResult)=>{type:Ttype, payload:TPayloadResult}
     
     //PayloadAction<Ttype,TPayloadResult> //: ()=> {type:Ttype, payload: ReturnType<typeof payloadCreator>}
 // export function createAction(type, payloadCreator?)

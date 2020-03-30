@@ -2,7 +2,8 @@ import {
     ActionType,
     createReducer,
     createAction,
-    createAsyncAction} from 'typesafe-actions'
+    createAsyncAction
+} from 'typesafe-actions'
 
 import * as api from 'lib/api';
 import createRequestSaga from 'lib/createRequestSaga' 

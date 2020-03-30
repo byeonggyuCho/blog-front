@@ -12,7 +12,7 @@ const ListContainer = () => {
     const location = useLocation();
     const dispatch = useDispatch();
     const params = useParams();
-    const { posts, error, loading } = useSelector(
+    const { posts} = useSelector(
         ({ list, loading } :RootState) => ({
             posts: list.posts,
             error: list.error,
@@ -23,7 +23,7 @@ const ListContainer = () => {
 
 
     useEffect(()=>{
-        const { username } = useParams()
+        const { username } =params;
         const {tag, page} = qs.parse(location.search, {
             ignoreQueryPrefix: true,
         });

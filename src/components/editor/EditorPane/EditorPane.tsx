@@ -64,7 +64,7 @@ const EditorPane = ({ tags = '', title = '' ,markdown,onChangeInput}) =>  {
         codeMirror.setValue(markdown);
         if(!cursor) return; // 커서가 없을때
         codeMirror.setCursor(cursor);
-    },[markdown])
+    },[markdown, codeMirror, cursor])
 /* 
     componentDidUpdate(prevProps, prevState) {
         // markdown이 변경되면 에디터 값도 변경합니다.

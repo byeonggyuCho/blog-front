@@ -3,7 +3,7 @@
  *  리덕스 스토어 설정
  * 
  */
-import {createStore, applyMiddleware, compose, combineReducers } from 'redux';
+import {createStore, applyMiddleware } from 'redux';
 import penderMiddleware from 'redux-pender';
 import createSagaMiddleware from 'redux-saga';
 import rootReducer, { rootSaga } from 'store/modules';

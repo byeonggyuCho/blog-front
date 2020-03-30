@@ -28,20 +28,6 @@ const MarkdownRender =  ({ markdown }) => {
         : ''
     )
 
-    const renderMarkdown = () => {
-
-        //마크다운이 존재하지 않는다면 공백처리를 한다.
-        if(!markdown) {
-            return  setHtml('');
-        }
-
-        setHtml(marked(markdown, {
-                breaks: true,   // 일반 엔터로 새 줄 입력
-                // sanitize: true  // 마크다운 내부 html 무시
-            })
-        );
-    }
-
 
 
     //여기서 마크다운 변환 작업을 하는 이유는 constructor함수가 서버사이드 랜더링을 할 때도 호출하기 때문이빈다ㅣ
@@ -70,6 +56,23 @@ const MarkdownRender =  ({ markdown }) => {
 
     //markdown 값이 변겨오디면 renderMardown을 호출한다.
     useEffect(()=>{
+
+
+        const renderMarkdown = () => {
+
+            //마크다운이 존재하지 않는다면 공백처리를 한다.
+            if(!markdown) {
+                return  setHtml('');
+            }
+    
+            setHtml(marked(markdown, {
+                    breaks: true,   // 일반 엔터로 새 줄 입력
+                    // sanitize: true  // 마크다운 내부 html 무시
+                })
+            );
+        }
+    
+
         renderMarkdown();
     },[markdown])
 

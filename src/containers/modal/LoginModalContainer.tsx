@@ -1,7 +1,7 @@
 import React from 'react';
 import LoginModal from 'components/modal/LoginModal';
 import { useSelector, useDispatch } from 'react-redux';
-import { bindActionCreators} from 'redux';
+// import { bindActionCreators} from 'redux';
 import * as baseActions from 'store/modules/base';
 import  {ReduxState} from 'store/modules'
 

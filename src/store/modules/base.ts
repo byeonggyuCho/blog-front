@@ -1,9 +1,9 @@
 import * as api from 'lib/api';
-import produce from 'immer';
-import createRequestSaga, {createRequestActionTypes} from 'lib/createRequestSaga' 
-import {createAction, createReducer, ActionType, createAsyncAction} from 'lib/reduxUtil'
+// import produce from 'immer';
+import createRequestSaga  from 'lib/createRequestSaga' 
+import {createAction, createReducer, createAsyncAction} from 'lib/reduxUtil'
 import { takeLatest } from 'redux-saga/effects';
-import { any } from 'prop-types';
+// import { any } from 'prop-types';
 // import {
 //     ActionType,
 //     createReducer,
@@ -23,13 +23,6 @@ const LOGOUT_FAILURE =  'base/LOOUT_FAILURE'as const
 const CHECK_LOGIN = 'base/CHECK_LOGIN'as const;
 const CHECK_LOGIN_SUCCESS = 'base/CHECK_LOGIN_SUCCESS'as const;
 const CHECK_LOGIN_FAILURE = 'base/CHECK_LOGIN_FAILURE'as const;
-
-// const [LOGOUT, LOGOUT_SUCCESS, LOGOUT_FAILURE]  = createRequestActionTypes(
-//     'base/LOGOUT'
-// );
-// const [CHECK_LOGIN, CHECK_LOGIN_SUCCESS, CHECK_LOGIN_FAILURE] = createRequestActionTypes(
-//     'base/CHECK_LOGIN'
-// );
 const SHOW_MODAL = 'base/SHOW_MODAL' as const;
 const HIDE_MODAL = 'base/HIDE_MODAL'as const;
 const CHANGE_PASSWORD_INPUT = 'base/CHAGE_PASSWORD_INPUT'as const;
@@ -38,14 +31,15 @@ const TEMP_LOGIN = 'base/TEMP_LOGIN'as const;
 
 
 // actoin creators
-// export const login = createAction(LOGIN)
-// export const logout = createAction(LOGOUT)
-// export const checkLogin = createAction(CHECK_LOGIN)
-
-
-export const showModal = createAction(SHOW_MODAL, (modalName: string) => (modalName));
-export const hideModal = createAction(HIDE_MODAL, (modalName: string) => (modalName))
-export const changePasswordInput = createAction(CHANGE_PASSWORD_INPUT,(password: string) => (password))
+export const showModal = createAction(SHOW_MODAL, 
+    (modalName: string) => (modalName)
+);
+export const hideModal = createAction(HIDE_MODAL, 
+    (modalName: string) => (modalName)
+)
+export const changePasswordInput = createAction(CHANGE_PASSWORD_INPUT,
+    (password: string) => (password)
+)
 export const initializeLoginModal = createAction(INITIALIZE_LOGIN_MODAL);
 export const tempLogin = createAction(TEMP_LOGIN);
 
@@ -70,19 +64,6 @@ export const checkLogin = createAsyncAction(
 )<undefined, boolean, Error>();
 
 
-
-
-// export const showModal = createAction(SHOW_MODAL, 
-//     action => (modalName: string) => action(modalName)
-// )
-// export const hideModal = createAction(HIDE_MODAL, 
-//     action => (modalName: string) => action(modalName)
-// )
-// export const changePasswordInput = createAction(CHANGE_PASSWORD_INPUT,
-//     action => (password: string) => action(password)
-// );
-// export const initializeLoginModal = createAction(INITIALIZE_LOGIN_MODAL);
-// export const tempLogin = createAction(TEMP_LOGIN);
 
 const loginSaga = createRequestSaga(LOGIN,api.login);
 const logoutSaga = createRequestSaga(LOGOUT,api.logout);

@@ -8,7 +8,7 @@ import {
     ActionType,
     createReducer,
     createAsyncAction } from 'typesafe-actions'
-import { Post, Responce} from 'store/models'
+import { Post} from 'store/models'
 
 
 const [
