@@ -3,6 +3,7 @@ import produce from 'immer';
 import createRequestSaga, {createRequestActionTypes} from 'lib/createRequestSaga' 
 import {createAction, createReducer, ActionType, createAsyncAction} from 'lib/reduxUtil'
 import { takeLatest } from 'redux-saga/effects';
+import { any } from 'prop-types';
 // import {
 //     ActionType,
 //     createReducer,
@@ -35,19 +36,18 @@ const CHANGE_PASSWORD_INPUT = 'base/CHAGE_PASSWORD_INPUT'as const;
 const INITIALIZE_LOGIN_MODAL = 'base/INITALIzE_LOGIN_MODAL'as const;
 const TEMP_LOGIN = 'base/TEMP_LOGIN'as const;
 
-// actoin creators
 
+// actoin creators
 // export const login = createAction(LOGIN)
 // export const logout = createAction(LOGOUT)
 // export const checkLogin = createAction(CHECK_LOGIN)
 
 
-export const showModal = createAction< string>(SHOW_MODAL)
-export const hideModal = createAction< string>(HIDE_MODAL)
-export const changePasswordInput = createAction< string>(CHANGE_PASSWORD_INPUT)
+export const showModal = createAction(SHOW_MODAL, (modalName: string) => (modalName));
+export const hideModal = createAction(HIDE_MODAL, (modalName: string) => (modalName))
+export const changePasswordInput = createAction(CHANGE_PASSWORD_INPUT,(password: string) => (password))
 export const initializeLoginModal = createAction(INITIALIZE_LOGIN_MODAL);
 export const tempLogin = createAction(TEMP_LOGIN);
-
 
 
 
@@ -142,8 +142,39 @@ const actions = {
 }
 
 
-// type BaseAction = ReturnType<typeof actions[keyof typeof actions]>
-type BaseAction = ActionType<typeof actions>
+// 하나의 유니온으로 만드는 유틸타입을 만들어야한다.  
+type makeUnion<T> =  T[keyof  T ]
+
+
+interface AsyncAction {
+    request: (...arg)=> any
+    success: (...arg)=> any
+    failure: (...arg)=> any
+}
+
+
+type map2<T> = {
+    [K in keyof T] : T[K] extends AsyncAction ? makeUnion<T[K]>: T[K]
+}
+
+type BaseAction = ReturnType<makeUnion<map2< typeof actions>>>
+
+
+/* 
+type t9 = makeUnion<typeof actions>
+// type t91 = makeUnion< t9>
+// type t10 = ReturnType<t8>
+
+type IndexTypeFunction = {
+    [key : string] : (...args: any)=>any | AsyncAction;
+}
+
+type ActionType2<T extends IndexTypeFunction  > = ReturnType<makeUnion<T>>
+// type BaseAction2 = ReturnType< t1[keyof t1] extends AsyncAction ? >
+type BaseAction2 = ActionType2<typeof actions>
+ */
+// type t4 = ReturnType<t3>;
+// type BaseAction = ActionType<typeof actions>
 
 
 
@@ -156,20 +187,21 @@ export default createReducer<StateBase, BaseAction>(initialSate, {
             state.modal[payload] = true;
         // })
     },
-    [HIDE_MODAL]: (state, { payload }) => {
+     [HIDE_MODAL]: (state, action) => {
         //return state.setIn(['modal', modalName], false);
         // return produce(state, draft => {
-            state.modal[payload] = true;
+            state.modal[action.payload] = true;
         // })
     },
     [CHANGE_PASSWORD_INPUT]: (state, {payload}) => {
         // return  state.setIn(['loginModal', 'password'], value)
         //   return produce(state, draft => {
-            state.loginModal.password = payload.password;
-        //   })
+            state.loginModal.password = payload;
+            //   })
       },
+    
  
-    [TEMP_LOGIN]: (state,action) => {
+      [TEMP_LOGIN]: (state,action) => {
         // return state.set('logged', true);
         // return produce(state, draft => {
             state.logged = true
@@ -185,6 +217,10 @@ export default createReducer<StateBase, BaseAction>(initialSate, {
         // })
     },
 
+    // 얘네 필요없음... 필터링하는 로직이 필요함..
+    [LOGOUT] : (state, action) => {
+
+    },
     [LOGOUT_SUCCESS]: (state,action) => {
         // return state.set('logged', false);
         // return produce(state, draft => {
@@ -197,6 +233,9 @@ export default createReducer<StateBase, BaseAction>(initialSate, {
             state.logged = true
         // })
         
+    },
+    [LOGIN] : (state, action) => {
+
     },
     [LOGIN_SUCCESS]: (state,action) => {
         // return state.set('logged', true);
@@ -213,6 +252,9 @@ export default createReducer<StateBase, BaseAction>(initialSate, {
         // })
     },
 
+    [CHECK_LOGIN] : (state, action) => {
+
+    },
     [CHECK_LOGIN_SUCCESS]: (state) => {
         // return state.set('logged', data.logged);
         // return produce(state, draft => {
@@ -223,8 +265,8 @@ export default createReducer<StateBase, BaseAction>(initialSate, {
         // return state.set('error', payload.error)
         
         // return produce(state, draft => {
-            state.modal.error = payload;
+            state.modal.error = !!payload;
         // })
-    },
+    }, 
   
 });

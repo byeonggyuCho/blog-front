@@ -3,13 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as baseActions from 'store/modules/base';
 import * as postActions from 'store/modules/post';
 import AskRemoveModal from 'components/modal/AskRemoveModal';
-import { withRouter } from 'react-router-dom';
+import { useHistory, useParams} from 'react-router'
 import {ReduxState} from 'store/modules'
 
 
-const AskRemoveModalContainer = ({history, match }) => {
+const AskRemoveModalContainer = () => {
 
     const dispatch = useDispatch();
+    const history = useHistory();
+    const params = useParams();
     const {visible} = useSelector( 
         (state:ReduxState)=>({
             visible: state.base.modal.remove
@@ -21,7 +23,7 @@ const AskRemoveModalContainer = ({history, match }) => {
     }
 
     const handleConfirm = () => {
-        const { id } = match.params;
+        const { id } = params;
 
         try {
             // 포스트 삭제 후, 모달 닫고 웹사이트로 이동
@@ -38,4 +40,4 @@ const AskRemoveModalContainer = ({history, match }) => {
     );
 }
 
-export default(withRouter(AskRemoveModalContainer));
+export default AskRemoveModalContainer;

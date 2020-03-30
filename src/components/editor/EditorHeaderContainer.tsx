@@ -1,21 +1,22 @@
 import React, {  useEffect} from 'react';
 import EditorHeader from './EditorHeader';
 import {  useSelector, useDispatch } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { useLocation, useHistory} from 'react-router'
 import queryString from 'query-string';
 import * as editorActions from 'store/modules/editor';
 import {ReduxState} from 'store/modules'
 
 
-interface Props  {
-    history: any,
-    location: any
-}
+// interface Props  {
+//     history: any,
+//     location: any
+// }
 
-const  EditorHeaderContainer : React.FunctionComponent<Props>
-= ({  history , location}) => {
+const  EditorHeaderContainer : React.FunctionComponent = () => {
 
     const dispatch = useDispatch();
+    const location = useLocation();
+    const history = useHistory();
 
     let {postId, title, markdown, tags } = useSelector(
         (state: ReduxState) => ({
@@ -79,4 +80,4 @@ const  EditorHeaderContainer : React.FunctionComponent<Props>
     );
 }
 
-export default withRouter(EditorHeaderContainer)
+export default EditorHeaderContainer

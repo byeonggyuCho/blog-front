@@ -26,8 +26,6 @@
 
 ## 정리
 1. 사가 플로우
-2. 리액트 라우터
-    - withRouter 이거 왜해줌?
 3. d3
 - [참고](https://riptutorial.com/ko/d3-js/example/8402/%EC%A2%8C%ED%91%9C%EA%B3%84)
 4. 코드 스플리트
@@ -38,24 +36,17 @@
     - __REDUX_DEVTOOLS_EXETENSION_COMPOSE__랑 차이가 뭔지
 8. 설계관점에서 생각하는 연습.
 9. 리액트 디버깅툴, 리덕스 디버깅툴 도구 분석.
-10. onchange시 여러번 호출되는것 최적화하기.
+10. 최적화
+    - onchange시 여러번 호출되는것 최적화하기.
 11. 로그린 프로세스 다시 정리.
 14. 컴포넌트 설계와 구성을 어떻게 할 것인지?
 15. 타입스크립트를 어떤 목적으로 어느 부분에 사용했는지?
 - 내가 적용한 부분 설명하기.
 
-16. 훅
-- useReducer
-- useREF
-- use memo
 
 - scss
 - media
-- ref
 - 서버사이드 랜더링
 
 
-타입
-- https://velog.io/@zeros0623/TypeScript-%EA%B3%A0%EA%B8%89-%ED%83%80%EC%9E%85
-- 타입단언
-- 타입 가드
+2. 페이지네이션

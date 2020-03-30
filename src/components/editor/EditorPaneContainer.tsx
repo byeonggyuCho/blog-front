@@ -2,7 +2,6 @@ import React from 'react';
 import EditorPane from 'components/editor/EditorPane';
 import { useDispatch, useSelector } from 'react-redux';
 import  { RootState } from 'store/modules'
-import { withRouter } from 'react-router-dom';
 import * as editorActoins from 'store/modules/editor'
 
 
@@ -32,4 +31,4 @@ const EditorPaneContainer = ( ) => {
     );
 }
 
-export default withRouter(EditorPaneContainer);
+export default EditorPaneContainer

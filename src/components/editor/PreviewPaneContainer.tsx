@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import PreviewPane from './PreviewPane';
 import { RootState} from 'store/modules'
 import { statement } from '@babel/template';
-import { withRouter } from 'react-router-dom';
 
 const  PreviewPaneContainer = () =>  {
 
@@ -19,4 +18,4 @@ const  PreviewPaneContainer = () =>  {
     );
 }
 
-export default withRouter(PreviewPaneContainer);
+export default (PreviewPaneContainer);

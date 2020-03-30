@@ -1,21 +1,23 @@
 import produce from 'immer';
-import { PayloadAction } from 'typesafe-actions';
+import { action } from 'typesafe-actions';
+import { any } from 'prop-types';
+import { Type } from 'tern';
 
 
-interface TypedAction<T extends string> {
+interface Action<T extends string> {
     type: T,
 }
 
-interface TypedPayloadAction<T extends string, P> extends TypedAction<T> {
+interface PayloadAction<T extends string, P> extends Action<T> {
     payload: P
 }
 
 interface ActionCreator<T extends string> {
-    () :TypedAction<T>
+    () :Action<T>
 }
 
 interface PayloadActionCreator<T extends string,P> {
-    (payload:P): TypedPayloadAction<T,P>
+    (payload:P): PayloadAction<T,P>
 }
 
 
@@ -23,11 +25,11 @@ interface PayloadActionCreator<T extends string,P> {
 
 export type ActionType<T extends any > =  ReturnType<T[keyof T]>
 
-export function actionBuilder<T extends string>(type: T): TypedAction<T>;
+export function actionBuilder<T extends string>(type: T): Action<T>;
 export  function actionBuilder<T extends string, P>(
     type: T,
     payload?: P,
-): TypedPayloadAction<T, P>;
+): PayloadAction<T, P>;
 
 
 export function actionBuilder(type, payload?) {
@@ -50,68 +52,62 @@ export function createAsyncAction<R extends string ,S extends string ,F extends 
 ){
     return function asyncActionBuilder<TRequestPayload, TResponsePayload, TFailurePayload>(){
         return {
-            // request(payload?: TRequestPayload | undefined) : NonUndefined<typeof payload, TypedAction<R>, PayloadAction<R,TRequestPayload>> {
-                request(payload? :TRequestPayload|undefined ) {//:  typeof  payload extends undefined ? TypedAction<R>  : PayloadAction<R,TRequestPayload> {
+            // request(payload?: TRequestPayload | undefined) : NonUndefined<typeof payload, Action<R>, PayloadAction<R,TRequestPayload>> {
+                request(payload? :TRequestPayload | undefined ) {//:  typeof  payload extends undefined ? Action<R>  : PayloadAction<R,TRequestPayload> {
 
-                if(typeof payload !== 'undefined'){
                     return{
                         type: REQUEST,
-                        payload
+                        payload : payload
                     }
-                }else{
-                    return{
-                        type: REQUEST,
-                    }
-                }
             },
-            success(payload?: TResponsePayload |undefined ) {
+            success(payload?: TResponsePayload  ) {
 
 
-                if(typeof payload !== 'undefined'){
                     return{
                         type: SUCCESS,
                         payload
                     }
-                }else{
-                    return{
-                        type: SUCCESS,
-                    }
-                }
             },
-            failure(payload? : TFailurePayload |undefined ) {
-                if(typeof payload !== 'undefined'){
+            failure(payload? : TFailurePayload  ) {
                     return{
                         type: FAILURE,
                         payload
                     }
-                }else{
-                    return{
-                        type: FAILURE,
-                    }
-                }
             }
         }
     }
 }
 
-let s = 'banana';
+interface PayloadCreator<TreturnType> {
+    (payload) : TreturnType
+}
 
+// type temp<TPayloadRequest,TPayloadResult>  = (payload: TPayloadRequest) => (result:TPayloadResult) 
 
 // payload가 있을때 제네릭으로 페이로드 타입을 넘긴다.
-export function createAction(type)
-export function createAction<TRequestPayload>(type, payload?:TRequestPayload)
+export function createAction<Ttype extends string>(type:Ttype) : () => {type:Ttype}
+export function createAction<Ttype extends string,TPayloadRequest,TPayloadResult>(type:Ttype ,
+    payloadCreator : (payload: TPayloadRequest) => (TPayloadResult) ): (type:Ttype)=>{type:Ttype, payload:TPayloadResult}
+    
+    //PayloadAction<Ttype,TPayloadResult> //: ()=> {type:Ttype, payload: ReturnType<typeof payloadCreator>}
+// export function createAction(type, payloadCreator?)
 
-export function createAction(type,payload?){
-    return (payload?) => actionBuilder(type,payload)
+export function createAction<Ttype extends string, TPayloadType>(type:Ttype,payloadCreator?) : any{
+
+    if(payloadCreator !== undefined){
+        return (payload? : TPayloadType) => actionBuilder(type,payloadCreator(payload))
+    }else{
+        return () => actionBuilder(type)
+    }
 }
 
 
 
 // payLaod 타입을 검증하기... 지금은 any로 들어간다.
-export function createReducer<S, A extends TypedAction<string>>(
+export function createReducer<S, A extends Action<string>>(
     initialState:S,
     handleMap: {
-        [key in A['type']]: (state: S, actoin: Extract<A, TypedAction<key>>) => void
+        [key in A['type']]: (state: S, actoin: Extract<A, Action<key>>) => void
     },
 ) {
     return (state: S= initialState, action:A) => 

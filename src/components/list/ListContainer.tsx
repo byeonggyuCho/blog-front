@@ -1,15 +1,17 @@
 import React, { useEffect } from 'react';
 import qs from 'qs';
-import { withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import PostList from 'components/list/PostList';
 import { listPosts } from 'store/modules/list';
 import { RootState} from 'store/modules'
+import { useLocation, useParams} from 'react-router'
 
 // import Pagination from 'components/list/Pagination';
 
-const ListContainer = ({location, match}) => {
+const ListContainer = () => {
+    const location = useLocation();
     const dispatch = useDispatch();
+    const params = useParams();
     const { posts, error, loading } = useSelector(
         ({ list, loading } :RootState) => ({
             posts: list.posts,
@@ -21,7 +23,7 @@ const ListContainer = ({location, match}) => {
 
 
     useEffect(()=>{
-        const { username } = match.params;
+        const { username } = useParams()
         const {tag, page} = qs.parse(location.search, {
             ignoreQueryPrefix: true,
         });
@@ -30,7 +32,7 @@ const ListContainer = ({location, match}) => {
          document.documentElement.scrollTop = 0;
 
         dispatch(listPosts.request({ tag, username, page }));
-    }, [dispatch, location.search, match.params])
+    }, [dispatch, location.search, params])
 
 
     return (
@@ -43,4 +45,4 @@ const ListContainer = ({location, match}) => {
     )
 }
 
-export default withRouter(ListContainer)
+export default (ListContainer)

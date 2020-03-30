@@ -39,6 +39,9 @@ interface EditPost {
 }
 
 export const initialize =  createAction(INITIALIZE);
+// export const changeInput2 = createAction(CHANGE_INPUT, 
+//     action => (payload : {name:string, value:string}) => action({name:""})   
+// );
 export const changeInput = createAction(CHANGE_INPUT, 
     action => (payload : {name:string, value:string}) => action(payload)   
 );
