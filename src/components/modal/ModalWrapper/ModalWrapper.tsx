@@ -10,7 +10,7 @@ interface Props {
     children: any
 }
 
-const ModalWrapper:React.FunctionComponent<Props> = ({visible, children}) => {
+const ModalWrapper = ({visible, children} : Props) => {
 
     const [animate, setAnimate] = useState(false);
 

@@ -16,20 +16,12 @@ export const createRequestActionTypes = (type:string )=> {
 type PromiseCreatorFunction<P, T> = ((payload: P) => Promise<T>) | (() => Promise<T>);
 
 
-interface AsyncActionCreator<R extends any[], S extends any[], F extends any[] > {
-  // ACTION: {
-      request: (payload?: R[1])=> {type:R[0]}
-      success: (payload?: S[1])=> {type:S[0]}
-      failure: (payload?: F[1])=> {type:F[0]}
-      [K :string]: (...payload: any[])=>any
-  // }
-}
 
-export default function createRequestSaga <Param , RES>//<T1,P1, T2,P2, T3,P3>
-(types:AsyncActionsTypes, api: PromiseCreatorFunction<Param, RES>) {
-  // (types:AsyncActionCreator<[T1,P1],[T2,P2],[T3,P3]>, api: PromiseCreatorFunction<P1, P2>) {
+export default function createRequestSaga <Param , RES>
+(types:AsyncActionTypes<string,string,string>, api: PromiseCreatorFunction<Param, RES>) {
 
-return function*(action: {payload:Param,type:AsyncActionsTypes}) {
+// return function*(action: {payload:Param,type:AsyncActionsTypes}) {
+return function*(action: PayloadAction<AsyncActionTypes<string,string,string>, Param>) {
 
     yield put(startLoading(types.REQUEST)); // 로딩 시작
     try {

@@ -10,7 +10,7 @@ interface Prop {
     id : string
 }
 
-const Post : React.FunctionComponent<Prop>= ({id})=> {
+const Post = ({id} : Prop)=> {
 
     const dispatch = useDispatch();
     const {loading, title, tags, body, publishedDate } = useSelector(
@@ -22,7 +22,6 @@ const Post : React.FunctionComponent<Prop>= ({id})=> {
             publishedDate: state.post.publishedDate,
         })
     )
-
 
 
     const initialize = () => {
@@ -39,8 +38,6 @@ const Post : React.FunctionComponent<Prop>= ({id})=> {
     },[])
 
 
-    // const { loading, body ,title,tags ,publishedDate} = this.props;
-
     if(loading) return null;    // 로딩 중일 때는 아무것도 보여주지 않음.
 
     return (
@@ -52,16 +49,3 @@ const Post : React.FunctionComponent<Prop>= ({id})=> {
 }
 
 export default Post
-
-// connect(
-//     (state) => ({
-//         loading: state.loading['post/GET_POST'],
-//         title: state.post.title,
-//         tags: state.post.tags,
-//         body: state.post.body,
-//         publishedDate: state.post.publishedDate,
-//     }),
-//     (dispatch) => ({
-//         PostActions: bindActionCreators(postActions, dispatch)
-//     })
-// )(Post);

@@ -26,12 +26,12 @@ const PostItem = ({title, body, publishedDate, tags, id}) => {
 }
 
 
-interface PostListProps {
+interface Props {
 
     posts: Post[]
 }
 
-const PostList: React.FunctionComponent<PostListProps>= ({posts}) => {
+const PostList = ({posts}: Props) => {
 
     const postList = posts.map(
         (post,i)=> {
