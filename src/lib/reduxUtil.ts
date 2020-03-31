@@ -20,6 +20,21 @@ interface PayloadActionCreator<T extends string,P> {
     (payload:P): PayloadAction<T,P>
 }
 
+interface AsyncAction<R, S, F> {
+    REQUEST :R;
+    SUCEESS :S;
+    FAILURE :F
+}
+
+interface AsyncActionCreator {
+    // ACTION: {
+        request: (...payload: any[])=>any
+        success: (...payload: any[])=>any
+        failure: (...payload: any[])=>any
+        [K :string]: (...payload: any[])=>any
+    // }
+}
+
 
 
 
@@ -37,47 +52,32 @@ export function actionBuilder(type, payload?) {
 }
 
 
-
 type NonUndefined<target, TCase, FCase> = target extends undefined ? TCase : FCase;
-// export const checkLogin = createAsyncAction(
-//     CHECK_LOGIN,
-//     CHECK_LOGIN_SUCCESS,
-//     CHECK_LOGIN_FAILURE
-// )<undefined, boolean, Error>();
-export function createAsyncAction<R extends string ,S extends string ,F extends string >(
+export function createAsyncAction<R  ,S  ,F >(
     REQUEST : R,
     SUCCESS : S,
     FAILURE : F,
-    CANCEL?
+    // CANCEL?
 ){
-    return function asyncActionBuilder<TRequestPayload, TResponsePayload, TFailurePayload>(){
-        return {
-                request(payload? :TRequestPayload | undefined ) {
-                    return{
-                        type: REQUEST,
-                        payload : payload
-                    }
-                },
-                success(payload?: TResponsePayload  ) {
-
-                        return{
-                            type: SUCCESS,
-                            payload
-                        }
-                },
-                failure(payload? : TFailurePayload  ) {
-                        return{
-                            type: FAILURE,
-                            payload
-                        }
-                }
-        }
-    }
+    return <RP, SP, FP>() : AsyncActionCreator =>({
+        request: (payload: RP) => ({type: REQUEST, payload}),
+        success: (payload: SP) => ({type: SUCCESS, payload}),
+        failure: (payload: FP) => ({type: FAILURE, payload}),
+    })
 }
+
+
 
 interface PayloadCreator<TreturnType> {
     (payload) : TreturnType
 }
+
+
+// 객체 타입의 비동기 액션을 유니온 타입 액션으로 만든다.
+type ActionTypes< T extends AsyncActionCreator> = ReturnType<T[keyof T]>;
+
+
+
 
 // type temp<TPayloadRequest,TPayloadResult>  = (payload: TPayloadRequest) => (result:TPayloadResult) 
 
@@ -104,7 +104,7 @@ export function createAction<Ttype extends string, TPayloadType>(type:Ttype,payl
 export function createReducer<S, A extends Action<string>>(
     initialState:S,
     handleMap: {
-        [key in A['type']]: (state: S, actoin: Extract<A, Action<key>>) => void
+        [key in A['type']]: (state: S, action: Extract<A, Action<key>>) => void
     },
 ) {
     return (state: S= initialState, action:A) => 

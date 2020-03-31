@@ -1,9 +1,7 @@
-import * as api from 'lib/api';
-// import produce from 'immer';
+import * as api from 'lib/api/auth';
 import createRequestSaga  from 'lib/createRequestSaga' 
 import {createAction, createReducer, createAsyncAction} from 'lib/reduxUtil'
 import { takeLatest } from 'redux-saga/effects';
-// import { any } from 'prop-types';
 // import {
 //     ActionType,
 //     createReducer,
@@ -11,21 +9,28 @@ import { takeLatest } from 'redux-saga/effects';
 //     createAsyncAction 
 // } from 'typesafe-actions'
 
+// 비동기 타입
+const LOGIN = {
+    REQUEST: 'base/LOGIN_REQUEST',
+    SUCCESS: 'base/LOGIN_SUCCESS',
+    FAILURE: 'base/LOGIN_FAILURE'
+} as const
 
-// action types
-const LOGIN =  'base/LOGIN'as const
-const LOGIN_SUCCESS =  'base/LOGIN_SUCCESS'as const
-const LOGIN_FAILURE =  'base/LOGIN_FAILURE'as const
-const LOGOUT =  'base/LOGOUT'as const
-const LOGOUT_SUCCESS =  'base/LOGOUT_SUCCESS'as const
-const LOGOUT_FAILURE =  'base/LOOUT_FAILURE'as const
+const LOGOUT = {
+    REQUEST: 'base/LOGOUT_REQUEST',
+    SUCCESS: 'base/LOGOUT_SUCCESS',
+    FAILURE: 'base/LOGOUT_FAILURE'
+} as const
 
-const CHECK_LOGIN = 'base/CHECK_LOGIN'as const;
-const CHECK_LOGIN_SUCCESS = 'base/CHECK_LOGIN_SUCCESS'as const;
-const CHECK_LOGIN_FAILURE = 'base/CHECK_LOGIN_FAILURE'as const;
+const CHECK_LOGIN = {
+    REQUEST: 'base/CHECK_LOGIN_REQUEST',
+    SUCCESS: 'base/CHECK_LOGIN_SUCCESS',
+    FAILURE: 'base/CHECK_LOGIN_FAILURE'
+} as const
+
+const CHANGE_PASSWORD_INPUT = 'base/CHAGE_PASSWORD_INPUT'as const;
 const SHOW_MODAL = 'base/SHOW_MODAL' as const;
 const HIDE_MODAL = 'base/HIDE_MODAL'as const;
-const CHANGE_PASSWORD_INPUT = 'base/CHAGE_PASSWORD_INPUT'as const;
 const INITIALIZE_LOGIN_MODAL = 'base/INITALIzE_LOGIN_MODAL'as const;
 const TEMP_LOGIN = 'base/TEMP_LOGIN'as const;
 
@@ -44,35 +49,35 @@ export const initializeLoginModal = createAction(INITIALIZE_LOGIN_MODAL);
 export const tempLogin = createAction(TEMP_LOGIN);
 
 
-
+// Entity 선언.
 export const login = createAsyncAction(
-    LOGIN,
-    LOGIN_SUCCESS,
-    LOGIN_FAILURE
+    LOGIN.REQUEST,
+    LOGIN.SUCCESS,
+    LOGIN.FAILURE
 )<string, null, Error>();
 
 export const logout = createAsyncAction(
-    LOGOUT,
-    LOGOUT_SUCCESS,
-    LOGOUT_FAILURE
+    LOGOUT.REQUEST,
+    LOGOUT.SUCCESS,
+    LOGOUT.FAILURE
 )<undefined, null, Error>();
 
 export const checkLogin = createAsyncAction(
-    CHECK_LOGIN,
-    CHECK_LOGIN_SUCCESS,
-    CHECK_LOGIN_FAILURE
+    CHECK_LOGIN.REQUEST,
+    CHECK_LOGIN.SUCCESS,
+    CHECK_LOGIN.FAILURE
 )<undefined, boolean, Error>();
 
 
 
-const loginSaga = createRequestSaga(LOGIN,api.login);
+const loginSaga = createRequestSaga(LOGIN, api.login);
 const logoutSaga = createRequestSaga(LOGOUT,api.logout);
 const checkLoginSaga = createRequestSaga(CHECK_LOGIN,api.checkLogin);
 
 export function* baseSaga(){
-    yield takeLatest(LOGIN, loginSaga);
-    yield takeLatest(LOGOUT, logoutSaga);
-    yield takeLatest(CHECK_LOGIN, checkLoginSaga);
+    yield takeLatest(LOGIN.REQUEST, loginSaga);
+    yield takeLatest(LOGOUT.REQUEST, logoutSaga);
+    yield takeLatest(CHECK_LOGIN.REQUEST, checkLoginSaga);
 }
 
 
@@ -127,12 +132,6 @@ const actions = {
 type makeUnion<T> =  T[keyof  T ]
 
 
-interface AsyncAction {
-    request: (...arg)=> any
-    success: (...arg)=> any
-    failure: (...arg)=> any
-}
-
 
 type map2<T> = {
     [K in keyof T] : T[K] extends AsyncAction ? makeUnion<T[K]>: T[K]
@@ -140,22 +139,6 @@ type map2<T> = {
 
 type BaseAction = ReturnType<makeUnion<map2< typeof actions>>>
 
-
-/* 
-type t9 = makeUnion<typeof actions>
-// type t91 = makeUnion< t9>
-// type t10 = ReturnType<t8>
-
-type IndexTypeFunction = {
-    [key : string] : (...args: any)=>any | AsyncAction;
-}
-
-type ActionType2<T extends IndexTypeFunction  > = ReturnType<makeUnion<T>>
-// type BaseAction2 = ReturnType< t1[keyof t1] extends AsyncAction ? >
-type BaseAction2 = ActionType2<typeof actions>
- */
-// type t4 = ReturnType<t3>;
-// type BaseAction = ActionType<typeof actions>
 
 
 
@@ -199,32 +182,32 @@ export default createReducer<StateBase, BaseAction>(initialSate, {
     },
 
     // 얘네 필요없음... 필터링하는 로직이 필요함..
-    [LOGOUT] : (state, action) => {
+    [LOGOUT.REQUEST] : (state, action) => {
 
     },
-    [LOGOUT_SUCCESS]: (state,action) => {
+    [LOGOUT.SUCCESS]: (state,action) => {
         // return state.set('logged', false);
         // return produce(state, draft => {
             state.logged = false;
         // })
     },
-    [LOGOUT_FAILURE]: (state) => {
+    [LOGOUT.FAILURE]: (state) => {
         // return state.set('logged', logged);
         // return produce(state, draft => {
             state.logged = true
         // })
         
     },
-    [LOGIN] : (state, action) => {
+    [LOGIN.REQUEST] : (state, action) => {
 
     },
-    [LOGIN_SUCCESS]: (state,action) => {
+    [LOGIN.SUCCESS]: (state,action) => {
         // return state.set('logged', true);
         // return produce(state, draft => {
             state.logged = true;
         // })
     },
-    [LOGIN_FAILURE]: (state) =>{
+    [LOGIN.FAILURE]: (state) =>{
         // return state.setIn(['loginModal',   'error'],       true)
         //             .setIn(['loginModal',   'password'],    '');
         // return produce(state, draft => {
@@ -233,16 +216,16 @@ export default createReducer<StateBase, BaseAction>(initialSate, {
         // })
     },
 
-    [CHECK_LOGIN] : (state, action) => {
+    [CHECK_LOGIN.REQUEST] : (state, action) => {
 
     },
-    [CHECK_LOGIN_SUCCESS]: (state) => {
+    [CHECK_LOGIN.SUCCESS]: (state) => {
         // return state.set('logged', data.logged);
         // return produce(state, draft => {
             state.logged = true;
         // })
     },
-    [CHECK_LOGIN_FAILURE]: (state, {payload}) => {
+    [CHECK_LOGIN.FAILURE]: (state, {payload}) => {
         // return state.set('error', payload.error)
         
         // return produce(state, draft => {

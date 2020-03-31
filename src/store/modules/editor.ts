@@ -5,7 +5,7 @@ import {
     createAsyncAction
 } from 'typesafe-actions'
 
-import * as api from 'lib/api';
+import * as api from 'lib/api/posts';
 import createRequestSaga from 'lib/createRequestSaga' 
 import { takeLatest } from 'redux-saga/effects';
 import {Post } from 'store/models'
@@ -13,16 +13,24 @@ import {Post } from 'store/models'
 // action type
 const INITIALIZE = 'editor/INITALIZE';
 const CHANGE_INPUT = 'editor/CHANGE_INPUT';
-const WRITE_POST = 'editor/WRITE_POST';
-const WRITE_POST_SUCCESS = 'editor/WRITE_POST_SUCCESS';
-const WRITE_POST_FAILURE = 'editor/WRITE_POST_FAILURE';
-const GET_POST = 'editor/GET_POST';
-const GET_POST_SUCCESS = 'editor/GET_POST_SUCCESS';
-const GET_POST_FAILURE = 'editor/GET_POST_FAILURE';
-const EDIT_POST = 'editor/EDIT_POST';
-const EDIT_POST_SUCCESS = 'editor/EDIT_POST_SUCCESS';
-const EDIT_POST_FAILURE = 'editor/EDIT_POST_FAILURE' ;
 
+
+// async Action Types
+const WRITE_POST = {
+    REQUEST : 'editor/WRITE_POST_REQUEST',
+    SUCCESS : 'editor/WRITE_POST_SUCCESS',
+    FAILURE : 'editor/WRITE_POST_FAILURE'
+} as const
+const GET_POST = {
+    REQUEST : 'editor/GET_POST_REQUEST',
+    SUCCESS : 'editor/GET_POST_SUCCESS',
+    FAILURE : 'editor/GET_POST_FAILURE'
+} as const
+const EDIT_POST = {
+    REQUEST : 'editor/EDIT_POST_REQUEST',
+    SUCCESS : 'editor/EDIT_POST_SUCCESS',
+    FAILURE : 'editor/EDIT_POST_FAILURE'
+} as const
 
 
 
@@ -40,28 +48,25 @@ interface EditPost {
 }
 
 export const initialize =  createAction(INITIALIZE);
-// export const changeInput2 = createAction(CHANGE_INPUT, 
-//     action => (payload : {name:string, value:string}) => action({name:""})   
-// );
 export const changeInput = createAction(CHANGE_INPUT, 
     action => (payload : {name:string, value:string}) => action(payload)   
 );
 export const writePost =  createAsyncAction(
-    WRITE_POST,
-    WRITE_POST_SUCCESS,
-    WRITE_POST_FAILURE
+    WRITE_POST.REQUEST,
+    WRITE_POST.SUCCESS,
+    WRITE_POST.FAILURE,
 )<WritePost, Post, Error >();
 
 export const getPost =  createAsyncAction(
-    GET_POST,
-    GET_POST_SUCCESS,
-    GET_POST_FAILURE
+    GET_POST.REQUEST,
+    GET_POST.SUCCESS,
+    GET_POST.FAILURE,
 )<string, Post, Error >();
 
 export const editPost= createAsyncAction(
-    EDIT_POST,
-    EDIT_POST_SUCCESS,
-    EDIT_POST_FAILURE
+    EDIT_POST.REQUEST,
+    EDIT_POST.SUCCESS,
+    EDIT_POST.FAILURE,
 )<EditPost, Post, Error >();
 
 
@@ -71,9 +76,9 @@ const writePostSaga = createRequestSaga(WRITE_POST, api.writePost)
 
 
 export function* editorSaga() {
-    yield takeLatest(GET_POST, getPostSaga);
-    yield takeLatest(EDIT_POST, editPostSaga);
-    yield takeLatest(WRITE_POST, writePostSaga);
+    yield takeLatest(GET_POST.REQUEST, getPostSaga);
+    yield takeLatest(GET_POST.REQUEST, editPostSaga);
+    yield takeLatest(GET_POST.REQUEST, writePostSaga);
 }
 
 
@@ -107,37 +112,37 @@ export default createReducer<StateEditor,EditorAction>(initialSate,{
         ...state,   
         [actoin.payload.name] : actoin.payload.value
     }),
-    [WRITE_POST_SUCCESS]: (state, action) => ({
+    [WRITE_POST.SUCCESS]: (state, action) => ({
         ...state,
         payload: action.payload,
         id: action.payload._id
     }),
   
-    [WRITE_POST_FAILURE]: (state, { payload: error }) => ({
+    [WRITE_POST.FAILURE]: (state, { payload: error }) => ({
         ...state,
         error,
     }),
 
-    [GET_POST_SUCCESS]: (state, { payload }) => ({
+    [GET_POST.SUCCESS]: (state, { payload }) => ({
         ...state,
         payload: payload,
         title: payload.title,
         markdown: payload.markdown,
         tags: payload.tags.join(', ')
     }),
-    [GET_POST_FAILURE]: (state, { payload: error }) => ({
+    [GET_POST.FAILURE]: (state, { payload: error }) => ({
         ...state,
         error,
     }),
 
-    [EDIT_POST_SUCCESS]: (state, { payload }) => ({
+    [EDIT_POST.SUCCESS]: (state, { payload }) => ({
         ...state,
         payload: payload,
         title: payload.title,
         markdown: payload.markdown,
         tags: payload.tags.join(', ')
     }),
-    [EDIT_POST_FAILURE]: (state, { payload: error }) => ({
+    [EDIT_POST.FAILURE]: (state, { payload: error }) => ({
         ...state,
         error,
     }),

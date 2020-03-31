@@ -1,6 +1,6 @@
-import * as api from 'lib/api';
+import * as api from 'lib/api/posts';
 import { takeLatest } from 'redux-saga/effects';
-import createRequestSaga, {createRequestActionTypes} from 'lib/createRequestSaga'
+import createRequestSaga from 'lib/createRequestSaga'
 import {
     ActionType,
     createReducer,
@@ -8,42 +8,45 @@ import {
 } from 'typesafe-actions'
 import { Post, Responce} from 'store/models'
 
-// action type
-const [GET_POST, GET_POST_SUCCESS, GET_POST_FAILURE] = createRequestActionTypes(
-    'post/GET_POST'
-);
 
-const [REMOVE_POST, REMOVE_POST_SUCCESS, REMOVE_POST_FAILURE] = createRequestActionTypes(
-    'post/REMOVE_POST'
-);
+const GET_POST = {
+    REQUEST :  'post/GET_POST_REQUEST',
+    SUCCESS :  'post/GET_POST_SUCCESS',
+    FAILURE :  'post/GET_POST_FAILURE'
+} as const
+const REMOVE_POST = {
+    REQUEST :  'post/REMOVE_POST_REQUEST',
+    SUCCESS :  'post/REMOVE_POST_SUCCESS',
+    FAILURE :  'post/REMOVE_POST_FAILURE'
+} as const
 
 
 
 
 // actoin creator
 export const getPost = createAsyncAction(
-    GET_POST,  
-    GET_POST_SUCCESS, 
-    GET_POST_FAILURE
-) <string, Responce<Post>, Error>();
+    GET_POST.REQUEST ,  
+    GET_POST.SUCCESS , 
+    GET_POST.FAILURE 
+) <string, Post, Error>();
 
 export const removePost = createAsyncAction(
-    REMOVE_POST, 
-    REMOVE_POST_SUCCESS, 
-    REMOVE_POST_FAILURE
+    REMOVE_POST.REQUEST , 
+    REMOVE_POST.SUCCESS ,
+    REMOVE_POST.FAILURE 
 ) <string, any, Error>();
 
 const getPostSaga = createRequestSaga(GET_POST, api.getPost)
 const removePostSaga = createRequestSaga(REMOVE_POST, api.removePost)
 
 export const postSaga = function*(){
-    yield takeLatest(GET_POST,getPostSaga)
-    yield takeLatest(REMOVE_POST,removePostSaga)
+    yield takeLatest(GET_POST.REQUEST, getPostSaga)
+    yield takeLatest(REMOVE_POST.REQUEST,removePostSaga)
 }
 
 export interface StatePost {
     post:string,
-    tags:string,
+    tags:string[],
     body:string,
     publishedDate:string,
     title: string
@@ -52,7 +55,7 @@ export interface StatePost {
 // initial state
 const initialSate : StatePost = {
     post:'',
-    tags:'',
+    tags:[],
     body:'',
     publishedDate:'',
     title: ''
@@ -64,19 +67,19 @@ type PostAction = ActionType<typeof actions>;
 
 // reducer
 export default createReducer<StatePost, PostAction>(initialSate, {
-    [GET_POST_SUCCESS]: (state, { payload}) => ({
+    [GET_POST.SUCCESS]: (state, { payload}) => ({
         ...state,
         ...payload,
     }),
-    [GET_POST_FAILURE]: (state, { payload: error }) => ({
+    [GET_POST.FAILURE]: (state, { payload: error }) => ({
         ...state,
         error,
     }),
-    [REMOVE_POST_SUCCESS]: (state, { payload }) => ({
+    [REMOVE_POST.SUCCESS]: (state, { payload }) => ({
         ...state,
         ...payload,
     }),
-    [REMOVE_POST_FAILURE]: (state, { payload: error }) => ({
+    [REMOVE_POST.FAILURE]: (state, { payload: error }) => ({
         ...state,
         error,
     }),

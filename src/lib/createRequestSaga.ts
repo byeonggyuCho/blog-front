@@ -7,30 +7,45 @@ export const createRequestActionTypes = (type:string )=> {
   return [type, SUCCESS , FAILURE];
 };
 
-export default function createRequestSaga(type:string, request) {
-  const SUCCESS = `${type}_SUCCESS`;
-  const FAILURE = `${type}_FAILURE`;
+
+/* 
+  유틸함수의 재사용성을 높이기 위하여 함수의 파라미터는 언제나 하나의 값을 사용하도록 하고,
+  action.payload 를 그대로 파라미터로 넣어주도록 설정합니다.
+  만약에 여러가지 종류의 값을 파라미터로 넣어야 한다면 객체 형태로 만들어줘야 합니다.
+*/
+type PromiseCreatorFunction<P, T> = ((payload: P) => Promise<T>) | (() => Promise<T>);
 
 
-  return function*(action) {
+interface AsyncActionCreator<R extends any[], S extends any[], F extends any[] > {
+  // ACTION: {
+      request: (payload?: R[1])=> {type:R[0]}
+      success: (payload?: S[1])=> {type:S[0]}
+      failure: (payload?: F[1])=> {type:F[0]}
+      [K :string]: (...payload: any[])=>any
+  // }
+}
 
-    yield put(startLoading(type)); // 로딩 시작
+export default function createRequestSaga <Param , RES>//<T1,P1, T2,P2, T3,P3>
+(types:AsyncActionsTypes, api: PromiseCreatorFunction<Param, RES>) {
+  // (types:AsyncActionCreator<[T1,P1],[T2,P2],[T3,P3]>, api: PromiseCreatorFunction<P1, P2>) {
+
+return function*(action: {payload:Param,type:AsyncActionsTypes}) {
+
+    yield put(startLoading(types.REQUEST)); // 로딩 시작
     try {
-      const response = yield call(request, action.payload);
-      console.log('lib',response.data)
+      const response = yield call(api, action.payload);
       yield put({
-        type: SUCCESS,
+        type: types.SUCCESS,
         payload: response.data
       });
     } catch (e) {
-      console.log('lib_ERR',e)
       yield put({
-        type: FAILURE,
+        type: types.FAILURE,
         payload: e,
         error: true,
       });
     }
-    yield put(finishLoading(type)); // 로딩 끝
+    yield put(finishLoading(types.REQUEST)); // 로딩 끝
   };
 }
 
