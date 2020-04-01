@@ -8,16 +8,10 @@ import {
     createAsyncAction } from 'typesafe-actions'
 import { Post} from 'store/models'
 
-
-// const [
-//     LIST_POSTS,
-//     LIST_POSTS_SUCCESS,
-//     LIST_POSTS_FAILURE,
-//   ] = createRequestActionTypes('posts/LIST_POSTS');
 const LIST = {
-    REQUEST : 'LIST_POSTS_REQUEST',
-    SUCCESS : 'LIST_POSTS_SUCCESS',
-    FAILURE : 'LIST_POSTS_FAILURE'
+    REQUEST : 'list/LIST_POSTS_REQUEST',
+    SUCCESS : 'list/LIST_POSTS_SUCCESS',
+    FAILURE : 'list/LIST_POSTS_FAILURE'
 } as const
 
 

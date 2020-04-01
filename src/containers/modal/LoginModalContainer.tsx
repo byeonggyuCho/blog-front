@@ -1,7 +1,6 @@
 import React from 'react';
 import LoginModal from 'components/modal/LoginModal';
 import { useSelector, useDispatch } from 'react-redux';
-// import { bindActionCreators} from 'redux';
 import * as baseActions from 'store/modules/base';
 import  {ReduxState} from 'store/modules'
 
@@ -16,20 +15,19 @@ const LoginModalContainer = () => {
         })
     )
 
-
-    const handleLogin = async() => {
+    const handleLogin = () => {
         try {
-            // 로그인 시도, 성고하면 모달 닫기
+            // 로그인 시도, 성꽁하면 모달 닫기
             dispatch(baseActions.login.request(password))
             dispatch(baseActions.hideModal('login'))
-
             localStorage.logged = "true";
         } catch(e) {
             console.log(e);
         }
     }
-    const handleCancel = () => {
 
+    // x버튼
+    const handleCancel = () => {
         dispatch(baseActions.hideModal('login'))
     }
     const handleChange = (e) => {

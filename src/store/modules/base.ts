@@ -31,7 +31,7 @@ const CHECK_LOGIN = {
 const CHANGE_PASSWORD_INPUT = 'base/CHAGE_PASSWORD_INPUT'as const;
 const SHOW_MODAL = 'base/SHOW_MODAL' as const;
 const HIDE_MODAL = 'base/HIDE_MODAL'as const;
-const INITIALIZE_LOGIN_MODAL = 'base/INITALIzE_LOGIN_MODAL'as const;
+const INITIALIZE_LOGIN_MODAL = 'base/INITALIZE_LOGIN_MODAL'as const;
 const TEMP_LOGIN = 'base/TEMP_LOGIN'as const;
 
 
@@ -54,19 +54,19 @@ export const login = createAsyncAction(
     LOGIN.REQUEST,
     LOGIN.SUCCESS,
     LOGIN.FAILURE
-)<string, null, Error>();
+)<string, undefined, Error>();
 
 export const logout = createAsyncAction(
     LOGOUT.REQUEST,
     LOGOUT.SUCCESS,
     LOGOUT.FAILURE
-)<undefined, null, Error>();
+)<undefined, undefined, Error>();
 
 export const checkLogin = createAsyncAction(
     CHECK_LOGIN.REQUEST,
     CHECK_LOGIN.SUCCESS,
     CHECK_LOGIN.FAILURE
-)<undefined, boolean, Error>();
+)<undefined, {logged: boolean}, Error>();
 
 
 
@@ -137,7 +137,8 @@ type map2<T> = {
     [K in keyof T] : T[K] extends AsyncAction ? makeUnion<T[K]>: T[K]
 }
 
-type BaseAction = ReturnType<makeUnion<map2< typeof actions>>>
+type actionCreatorUnion = makeUnion<map2< typeof actions>>;
+type BaseAction = ReturnType<actionCreatorUnion>
 
 
 
@@ -147,55 +148,41 @@ export default createReducer<StateBase, BaseAction>(initialSate, {
     
     [SHOW_MODAL]: (state, {payload}) => {
         // return state.setIn(['modal', modalName], true);
-        // return produce(state, draft => {
             state.modal[payload] = true;
-        // })
     },
-     [HIDE_MODAL]: (state, action) => {
+    [HIDE_MODAL]: (state, action) => {
         //return state.setIn(['modal', modalName], false);
-        // return produce(state, draft => {
-            state.modal[action.payload] = true;
-        // })
+            state.modal[action.payload] = false;
     },
     [CHANGE_PASSWORD_INPUT]: (state, {payload}) => {
         // return  state.setIn(['loginModal', 'password'], value)
-        //   return produce(state, draft => {
             state.loginModal.password = payload;
-            //   })
       },
     
  
-      [TEMP_LOGIN]: (state,action) => {
+    [TEMP_LOGIN]: (state,action) => {
         // return state.set('logged', true);
-        // return produce(state, draft => {
-            state.logged = true
-        // })
+        state.logged = true
     },
      [INITIALIZE_LOGIN_MODAL]: (state, action) => {
         // 로그인 모달의 상태를 초기 상태로 설정 (텍스트/오류 초기화)
         //return state.set('loginModal', initialSate.get('loginModal'));
 
-        // return produce(state, draft => {
-            state.loginModal.password = ''
-            state.loginModal.error = false
-        // })
+        state.loginModal.password = ''
+        state.loginModal.error = false
     },
 
     // 얘네 필요없음... 필터링하는 로직이 필요함..
     [LOGOUT.REQUEST] : (state, action) => {
-
+        // debugger;
     },
     [LOGOUT.SUCCESS]: (state,action) => {
         // return state.set('logged', false);
-        // return produce(state, draft => {
             state.logged = false;
-        // })
     },
     [LOGOUT.FAILURE]: (state) => {
         // return state.set('logged', logged);
-        // return produce(state, draft => {
-            state.logged = true
-        // })
+        state.logged = true
         
     },
     [LOGIN.REQUEST] : (state, action) => {
@@ -203,34 +190,28 @@ export default createReducer<StateBase, BaseAction>(initialSate, {
     },
     [LOGIN.SUCCESS]: (state,action) => {
         // return state.set('logged', true);
-        // return produce(state, draft => {
             state.logged = true;
-        // })
     },
     [LOGIN.FAILURE]: (state) =>{
         // return state.setIn(['loginModal',   'error'],       true)
         //             .setIn(['loginModal',   'password'],    '');
-        // return produce(state, draft => {
-            state.loginModal.error = true;
-            state.loginModal.password = '';
-        // })
+        state.loginModal.error = true;
+        state.loginModal.password = '';
     },
 
     [CHECK_LOGIN.REQUEST] : (state, action) => {
 
     },
-    [CHECK_LOGIN.SUCCESS]: (state) => {
+    [CHECK_LOGIN.SUCCESS]: (state,action) => {
         // return state.set('logged', data.logged);
         // return produce(state, draft => {
-            state.logged = true;
+            localStorage.logged = "false"
+            state.logged = action.payload.logged;
         // })
     },
     [CHECK_LOGIN.FAILURE]: (state, {payload}) => {
         // return state.set('error', payload.error)
-        
-        // return produce(state, draft => {
-            state.modal.error = !!payload;
-        // })
+        state.modal.error = !!payload;
     }, 
   
 });

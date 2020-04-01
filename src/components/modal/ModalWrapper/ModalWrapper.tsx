@@ -10,33 +10,56 @@ interface Props {
     children: any
 }
 
-const ModalWrapper = ({visible, children} : Props) => {
+const ModalWrapper = ({visible= false, children} : Props) => {
 
     const [animate, setAnimate] = useState(false);
+    const [init, setInit] = useState(false);
 
-    const startAnimation = () => {
-        // animation 값을 true로 설정 후
-        setAnimate(true)
 
-        // 250ms 이후 다시 false로 설정ㄴ
-        setTimeout(() => {
-            // animate 값을 true로 설정 후
-            setAnimate(false)
-        }, 250)
-    }
-
+    // 초기화 시점에 실행되면 안됩니다. (componentDidUpdate)는 최초 렌더링에 호출되면 안된다.
+    // visible값이 변했을때만 실행되어야합니다.
+    // useEffect을 이용해 componentDidMount와 componentDidUpdate를 분리해야한다.
     useEffect(()=>{
-        startAnimation();
-    },[visible])
+
+        // componentDidMount을 피하기 위해서.
+        if(init){
+            console.log('[ModalWrapper] visible이 변했습니다, 초기화시에는 실행되지 않습니다.')
+
+            const startAnimation = () => {
+                // animation 값을 true로 설정 후
+                setAnimate(true)
+        
+                // 250ms 이후 다시 false로 설정
+                setTimeout(() => {
+                    setAnimate(false)
+                }, 250)
+            }
+
+            startAnimation();
+            return function cleanUp(){
+                console.log('[ModalWrapper]  effect Clean up')
+            }
+        }
+    },[visible ])
+
+
+    // 초기시점을 잡기 위해서.
+    useEffect(()=>{
+        console.log('[ModalWrapper] componentDidMount')
+        // componentDidMount 시점을 알립니다.
+        setInit(true);
+    },[])
 
 
 
-    // visible과 animate값이 둘 다 false일 때만
-    // null을 리턴
+    // console.log('====visible', visible)
+    // console.log('====animate', animate)
+    // visible과 animate값이 둘 다 false일 때만  null을 리턴
     if(!visible && !animate) return null;  
 
     // 상태에 따라 애니메이션 설정
     const animation = animate && (visible ? 'enter' : 'leave');
+    console.log('animation', animation)
 
     return (
         <div>

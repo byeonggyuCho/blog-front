@@ -1,7 +1,6 @@
 import React from 'react';
 import Footer from 'components/common/Footer';
 import { useDispatch, useSelector } from 'react-redux';
-// import { bindActionCreators } from 'redux';
 import * as baseActions from 'store/modules/base';
 import {ReduxState} from 'store/modules'
 

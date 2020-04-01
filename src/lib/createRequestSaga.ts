@@ -8,12 +8,7 @@ export const createRequestActionTypes = (type:string )=> {
 };
 
 
-/* 
-  유틸함수의 재사용성을 높이기 위하여 함수의 파라미터는 언제나 하나의 값을 사용하도록 하고,
-  action.payload 를 그대로 파라미터로 넣어주도록 설정합니다.
-  만약에 여러가지 종류의 값을 파라미터로 넣어야 한다면 객체 형태로 만들어줘야 합니다.
-*/
-type PromiseCreatorFunction<P, T> = ((payload: P) => Promise<T>) | (() => Promise<T>);
+
 
 
 
@@ -24,13 +19,19 @@ export default function createRequestSaga <Param , RES>
 return function*(action: PayloadAction<AsyncActionTypes<string,string,string>, Param>) {
 
     yield put(startLoading(types.REQUEST)); // 로딩 시작
+
+   
+
     try {
       const response = yield call(api, action.payload);
+
+      if(types.REQUEST.includes('LOGOUT'))  console.log('in saga logout reqeust')
       yield put({
         type: types.SUCCESS,
         payload: response.data
       });
     } catch (e) {
+      console.error(e)
       yield put({
         type: types.FAILURE,
         payload: e,

@@ -16,10 +16,11 @@ const ListContainer = () => {
         ({ list, loading } :RootState) => ({
             posts: list.posts,
             error: list.error,
-            loading: loading['posts/LIST_POSTS'],
+            loading: loading['list/LIST_POSTS_REQUEST'],
             // user: user.user,
         }),
     );
+
 
 
     useEffect(()=>{

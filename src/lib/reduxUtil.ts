@@ -4,36 +4,6 @@ import produce from 'immer';
 // import { Type } from 'tern';
 
 
-interface Action<T extends string> {
-    type: T,
-}
-
-interface PayloadAction<T extends string, P> extends Action<T> {
-    payload: P
-}
-
-interface ActionCreator<T extends string> {
-    () :Action<T>
-}
-
-interface PayloadActionCreator<T extends string,P> {
-    (payload:P): PayloadAction<T,P>
-}
-
-interface AsyncAction<R, S, F> {
-    REQUEST :R;
-    SUCEESS :S;
-    FAILURE :F
-}
-
-interface AsyncActionCreator {
-    // ACTION: {
-        request: (...payload: any[])=>any
-        success: (...payload: any[])=>any
-        failure: (...payload: any[])=>any
-        [K :string]: (...payload: any[])=>any
-    // }
-}
 
 
 
@@ -59,7 +29,7 @@ export function createAsyncAction<R  ,S  ,F >(
     FAILURE : F,
     // CANCEL?
 ){
-    return <RP, SP, FP>() : AsyncActionCreator =>({
+    return <RP, SP, FP>() : AsyncActionCreator<[R,RP],[S,SP],[F,FP]> =>({
         request: (payload: RP) => ({type: REQUEST, payload}),
         success: (payload: SP) => ({type: SUCCESS, payload}),
         failure: (payload: FP) => ({type: FAILURE, payload}),
@@ -74,7 +44,7 @@ interface PayloadCreator<TreturnType> {
 
 
 // 객체 타입의 비동기 액션을 유니온 타입 액션으로 만든다.
-type ActionTypes< T extends AsyncActionCreator> = ReturnType<T[keyof T]>;
+// type ActionTypes< T extends AsyncActionCreator> = ReturnType<T[keyof T]>;
 
 
 
