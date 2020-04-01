@@ -77,8 +77,8 @@ const writePostSaga = createRequestSaga(WRITE_POST, api.writePost)
 
 export function* editorSaga() {
     yield takeLatest(GET_POST.REQUEST, getPostSaga);
-    yield takeLatest(GET_POST.REQUEST, editPostSaga);
-    yield takeLatest(GET_POST.REQUEST, writePostSaga);
+    yield takeLatest(EDIT_POST.REQUEST, editPostSaga);
+    yield takeLatest(WRITE_POST.REQUEST, writePostSaga);
 }
 
 
@@ -108,14 +108,22 @@ type EditorAction = ActionType<typeof actions>
 // reducer
 export default createReducer<StateEditor,EditorAction>(initialSate,{
     [INITIALIZE]: (state, action) => initialSate,
-    [CHANGE_INPUT]: (state, actoin) => ({
-        ...state,   
-        [actoin.payload.name] : actoin.payload.value
+    [CHANGE_INPUT]: (state, actoin) => {
+
+        let re = { 
+            ...state,   
+         [actoin.payload.name] : actoin.payload.value
+         }
+        //  console.log('====',re)
+       return re
+    },
+    [WRITE_POST.REQUEST]: (state, action)=>({
+        ...state
     }),
     [WRITE_POST.SUCCESS]: (state, action) => ({
         ...state,
-        payload: action.payload,
-        id: action.payload._id
+        //payload: action.payload,
+        postId: action.payload._id
     }),
   
     [WRITE_POST.FAILURE]: (state, { payload: error }) => ({

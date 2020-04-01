@@ -6,7 +6,14 @@ import list, {listSaga, SateList} from './list'
 import editor, {editorSaga, StateEditor} from './editor'
 import base , {baseSaga , StateBase} from './base';
 
+import { connectRouter } from 'connected-react-router';
+
 const rootReducer = combineReducers({
+    list, base, editor, post, loading
+})
+
+const createRootReducer = (history) => combineReducers({
+    router: connectRouter(history),     // redux store에서 history객체를 이용하기 위해서...
     list, base, editor, post, loading
 })
 
@@ -27,6 +34,7 @@ export function* rootSaga() {
     ])
 }
 
-export default rootReducer;
+// export default rootReducer;
+export default createRootReducer;
 
 export type RootState = ReturnType<typeof rootReducer>

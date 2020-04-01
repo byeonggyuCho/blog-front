@@ -5,10 +5,10 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import configure from 'store/configure';
+import configureStore from 'store/configure';
 
 // // 리덕스 스토어 설정
-const store = configure();
+const store = configureStore();
 const container = document.getElementById('root');
 
 ReactDOM.render(

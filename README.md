@@ -17,6 +17,9 @@
     - 검색바 만들기
 5. 윙배너
     - 카테고리.
+6. 쓰기
+    - 최소값 검증
+    - 카테고리 지정.
 
 ## TODO
 - [typesciptWithReact](https://medium.com/@martin_hotell/10-typescript-pro-tips-patterns-with-or-without-react-5799488d6680#78b9) 
@@ -32,6 +35,9 @@
 6. AWS & 도커 배포를 연습한다.
 7. d3를 이용한 리포팅 페이지를 만든다.
 8. 빌드 배포 프로세스 구축.
+
+
+
 
 
 ## 정리
@@ -58,6 +64,7 @@
 17. 배포
     - 정적파일로 만들어서 서버에 배포하는것.
 18. useEfffect의 사용에 대한 자세한 정리
+19. 리다이랙션을 어디서???
 
 
 - scss

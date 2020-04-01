@@ -20,16 +20,18 @@ return function*(action: PayloadAction<AsyncActionTypes<string,string,string>, P
 
     yield put(startLoading(types.REQUEST)); // 로딩 시작
 
-   
+   console.log('[createRequest] before request', types.REQUEST);
 
     try {
       const response = yield call(api, action.payload);
 
-      if(types.REQUEST.includes('LOGOUT'))  console.log('in saga logout reqeust')
+      console.log('[createRequest] after request', types.REQUEST)
+      // if(types.REQUEST.includes('LOGOUT'))  console.log('in saga logout reqeust')
       yield put({
         type: types.SUCCESS,
         payload: response.data
       });
+      console.log('[createRequest] ', types.SUCCESS, 'DONE!!')
     } catch (e) {
       console.error(e)
       yield put({

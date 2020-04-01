@@ -6,8 +6,14 @@
 import {createStore, applyMiddleware } from 'redux';
 import penderMiddleware from 'redux-pender';
 import createSagaMiddleware from 'redux-saga';
-import rootReducer, { rootSaga } from 'store/modules';
+// import creat, { rootSaga } from 'store/modules';
+import createRootReducer, { rootSaga } from 'store/modules';
 import { composeWithDevTools } from 'redux-devtools-extension';
+
+import { createBrowserHistory } from 'history'
+
+
+export const history = createBrowserHistory() 
 
 
 // const reducers = combineReducers(modules);
@@ -25,12 +31,15 @@ const middlewares = [ pendderMiddleware, sagaMiddleware ];
 
 
 // preloadedState는 추후 서버사이드 랜더링을 했을 때 전달받는 초기 상태이다.
-const configure = (preloadedSate?)  => {
+export default function configureStore (preloadedSate?)  {
     
     const store = createStore(
-        rootReducer, 
+        // rootReducer, 
+        createRootReducer(history), // root reducer with router state
         preloadedSate, 
-        composeWithDevTools(applyMiddleware(...middlewares))
+        composeWithDevTools(
+            applyMiddleware(...middlewares)
+        )
     );
 
     sagaMiddleware.run(rootSaga);
@@ -39,4 +48,4 @@ const configure = (preloadedSate?)  => {
 }
 
 
-export default configure;
+ 
