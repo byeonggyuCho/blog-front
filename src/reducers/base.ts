@@ -148,6 +148,8 @@ export default createReducer<StateBase, BaseAction>(initialSate, {
         // return state.set('logged', data.logged);
         // return produce(state, draft => {
             localStorage.logged = "false"
+
+            console.log('[SYSTEM] CHECK_LOGIN: '+ action.payload.logged)
             state.logged = action.payload.logged;
         // })
     },

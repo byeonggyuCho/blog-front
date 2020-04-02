@@ -10,21 +10,22 @@
  const Base = () => {
     const dispatch = useDispatch();
 
-    const initialize = () => {
-         //로그인상태를 학인한다.
 
-         // checkLogin의 응답을 기다리기 전에 로그인으로 간준한다.
-         // 이는 임시적 단계를 넘기기 위한 방법이며 추후에 session의 저장값에 따라 로그인 비화성화 처리를 한다.
-         if(localStorage.logged === "true") {
-             dispatch(baseActions.tempLogin())
-         }
-
-         dispatch(baseActions.checkLogin.request())
-    }
 
     useEffect(()=>{
+        const initialize = () => {
+            //로그인상태를 학인한다.
+   
+            // checkLogin의 응답을 기다리기 전에 로그인으로 간준한다.
+            // 이는 임시적 단계를 넘기기 위한 방법이며 추후에 session의 저장값에 따라 로그인 비화성화 처리를 한다.
+            if(localStorage.logged === "true") {
+                dispatch(baseActions.tempLogin())
+            }
+   
+            dispatch(baseActions.checkLogin.request())
+       }
         initialize();
-    },[])
+    },[dispatch])
 
 
     return (

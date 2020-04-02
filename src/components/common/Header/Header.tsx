@@ -9,7 +9,7 @@ const Header = ({postId, onRemove, logged}) => (
     <header className={cx('header')}>
         <div className={cx('header-content')}>
             <div className={'brand'}>
-                <Link to="/">reactblog</Link>
+                <Link to="/">devlog</Link>
             </div>
             { 
                 logged && 

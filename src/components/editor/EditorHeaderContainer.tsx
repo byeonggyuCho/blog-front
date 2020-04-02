@@ -18,12 +18,12 @@ const  EditorHeaderContainer : React.FunctionComponent = () => {
     const location = useLocation();
     const history = useHistory();
 
-    let {postId, title, markdown, tags } = useSelector(
+    let { title, markdown, tags } = useSelector(
         (state: RootState) => ({
             title: state.editor.title,
             markdown: state.editor.markdown,
             tags: state.editor.tags,
-            postId: state.editor.postId
+            //postId: state.editor.postId
         })
     )
 
@@ -39,7 +39,7 @@ const  EditorHeaderContainer : React.FunctionComponent = () => {
         }
 
         //return dispatch(editorActions.initialize());
-    },[])
+    },[dispatch,location.search])
 
 
     const handleGoBack = () => {

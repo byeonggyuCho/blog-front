@@ -51,8 +51,9 @@ return function*(action: PayloadAction<AsyncActionTypes<string,string,string>, P
         payload: e,
         error: true,
       });
+    } finally {
+      yield put(finishLoading(types.REQUEST)); // 로딩 끝
     }
-    yield put(finishLoading(types.REQUEST)); // 로딩 끝
   };
 }
 

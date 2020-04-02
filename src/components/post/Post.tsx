@@ -24,18 +24,19 @@ const Post = ({id} : Prop)=> {
     )
 
 
-    const initialize = () => {
-        try {
-            dispatch( postActions.getPost.request(id))
-           
-        } catch(e) {
-            console.log(e);
-        }
-    }
+   
 
     useEffect(()=>{
+        const initialize = () => {
+            try {
+                dispatch( postActions.getPost.request(id))
+               
+            } catch(e) {
+                console.log(e);
+            }
+        }
         initialize();
-    },[])
+    },[dispatch,id])
 
 
     if(loading) return null;    // 로딩 중일 때는 아무것도 보여주지 않음.

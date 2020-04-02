@@ -1,4 +1,4 @@
-import React, {  useEffect } from 'react';
+import React, {  useEffect, useState } from 'react';
 import styles from './EditorPane.scss';
 import classNames from 'classnames/bind';
 import CodeMirror from 'codemirror';
@@ -21,41 +21,55 @@ const cx = classNames.bind(styles);
 const EditorPane = ({ tags = '', title = '' ,markdown,onChangeInput}) =>  {
 
     let editor = null;  //에디터 ref
-    let codeMirror = null; //CodeMirror  인스턴스
-    let cursor = null;
+    let [cursor, setCursor] = useState(null);
+    let [codeMirror, setCodeMirror] = useState(null); //CodeMirror  인스턴스
 
-    const initializeEditor = () => {
-        codeMirror = CodeMirror(editor, {
-            mode: 'markdown',
-            theme: 'monokai',
-            lineNumbers: true, // 왼쪽에 라인넘버 표시여부
-            lineWrapping: true // 개행 여부  
-        })
-        codeMirror.on('change', handleChangeMardown)
-    }
+    
 
     useEffect(()=>{
+
+
+        const handleChangeMardown = (doc) => {
+            // const { onChangeInput } = this.props;
+            // cursor = doc.getCursor();      // 텍스트 커서 위치 저장.
+            setCursor(
+                doc.getCursor()      // 텍스트 커서 위치 저장.
+            )
+    
+            onChangeInput({
+                name : 'markdown',
+                value: doc.getValue()
+            })
+        }
+
+        const initializeEditor = () => {
+            setCodeMirror(
+                CodeMirror(editor, {
+                    mode: 'markdown',
+                    theme: 'monokai',
+                    lineNumbers: true, // 왼쪽에 라인넘버 표시여부
+                    lineWrapping: true // 개행 여부  
+                })
+            )
+            // codeMirror = CodeMirror(editor, {
+            //     mode: 'markdown',
+            //     theme: 'monokai',
+            //     lineNumbers: true, // 왼쪽에 라인넘버 표시여부
+            //     lineWrapping: true // 개행 여부  
+            // })
+            codeMirror.on('change', handleChangeMardown)
+        }
         initializeEditor();
-    },[])
+    },[codeMirror, editor, onChangeInput])
     // componentDidMount() {
     //     this.initializeEditor();
     // }
 
     const handleChange = (e) => {
         // const { onChangeInput } = this.props;
-        const { value, name } = e.target;
-        onChangeInput({name, value}); 
+        onChangeInput(e.target); 
     }
 
-    const handleChangeMardown = (doc) => {
-        // const { onChangeInput } = this.props;
-        cursor = doc.getCursor();      // 텍스트 커서 위치 저장.
-
-        onChangeInput({
-            name : 'markdown',
-            value: doc.getValue()
-        })
-    }
 
     useEffect(()=>{
          // markdown이 변경되면 에디터 값도 변경합니다.
