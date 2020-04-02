@@ -1,8 +1,8 @@
 import React from 'react';
 import EditorPane from 'components/editor/EditorPane';
 import { useDispatch, useSelector } from 'react-redux';
-import  { RootState } from 'store/modules'
-import * as editorActoins from 'store/modules/editor'
+import  { RootState } from 'reducers'
+import * as editorActoins from 'actions/editor'
 
 
 const EditorPaneContainer = ( ) => {

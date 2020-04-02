@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import PreviewPane from './PreviewPane';
-import { RootState} from 'store/modules'
+import { RootState} from 'reducers'
 // import { statement } from '@babel/template';
 
 const  PreviewPaneContainer = () =>  {

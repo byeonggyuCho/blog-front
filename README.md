@@ -21,15 +21,9 @@
     - 최소값 검증
     - 카테고리 지정.
 
+
+
 ## TODO
-- [typesciptWithReact](https://medium.com/@martin_hotell/10-typescript-pro-tips-patterns-with-or-without-react-5799488d6680#78b9) 
-- [typescriptWithSaga](https://jonir227.github.io/develop/2019/06/04/redux-saga%EC%99%80-typescript-%ED%8E%B8%ED%95%98%EA%B2%8C-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0.html)
-- [CUSTOM_typescript and redux](https://godsenal.com/posts/redux,-redux-saga%EC%99%80-typescript%EB%A5%BC-%ED%8E%B8%ED%95%98%EA%B2%8C-%EC%93%B0%EA%B8%B0%EC%9C%84%ED%95%9C-%EB%85%B8%EB%A0%A5/)
-- [typescript 프로처럼 사용하기]( https://velog.io/@velopert/use-typescript-and-redux-like-a-pro)
-- [ts+redux 셋팅가이드](https://blog.woolta.com/categories/1/posts/197)
-- [react_handbooks](https://react.vlpt.us/using-typescript/06-ts-redux-middleware.html)
-- [셈플코드_1](https://gist.github.com/Jonir227/b7fc8b5b0646b7a90c26bd73a70c12b9)
-- [셈플코드_2](https://github.com/velopert/ts-react-redux-tutorial)
 4. jest를 이용해서 컴포넌트 단위테스트를 수행한다.
 5. 스토리북을 이용해 컴포넌트 개발을 해본다.
 6. AWS & 도커 배포를 연습한다.
@@ -64,11 +58,27 @@
 17. 배포
     - 정적파일로 만들어서 서버에 배포하는것.
 18. useEfffect의 사용에 대한 자세한 정리
-19. 리다이랙션을 어디서???
 
 
 - scss
 - media
 - 서버사이드 랜더링
+- Hooks
+    - useCallback
+    - useMemo
 
 
+# 질문
+
+1. useEffect
+    - 특정 데이터를 구독중인 useEffect가 componentDidMount시점에 실행 안되게 하려면 어떻게 해야할까?
+
+2. 라우터
+    - 왜 프론트에서 라우팅 처리를 할까?
+    - 어떤 차이가 있나?
+    - 그럼 왜 그동안 서버에서 페이지 라우팅 처리를 했나?
+        - 서버사이드 렌더링이기 때문에 화면 렌더링을 서버에서 한뒤에 경로를 지정한다.
+    
+
+3. react-saga
+    - 페이지 리다이렉션을 어디서 어떻게?

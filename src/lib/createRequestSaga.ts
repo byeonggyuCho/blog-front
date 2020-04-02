@@ -1,5 +1,6 @@
 import { call, put } from 'redux-saga/effects';
-import { startLoading, finishLoading } from 'store/modules/loading';
+import { startLoading, finishLoading } from 'actions/loading';
+import { push } from 'connected-react-router';
  
 export const createRequestActionTypes = (type:string )=> {
   const SUCCESS = `${type}_SUCCESS`;
@@ -8,12 +9,14 @@ export const createRequestActionTypes = (type:string )=> {
 };
 
 
+// import { yellow } from 'color-name';
+
 
 
 
 
 export default function createRequestSaga <Param , RES>
-(types:AsyncActionTypes<string,string,string>, api: PromiseCreatorFunction<Param, RES>) {
+(types:AsyncActionTypes<string,string,string>, api: PromiseCreatorFunction<Param, RES>, uri?: string) {
 
 // return function*(action: {payload:Param,type:AsyncActionsTypes}) {
 return function*(action: PayloadAction<AsyncActionTypes<string,string,string>, Param>) {
@@ -32,6 +35,15 @@ return function*(action: PayloadAction<AsyncActionTypes<string,string,string>, P
         payload: response.data
       });
       console.log('[createRequest] ', types.SUCCESS, 'DONE!!')
+
+      if(uri !== undefined){
+        // let {_id } = response.data
+        // console.log('PostId===  ', _id)
+        let redirectionUri = `uri${ response.data._id}`
+        console.log('[createRequest] redirection to ' + redirectionUri)
+        yield put( push(redirectionUri));
+      }
+
     } catch (e) {
       console.error(e)
       yield put({

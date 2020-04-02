@@ -1,8 +1,8 @@
 import React from 'react';
 import Header from 'components/common/Header';
-import * as BaseActions from 'store/modules/base';
+import * as BaseActions from 'actions/base';
 import {  useDispatch, useSelector } from 'react-redux';
-import { RootState  } from "store/modules";
+import { RootState  } from 'reducers'
 import { useParams} from'react-router'
 
 const  HeaderContainer = () => {

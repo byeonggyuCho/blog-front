@@ -2,7 +2,7 @@
  import React, { useEffect } from 'react';
  import LoginModalContainer from 'containers/modal/LoginModalContainer';
  import { useDispatch} from 'react-redux';
- import * as baseActions from 'store/modules/base';
+ import * as baseActions from 'actions/base';
  
  /**
   * 페이지를 새로고침할 때마다 현재 유저가 로그인 중인지 검증하는 목적

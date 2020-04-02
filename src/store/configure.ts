@@ -6,8 +6,9 @@
 import {createStore, applyMiddleware } from 'redux';
 import penderMiddleware from 'redux-pender';
 import createSagaMiddleware from 'redux-saga';
-// import creat, { rootSaga } from 'store/modules';
-import createRootReducer, { rootSaga } from 'store/modules';
+// import creat, { rootSaga } from 'reducers';
+import createRootReducer from 'reducers';
+import rootSaga from 'sagas'
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import { createBrowserHistory } from 'history'

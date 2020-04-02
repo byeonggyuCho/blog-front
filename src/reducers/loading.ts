@@ -1,5 +1,3 @@
-// import { createAction, handleActions } from 'redux-actions';
-
 import {
   ActionType,
   createReducer,

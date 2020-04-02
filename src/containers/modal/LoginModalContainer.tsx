@@ -1,14 +1,14 @@
 import React from 'react';
 import LoginModal from 'components/modal/LoginModal';
 import { useSelector, useDispatch } from 'react-redux';
-import * as baseActions from 'store/modules/base';
-import  {ReduxState} from 'store/modules'
+import * as baseActions from 'actions/base';
+import  {RootState} from 'reducers'
 
 const LoginModalContainer = () => {
 
     const dispatch = useDispatch();
     const {visible, password, error} = useSelector( 
-        (state: ReduxState) => ({
+        (state: RootState) => ({
             visible: state.base.modal.login,
             password: state.base.loginModal.password,
             error: state.base.loginModal.error

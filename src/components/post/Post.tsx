@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import PostInfo from 'components/post/PostInfo';
 import PostBody from 'components/post/PostBody';
-import * as postActions from 'store/modules/post';
+import * as postActions from 'actions/post';
 import { useSelector, useDispatch} from 'react-redux';
-import { ReduxState} from 'store/modules'
+import { RootState} from 'reducers'
 
 
 interface Prop {
@@ -14,7 +14,7 @@ const Post = ({id} : Prop)=> {
 
     const dispatch = useDispatch();
     const {loading, title, tags, body, publishedDate } = useSelector(
-        (state: ReduxState)=>({
+        (state: RootState)=>({
             loading: state.loading['post/GET_POST'],
             title: state.post.title,
             tags: state.post.tags,

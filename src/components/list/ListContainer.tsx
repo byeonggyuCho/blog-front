@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import qs from 'qs';
 import { useDispatch, useSelector } from 'react-redux';
 import PostList from 'components/list/PostList';
-import { listPosts } from 'store/modules/list';
-import { RootState} from 'store/modules'
+import { listPosts } from 'actions/list';
+import { RootState} from 'reducers'
 import { useLocation, useParams} from 'react-router'
 
 // import Pagination from 'components/list/Pagination';

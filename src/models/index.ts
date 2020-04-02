@@ -1,3 +1,5 @@
+// 인터페이스 등록
+
 export interface Post {
     _id: string,
     title: string,
@@ -7,10 +9,12 @@ export interface Post {
     publishedDate?: string
 }
 
+export interface RequestPayload {
+    tag:string, 
+    username?:string, 
+    page?: number
+}
 
-
-export interface Responce<T> {
-    data: T,
-    headers: object,
+export interface Meta {
     [propName: string]: any
 }

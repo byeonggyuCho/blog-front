@@ -1,10 +1,10 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import * as baseActions from 'store/modules/base';
-import * as postActions from 'store/modules/post';
+import * as baseActions from 'actions/base';
+import * as postActions from 'actions/post';
 import AskRemoveModal from 'components/modal/AskRemoveModal';
 import { useHistory, useParams} from 'react-router'
-import {ReduxState} from 'store/modules'
+import {RootState} from 'reducers'
 
 
 const AskRemoveModalContainer = () => {
@@ -13,7 +13,7 @@ const AskRemoveModalContainer = () => {
     const history = useHistory();
     const params = useParams();
     const {visible} = useSelector( 
-        (state:ReduxState)=>({
+        (state:RootState)=>({
             visible: state.base.modal.remove
         }) 
     )

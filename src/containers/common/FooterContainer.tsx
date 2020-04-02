@@ -1,12 +1,12 @@
 import React from 'react';
 import Footer from 'components/common/Footer';
 import { useDispatch, useSelector } from 'react-redux';
-import * as baseActions from 'store/modules/base';
-import {ReduxState} from 'store/modules'
+import * as baseActions from 'actions/base';
+import {RootState} from 'reducers'
 
 const FooterContainer = () => {
     const dispatch = useDispatch();
-    const { logged } = useSelector( (state :ReduxState) =>({
+    const { logged } = useSelector( (state :RootState) =>({
         logged : state.base.logged
     }))
 

@@ -3,8 +3,8 @@ import EditorHeader from './EditorHeader';
 import {  useSelector, useDispatch } from 'react-redux';
 import { useLocation, useHistory} from 'react-router'
 import queryString from 'query-string';
-import * as editorActions from 'store/modules/editor';
-import {ReduxState} from 'store/modules'
+import * as editorActions from 'actions/editor';
+import {RootState} from 'reducers'
 
 
 // interface Props  {
@@ -19,7 +19,7 @@ const  EditorHeaderContainer : React.FunctionComponent = () => {
     const history = useHistory();
 
     let {postId, title, markdown, tags } = useSelector(
-        (state: ReduxState) => ({
+        (state: RootState) => ({
             title: state.editor.title,
             markdown: state.editor.markdown,
             tags: state.editor.tags,
@@ -71,7 +71,7 @@ const  EditorHeaderContainer : React.FunctionComponent = () => {
             // 사가에서 처리하는게 맞는듯..
             // connected-redux-router
             // 현재값을 불러오기 위해서 페이지를 이동시킨다.postId는 위쪽에서 레퍼런스를 만들지 않고 이 자리에서 this.props.postId를 조회해야한다.
-            history.push(`/post/${postId}`);
+            // history.push(`/post/${postId}`);
         } catch(e) {
             console.error(e);
         }

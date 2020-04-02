@@ -4,7 +4,7 @@ import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import removeMd from 'remove-markdown';
-import {Post} from 'store/models'
+import {Post} from 'models'
 
 const cx = classNames.bind(styles);
 
