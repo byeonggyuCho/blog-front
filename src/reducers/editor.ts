@@ -42,7 +42,6 @@ export default createReducer<StateEditor,EditorAction>(initialSate,{
             ...state,   
          [actoin.payload.name] : actoin.payload.value
          }
-        //  console.log('====',re)
        return re
     },
     [WRITE_POST.REQUEST]: (state, action)=>({
@@ -50,7 +49,7 @@ export default createReducer<StateEditor,EditorAction>(initialSate,{
     }),
     [WRITE_POST.SUCCESS]: (state, action) => ({
         ...state,
-        //payload: action.payload,
+        ...initialSate,
         postId: action.payload._id
     }),
   
@@ -63,7 +62,7 @@ export default createReducer<StateEditor,EditorAction>(initialSate,{
         ...state,
         payload: payload,
         title: payload.title,
-        markdown: payload.markdown,
+        markdown: payload.body,
         tags: payload.tags.join(', ')
     }),
     [GET_POST.FAILURE]: (state, { payload: error }) => ({
@@ -73,10 +72,7 @@ export default createReducer<StateEditor,EditorAction>(initialSate,{
 
     [EDIT_POST.SUCCESS]: (state, { payload }) => ({
         ...state,
-        payload: payload,
-        title: payload.title,
-        markdown: payload.markdown,
-        tags: payload.tags.join(', ')
+        ...initialSate
     }),
     [EDIT_POST.FAILURE]: (state, { payload: error }) => ({
         ...state,

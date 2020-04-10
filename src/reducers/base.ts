@@ -59,7 +59,7 @@ const initialSate : StateBase = {
         
     },
     loginModal: {
-        password: '',
+        password: '',       // 암호화 필요...
         error: false
     },
     logged: false, // 현재 로그인 상태
@@ -132,7 +132,7 @@ export default createReducer<StateBase, BaseAction>(initialSate, {
     },
     [LOGIN.SUCCESS]: (state,action) => {
         // return state.set('logged', true);
-            state.logged = true;
+        state.logged = action.payload.success;
     },
     [LOGIN.FAILURE]: (state) =>{
         // return state.setIn(['loginModal',   'error'],       true)
@@ -146,12 +146,10 @@ export default createReducer<StateBase, BaseAction>(initialSate, {
     },
     [CHECK_LOGIN.SUCCESS]: (state,action) => {
         // return state.set('logged', data.logged);
-        // return produce(state, draft => {
-            localStorage.logged = "false"
+        localStorage.logged = "false"
 
-            console.log('[SYSTEM] CHECK_LOGIN: '+ action.payload.logged)
-            state.logged = action.payload.logged;
-        // })
+        console.log('[SYSTEM] CHECK_LOGIN: '+ action.payload.logged)
+        state.logged = action.payload.logged;
     },
     [CHECK_LOGIN.FAILURE]: (state, {payload}) => {
         // return state.set('error', payload.error)

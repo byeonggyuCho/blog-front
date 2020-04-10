@@ -2,12 +2,12 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as baseActions from 'actions/base';
 import * as postActions from 'actions/post';
-import AskRemoveModal from 'components/modal/AskRemoveModal';
+import AskModal from 'components/modal/AskModal';
 import { useHistory, useParams} from 'react-router'
 import {RootState} from 'reducers'
 
 
-const AskRemoveModalContainer = () => {
+const AskModalContainer = () => {
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -36,8 +36,8 @@ const AskRemoveModalContainer = () => {
     }
 
     return (
-        <AskRemoveModal visible={visible} onCancel={handleCancle} onConfirm={handleConfirm}/>
+        <AskModal visible={visible} onCancel={handleCancle} onConfirm={handleConfirm}/>
     );
 }
 
-export default AskRemoveModalContainer;
+export default AskModalContainer;

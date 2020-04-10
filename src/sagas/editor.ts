@@ -11,8 +11,8 @@ import {
 const getPostSaga = createRequestSaga(GET_POST, api.getPost)
 
 // 작성후 리다이렉션 경로를 지정한다.
-const editPostSaga = createRequestSaga(EDIT_POST, api.editPost, '/api/post/')
-const writePostSaga = createRequestSaga(WRITE_POST, api.writePost, '/api/post/')
+const editPostSaga = createRequestSaga(EDIT_POST, api.editPost, '/post/')
+const writePostSaga = createRequestSaga(WRITE_POST, api.writePost, '/post/')
 
 
 export function* editorSaga() {

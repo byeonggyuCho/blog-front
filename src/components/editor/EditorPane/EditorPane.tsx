@@ -20,14 +20,22 @@ const cx = classNames.bind(styles);
 // CodeMirror라이브러리를 연동해야한다.
 const EditorPane = ({ tags = '', title = '' ,markdown,onChangeInput}) =>  {
 
+    // 초기화를 클린업에 해준다.
     let editor = null;  //에디터 ref
     let codeMirror =  null;
     let cursor = null
 
-    
+
+    const handleChange = (e) => {
+        // const { onChangeInput } = this.props;
+        onChangeInput(e.target); 
+    }
+
 
     useEffect(()=>{
 
+        // for detaile... 
+        // https://codemirror.net/doc/manual.html#config
         codeMirror = CodeMirror(editor, {
             mode: 'markdown',
             theme: 'monokai',
@@ -43,12 +51,9 @@ const EditorPane = ({ tags = '', title = '' ,markdown,onChangeInput}) =>  {
                 value: doc.getValue()
             })
         })
-    },[ editor, onChangeInput])
+        codeMirror.setSize(null, 500);
+    },[ ])
 
-    const handleChange = (e) => {
-        // const { onChangeInput } = this.props;
-        onChangeInput(e.target); 
-    }
 
 
     useEffect(()=>{

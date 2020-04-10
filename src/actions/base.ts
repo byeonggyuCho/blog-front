@@ -45,7 +45,7 @@ export const login = createAsyncAction(
     LOGIN.REQUEST,
     LOGIN.SUCCESS,
     LOGIN.FAILURE
-)<string, undefined, Error>();
+)<string, { success: boolean }, Error>();
 
 export const logout = createAsyncAction(
     LOGOUT.REQUEST,

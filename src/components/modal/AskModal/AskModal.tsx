@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './AskRemoveModal.scss';
+import styles from './AskModal.scss';
 import classNames from 'classnames/bind';
 import ModalWrapper from 'components/modal/ModalWrapper';
 import Button from 'components/common/Button';
@@ -7,7 +7,7 @@ import Button from 'components/common/Button';
 const cx = classNames.bind(styles);
 
 
-const AskRemoveModal = ({visible, onConfirm, onCancel}) => (
+const AskModal = ({visible, onConfirm, onCancel}) => (
     <ModalWrapper visible={visible}>
         <div className={cx('question')}>
             <div className={cx('title')}>포스트 삭제</div>
@@ -20,4 +20,4 @@ const AskRemoveModal = ({visible, onConfirm, onCancel}) => (
     </ModalWrapper>
 );
 
-export default AskRemoveModal;
+export default AskModal;

@@ -37,10 +37,7 @@ return function*(action: PayloadAction<AsyncActionTypes<string,string,string>, P
       console.log('[createRequest] ', types.SUCCESS, 'DONE!!')
 
       if(uri !== undefined){
-        // let {_id } = response.data
-        // console.log('PostId===  ', _id)
-        let redirectionUri = `uri${ response.data._id}`
-        console.log('[createRequest] redirection to ' + redirectionUri)
+        let redirectionUri = uri+ response.data._id;
         yield put( push(redirectionUri));
       }
 
@@ -53,7 +50,7 @@ return function*(action: PayloadAction<AsyncActionTypes<string,string,string>, P
       });
     } finally {
       yield put(finishLoading(types.REQUEST)); // 로딩 끝
-    }
+    } 
   };
 }
 

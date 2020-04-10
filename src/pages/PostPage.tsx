@@ -1,7 +1,7 @@
 import React from 'react';
 import PageTemplate from 'components/common/PageTemplate'
 import Post from 'components/post/Post'
-import AskRemoveModalContainer from 'containers/modal/AskRemoveModalContainer';
+import AskModalContainer from 'containers/modal/AskModalContainer';
 
 const PostPage = ({match}) => {
 
@@ -10,7 +10,7 @@ const PostPage = ({match}) => {
     return (
         <PageTemplate>
             <Post id = {id}/>
-            <AskRemoveModalContainer/>
+            <AskModalContainer/>
         </PageTemplate>
     );
 };

@@ -22,9 +22,9 @@ const container = document.getElementById('root');
 ReactDOM.render(
     <Provider store={store}>
          <ConnectedRouter history={history}> 
-            <BrowserRouter>
+            {/* <BrowserRouter> */}
                 <App/>
-            </BrowserRouter>
+            {/* </BrowserRouter> */}
         </ConnectedRouter>
     </Provider>
     , container
