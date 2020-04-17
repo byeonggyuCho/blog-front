@@ -23,7 +23,6 @@ const ModalWrapper = ({visible= false, children} : Props) => {
 
         // componentDidMount을 피하기 위해서.
         if(init){
-            console.log('[ModalWrapper] visible이 변했습니다, 초기화시에는 실행되지 않습니다.')
 
             const startAnimation = () => {
                 // animation 값을 true로 설정 후
@@ -59,7 +58,6 @@ const ModalWrapper = ({visible= false, children} : Props) => {
 
     // 상태에 따라 애니메이션 설정
     const animation = animate && (visible ? 'enter' : 'leave');
-    console.log('animation', animation)
 
     return (
         <div>

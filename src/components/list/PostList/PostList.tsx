@@ -8,7 +8,17 @@ import {Post} from 'models'
 
 const cx = classNames.bind(styles);
 
-const PostItem = ({title, body, publishedDate, tags, id}) => {
+interface PostItemProps {
+    title:string
+    body:string 
+    publishedDate :string
+    tags : string[]
+    id : string
+}
+
+const PostItem =  function (props:PostItemProps)  {
+
+    const {title, body, publishedDate, tags, id} = props
     const tagList = tags.map(
         tag => <Link key={tag} to={`/tag/${tag}`}>#{tag}</Link>
     )
@@ -27,7 +37,6 @@ const PostItem = ({title, body, publishedDate, tags, id}) => {
 
 
 interface Props {
-
     posts: Post[]
 }
 

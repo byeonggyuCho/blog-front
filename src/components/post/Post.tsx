@@ -6,12 +6,13 @@ import { useSelector, useDispatch} from 'react-redux';
 import { RootState} from 'reducers'
 
 
-interface Prop {
+interface PostProp {
     id : string
 }
 
-const Post = ({id} : Prop)=> {
+const Post: React.FC<PostProp> = (props)=> {
 
+    const {id} = props
     const dispatch = useDispatch();
     const {loading, title, tags, body, publishedDate } = useSelector(
         (state: RootState)=>({
@@ -22,9 +23,6 @@ const Post = ({id} : Prop)=> {
             publishedDate: state.post.publishedDate,
         })
     )
-
-
-   
 
     useEffect(()=>{
         const initialize = () => {

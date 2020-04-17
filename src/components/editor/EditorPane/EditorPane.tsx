@@ -18,7 +18,18 @@ const cx = classNames.bind(styles);
 
 //라이프라이클 메서드와 커스텀 메서드를 사용해야한다.
 // CodeMirror라이브러리를 연동해야한다.
-const EditorPane = ({ tags = '', title = '' ,markdown,onChangeInput}) =>  {
+
+interface EditorPaneProps {
+    tags : string
+    title : string
+    markdown: string
+    onChangeInput : (e)=>void
+}
+
+
+const EditorPane:React.FC<EditorPaneProps> = (props) =>  {
+
+    const { tags = '', title = '' ,markdown, onChangeInput} = props
 
     // 초기화를 클린업에 해준다.
     let editor = null;  //에디터 ref

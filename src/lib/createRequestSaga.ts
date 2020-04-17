@@ -28,13 +28,11 @@ return function*(action: PayloadAction<AsyncActionTypes<string,string,string>, P
     try {
       const response = yield call(api, action.payload);
 
-      console.log('[createRequest] after request', types.REQUEST)
       // if(types.REQUEST.includes('LOGOUT'))  console.log('in saga logout reqeust')
       yield put({
         type: types.SUCCESS,
         payload: response.data
       });
-      console.log('[createRequest] ', types.SUCCESS, 'DONE!!')
 
       if(uri !== undefined){
         let redirectionUri = uri+ response.data._id;

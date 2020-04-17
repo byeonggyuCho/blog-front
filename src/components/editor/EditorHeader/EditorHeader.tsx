@@ -5,8 +5,17 @@ import Button from 'components/common/Button';
 // import Button from '../../../components/common/Button';
 
 const cx = classNames.bind(styles);
+interface EditorHeaderInterface {
+    onGoBack: ()=>void
+    onSubmit: ()=>void
+    isEdit: boolean
+}
 
-const EditorHeader = ({onGoBack, onSubmit, isEdit}) => {
+
+const EditorHeader:React.FC<EditorHeaderInterface> = (props) => {
+
+    const {onGoBack, onSubmit, isEdit} = props
+    
     return (
         <div className={cx('editor-header')}>
             <div className={cx('back')}>

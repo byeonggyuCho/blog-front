@@ -10,15 +10,14 @@ import ListContainer from '../components/list/ListContainer';
  *  레프트박스만들기
  */
 
-const ListPage  = ({page, tag}) => {
+
+const ListPage  = () => {
+
     // page의 기본 값을 1로 설정
     return (
         <PageTemplate>
             <ListWrapper>
-                <ListContainer
-                    // page={parseInt(page, 10)}
-                    // tag={tag}
-                />
+                <ListContainer />
             </ListWrapper>
         </PageTemplate>
     );

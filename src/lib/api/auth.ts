@@ -1,6 +1,17 @@
 import client from './client';
 
+interface loginInterface {
+    (password: string ): Promise<any>
+}
 
-export const login = (password: string) => client.post('/api/auth/login', { password });
-export const logout= () => client.post('/api/auth/logout');
-export const checkLogin = () => client.get('/api/auth/check');
+interface logoutInterface {
+    () : Promise<any>
+}
+
+interface checkLoginInterface {
+    () : Promise<any>
+}
+
+export const login:loginInterface = (password: string) => client.post('/api/auth/login', { password });
+export const logout:logoutInterface = () => client.post('/api/auth/logout');
+export const checkLogin:checkLoginInterface = () => client.get('/api/auth/check');

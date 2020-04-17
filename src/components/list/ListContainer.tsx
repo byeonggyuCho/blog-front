@@ -5,12 +5,13 @@ import PostList from 'components/list/PostList';
 import { listPosts } from 'actions/list';
 import { RootState} from 'reducers'
 import { useLocation, useParams} from 'react-router'
+import {Dispatch} from 'redux'
 
 // import Pagination from 'components/list/Pagination';
 
 const ListContainer = () => {
+    const dispatch:Dispatch = useDispatch();
     const location = useLocation();
-    const dispatch = useDispatch();
     const params = useParams();
     const { posts} = useSelector(
         ({ list, loading } :RootState) => ({
@@ -29,8 +30,8 @@ const ListContainer = () => {
             ignoreQueryPrefix: true,
         });
 
-         // 스크롤바를 맨 위로 올립니다
-         document.documentElement.scrollTop = 0;
+        // 스크롤바를 맨 위로 올립니다
+        document.documentElement.scrollTop = 0;
 
         dispatch(listPosts.request({ tag, username, page }));
     }, [dispatch, location.search, params])

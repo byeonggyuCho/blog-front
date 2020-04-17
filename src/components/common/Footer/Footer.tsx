@@ -6,7 +6,13 @@ import { Link } from 'react-router-dom';
 const cx = classNames.bind(styles);
 
 
-const Footer = ({onLoginClick, logged}) => (
+interface FooterInterface {
+    onLoginClick : ()=> void
+    logged : boolean
+}
+
+
+const Footer = ({onLoginClick, logged}:FooterInterface) => (
     <footer className={cx('footer')}>
         <Link to="/" className={cx('brand')}>Byueongyu Cho</Link>
         <div onClick={onLoginClick} className={cx('admin-login')}>

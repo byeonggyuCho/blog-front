@@ -5,29 +5,40 @@ import { Link } from 'react-router-dom';
 import Button from 'components/common/Button'
 const cx = classNames.bind(styles);
 
-const Header = ({postId, onRemove, logged}) => (
-    <header className={cx('header')}>
-        <div className={cx('header-content')}>
-            <div className={'brand'}>
-                <Link to="/">devlog</Link>
-            </div>
-            { 
-                logged && 
-                <div className={cx('right')}>
-                    {
-                        // 조건에 따라 버튼 렌더링
-                        // flex를 유지하려고 배열 형태로 랜더링합니다.
-                        postId && 
-                        [
-                            <Button key="edit" theme="outline" to={`/editor?id=${postId}`}>수정</Button>,
-                            <Button key="remove" theme="outline" onClick={onRemove}>삭제</Button>
-                        ]
-                    }
-                    <Button theme="outline" to="/editor">새 포스트</Button>
+interface HeaderInterface {
+    postId : string
+    onRemove : ()=>void
+    logged : boolean
+}
+
+
+const Header = function(props: HeaderInterface) {
+
+    const {postId, onRemove, logged} = props
+
+    return (
+        <header className={cx('header')}>
+            <div className={cx('header-content')}>
+                <div className={'brand'}>
+                    <Link to="/">devlog</Link>
                 </div>
-            }
-        </div>
-    </header>
-)
+                { 
+                    logged && 
+                    <div className={cx('right')}>
+                        {
+                            // 조건에 따라 버튼 렌더링
+                            // flex를 유지하려고 배열 형태로 랜더링합니다.
+                            postId && 
+                            [
+                                <Button key="edit" theme="outline" to={`/editor?id=${postId}`}>수정</Button>,
+                                <Button key="remove" theme="outline" onClick={onRemove}>삭제</Button>
+                            ]
+                        }
+                        <Button theme="outline" to="/editor">새 포스트</Button>
+                    </div>
+                }
+            </div>
+        </header>
+)}
 
 export default Header;

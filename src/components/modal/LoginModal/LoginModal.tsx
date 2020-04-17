@@ -5,6 +5,17 @@ import ModalWrapper from 'components/modal/ModalWrapper';
 
 const cx = classNames.bind(styles)
 
+
+interface LoginModal {
+    visible : boolean
+    password : string
+    error : boolean
+    onCancel : ()=>void
+    onLogin : ()=>void
+    onChange : (e: React.FormEvent<HTMLTextAreaElement> )=>void
+    onKeyPress : (e: React.FormEvent<HTMLTextAreaElement>)=>void
+}
+
 const LoginModal = ({
     visible, password, error, onCancel, onLogin, onChange, onKeyPress
 }) => (

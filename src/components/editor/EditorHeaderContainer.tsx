@@ -12,7 +12,7 @@ import {RootState} from 'reducers'
 //     location: any
 // }
 
-const  EditorHeaderContainer : React.FunctionComponent = () => {
+const  EditorHeaderContainer : React.FC = () => {
 
     const dispatch = useDispatch();
     const location = useLocation();

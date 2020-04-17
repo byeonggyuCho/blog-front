@@ -22,12 +22,7 @@ const EditorPaneContainer = ( ) => {
         dispatch( editorActoins.changeInput({name, value}))
     }
     return (
-        <EditorPane
-            title={title}
-            markdown={markdown}
-            tags={tags}
-            onChangeInput={handleChangeInput}
-        />
+        <EditorPane title={title} markdown={markdown} tags={tags} onChangeInput={handleChangeInput} />
     );
 }
 

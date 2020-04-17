@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import * as baseActions from 'actions/base';
 import  {RootState} from 'reducers'
 
-const LoginModalContainer = () => {
+const LoginModalContainer:React.FC<void> = () => {
 
     const dispatch = useDispatch();
     const {visible, password, error} = useSelector( 

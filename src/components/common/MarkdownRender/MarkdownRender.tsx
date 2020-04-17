@@ -78,25 +78,6 @@ const MarkdownRender =  ({ markdown }) => {
 
 
 
-    /* 
-    componentDidUpdate(prevProps, prevState) {
-        //markdown 값이 변겨오디면 renderMardown을 호출한다.
-        if(prevProps.markdown !== this.props.markdown) {
-            this.renderMarkdown();
-        }
-
-        //state가 바뀌면 코드 하이라이팅
-        //html을 렌더링한 후에 반영되어야한다.
-        if(prevState.html !== this.state.html) {
-            Prism.highlightAll();
-        }
-    }
-
-    componentDidMount(){
-        this.renderMarkdown();
-        Prism.highlightAll();
-    } */
-
 
     // React에서 html을 렌더링하려면 객체를 만들어 내부에 __html값을 설정해야합니다.
     const markup = {

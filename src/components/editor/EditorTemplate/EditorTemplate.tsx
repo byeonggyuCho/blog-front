@@ -4,8 +4,15 @@ import classNames from 'classnames/bind';
 
 const cx = classNames.bind(styles);
 
-const EditorTemplate = ({ header, editor, preview }) => {
+interface EditorTemplateProps {
+    header:React.ReactElement
+    editor: React.ReactElement
+    preview:React.ReactElement
+}
 
+const EditorTemplate: React.FC<EditorTemplateProps> = (props) => {
+
+    const { header, editor, preview } = props
     const [leftPercentage, setLeftPercentage] = useState(0.5)
 
     // separator 클릭 후 마우스를움직이면 그에 따라 leftPercentage 업데이터
