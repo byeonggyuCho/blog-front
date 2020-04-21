@@ -17,7 +17,7 @@ const  EditorHeaderContainer : React.FC = () => {
     const dispatch = useDispatch();
     const location = useLocation();
     const history = useHistory();
-
+    const { id } = queryString.parse(location.search);
     let { title, markdown, tags } = useSelector(
         (state: RootState) => ({
             title: state.editor.title,
@@ -28,18 +28,13 @@ const  EditorHeaderContainer : React.FC = () => {
     )
 
     useEffect(() => {
-        // 에디터를 초기화
-        dispatch(editorActions.initialize());
-
-        // 쿼리 파싱
-        const { id } = queryString.parse(location.search);
         if(id) {
             // id가 존재하면 포스트 불러오기
             dispatch(editorActions.getPost.request(id));
         }
 
-        //return dispatch(editorActions.initialize());
-    },[dispatch,location.search])
+        return () => dispatch(editorActions.initialize());
+    },[id])
 
 
     const handleGoBack = () => {
@@ -77,7 +72,6 @@ const  EditorHeaderContainer : React.FC = () => {
         }
     }
 
-    const { id } = queryString.parse(location.search);
     return (
         <EditorHeader
             onGoBack={handleGoBack}

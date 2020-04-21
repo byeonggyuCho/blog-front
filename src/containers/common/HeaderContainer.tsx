@@ -5,7 +5,7 @@ import {  useDispatch, useSelector } from 'react-redux';
 import { RootState  } from 'reducers'
 import { useParams} from'react-router'
 
-const  HeaderContainer = () => {
+const  HeaderContainer: React.FC = () => {
 
     const dispatch = useDispatch();
     const params = useParams();

@@ -36,9 +36,7 @@ const EditorPane:React.FC<EditorPaneProps> = (props) =>  {
     let codeMirror =  null;
     let cursor = null
 
-
     const handleChange = (e) => {
-        // const { onChangeInput } = this.props;
         onChangeInput(e.target); 
     }
 
@@ -63,7 +61,7 @@ const EditorPane:React.FC<EditorPaneProps> = (props) =>  {
             })
         })
         codeMirror.setSize(null, 500);
-    },[ ])
+    },[])
 
 
 
@@ -75,20 +73,6 @@ const EditorPane:React.FC<EditorPaneProps> = (props) =>  {
         if(!cursor) return; // 커서가 없을때
         codeMirror.setCursor(cursor);
     },[markdown, codeMirror, cursor])
-/* 
-    componentDidUpdate(prevProps, prevState) {
-        // markdown이 변경되면 에디터 값도 변경합니다.
-        // 이 과정에서 텍스트 커서의 위치가 초기화 되기 때문에 저장한 커서의 위치가 있으면 해당 위치로 설정하빈다.
-
-
-        if(prevProps.markdown !== this.props.markdown) {
-            const { codeMirror, cursor } = this;
-            if(!codeMirror) return; //인스턴스가 생성되지 않았을 때
-            codeMirror.setValue(this.props.markdown);
-            if(!cursor) return; // 커서가 없을때
-            codeMirror.setCursor(cursor);
-        }
-    } */
 
 
     return (

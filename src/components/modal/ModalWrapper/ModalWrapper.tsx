@@ -44,15 +44,11 @@ const ModalWrapper = ({visible= false, children} : Props) => {
 
     // 초기시점을 잡기 위해서.
     useEffect(()=>{
-        console.log('[ModalWrapper] componentDidMount')
-        // componentDidMount 시점을 알립니다.
         setInit(true);
     },[])
 
 
 
-    // console.log('====visible', visible)
-    // console.log('====animate', animate)
     // visible과 animate값이 둘 다 false일 때만  null을 리턴
     if(!visible && !animate) return null;  
 

@@ -19,7 +19,7 @@ interface Props {
     theme?: string
 }
 
-const Button = (props: Props) => {
+const Button: React.FC<Props> = (props) => {
 
     const {  children, to, onClick, disabled, theme = 'default' } = props
     // to 값이 존재하면 Link를 사용하고, 그렇지 않으면 div를 사용하빈다.

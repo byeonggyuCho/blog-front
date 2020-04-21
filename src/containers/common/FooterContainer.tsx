@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as baseActions from 'actions/base';
 import {RootState} from 'reducers'
 
-const FooterContainer = () => {
+const FooterContainer: React.FC = () => {
     const dispatch = useDispatch();
     const { logged } = useSelector( (state :RootState) =>({
         logged : state.base.logged
