@@ -5,7 +5,7 @@ import post, { StatePost} from './post'
 import list, { SateList} from './list'
 import editor, {StateEditor} from './editor'
 import base , { StateBase} from './base';
-
+import auth , {StateAuth} from './auth'
 import { connectRouter } from 'connected-react-router';
 
 
@@ -17,6 +17,7 @@ export interface RootState {
     list : SateList,
     loading : StateLoading
     post : StatePost,
+    auth : StateAuth
 }
 
 
@@ -28,6 +29,7 @@ const createRootReducer = (history: History) => combineReducers({
     list, 
     loading,
     post, 
+    auth
 })
 
 export default createRootReducer;

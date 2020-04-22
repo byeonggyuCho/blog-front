@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import PostList from 'components/list/PostList';
 import { listPosts } from 'actions/list';
 import { RootState} from 'reducers'
-import { useLocation, useParams} from 'react-router'
+import { useLocation, useParams} from 'containers/Base/node_modules/react-router'
 import {Dispatch} from 'redux'
 
 // import Pagination from 'components/list/Pagination';

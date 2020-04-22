@@ -1,9 +1,9 @@
 import React from 'react';
-import Header from 'components/common/Header';
+import Header from 'containers/Base/node_modules/components/common/Header';
 import * as BaseActions from 'actions/base';
 import {  useDispatch, useSelector } from 'react-redux';
 import { RootState  } from 'reducers'
-import { useParams} from'react-router'
+import { useParams} from'containers/Base/node_modules/react-router'
 
 const  HeaderContainer: React.FC = () => {
 

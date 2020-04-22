@@ -1,4 +1,4 @@
-import {   ActionType,   createReducer,} from 'typesafe-actions'
+import {   ActionType,   createReducer} from 'typesafe-actions'
 
 import actions,{
     WRITE_POST,

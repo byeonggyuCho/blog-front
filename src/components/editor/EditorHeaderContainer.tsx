@@ -1,7 +1,7 @@
 import React, {  useEffect} from 'react';
 import EditorHeader from './EditorHeader';
 import {  useSelector, useDispatch } from 'react-redux';
-import { useLocation, useHistory} from 'react-router'
+import { useLocation, useHistory} from 'containers/Base/node_modules/react-router'
 import queryString from 'query-string';
 import * as editorActions from 'actions/editor';
 import {RootState} from 'reducers'

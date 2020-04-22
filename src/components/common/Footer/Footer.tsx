@@ -15,9 +15,9 @@ interface FooterInterface {
 const Footer = ({onLoginClick, logged}:FooterInterface) => (
     <footer className={cx('footer')}>
         <Link to="/" className={cx('brand')}>Byueongyu Cho</Link>
-        <div onClick={onLoginClick} className={cx('admin-login')}>
+        {/* <div onClick={onLoginClick} className={cx('admin-login')}>
             {logged ? '로그아웃' : '관리자 로그인'} 
-        </div>
+        </div> */}
     </footer>
 );
 

@@ -4,8 +4,10 @@ import classNames from 'classnames/bind';
 
 const cx = classNames.bind(styles);
 
-const ListWrapper = function (children: React.Component) {
+const ListWrapper:React.FC = function (props) {
     
+    const {children} = props
+
     return (
         <div className={cx('list-wrapper')}>
             {children}
