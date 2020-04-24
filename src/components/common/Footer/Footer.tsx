@@ -7,12 +7,12 @@ const cx = classNames.bind(styles);
 
 
 interface FooterInterface {
-    onLoginClick : ()=> void
-    logged : boolean
+    // onLoginClick : ()=> void
+    // logged : boolean
 }
 
 
-const Footer = ({onLoginClick, logged}:FooterInterface) => (
+const Footer:React.FC = () => (
     <footer className={cx('footer')}>
         <Link to="/" className={cx('brand')}>Byueongyu Cho</Link>
         {/* <div onClick={onLoginClick} className={cx('admin-login')}>

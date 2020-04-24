@@ -9,7 +9,7 @@ const FooterContainer: React.FC = () => {
     const { logged } = useSelector( (state :RootState) =>({
         logged : state.base.logged
     }))
-
+/* 
     const handleLoginClick = () => {
         if(logged) {
             try {
@@ -22,10 +22,10 @@ const FooterContainer: React.FC = () => {
         }
         dispatch(baseActions.showModal('login'))
         dispatch(baseActions.initializeLoginModal())
-    }
+    } */
 
     return (
-        <Footer onLoginClick={handleLoginClick} logged={logged}/>
+        <Footer/>
     );
 }
 

@@ -8,22 +8,19 @@ import { useParams} from'react-router'
 import { userInfo } from 'os';
 import storage from 'lib/storage'
 
-const  HeaderContainer: React.FC = ({visible}) => {
+
+
+
+const  HeaderContainer: React.FC = () => {
 
     const dispatch = useDispatch();
     const params = useParams();
     const {logged,user} = useSelector(
         (state : RootState) =>({
             logged : state.base.logged,
-            user: state.user
+            user: state.user,
         })
     )
-
-
-    //TODO
-    // const handleRemove = () => {
-    //     dispatch( BaseActions.showModal('remove'));
-    // }
 
     const handleLogout = () => {
         try {
@@ -32,20 +29,14 @@ const  HeaderContainer: React.FC = ({visible}) => {
             console.log(e);
         }
 
-        storage.remove('loggedInfo');
-        window.location.href = '/'; // 홈페이지로 새로고침
     }
-
-    if(!visible) return null;
 
     return (
         <Header
             postId={params.id}
             logged={logged}
             user={user}
-            // onRemove={handleRemove}
             onLogout={handleLogout}
-            // userName={user.loggedInfo.username}
         />
     );
 }

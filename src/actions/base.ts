@@ -29,7 +29,7 @@ export const CHECK_LOGIN = {
 } as const
 
 
-export const SET_HEADER_VISIBILITY = 'base/SET_HEADER_VISIBILITY' as const;// 헤더 렌더링 여부 설정
+// export const SET_HEADER_VISIBILITY = 'base/SET_HEADER_VISIBILITY' as const;// 헤더 렌더링 여부 설정
 
 export const CHANGE_PASSWORD_INPUT = 'base/CHAGE_PASSWORD_INPUT'as const;
 export const INITIALIZE_LOGIN_MODAL = 'base/INITALIZE_LOGIN_MODAL'as const;
@@ -52,9 +52,9 @@ export const changePasswordInput = createAction(CHANGE_PASSWORD_INPUT,
 export const initializeLoginModal = createAction(INITIALIZE_LOGIN_MODAL);
 export const tempLogin = createAction(TEMP_LOGIN);
 
-export const setHeaderVisibility = createAction(SET_HEADER_VISIBILITY,
-    (visible:boolean)=> (visible)
-); // visible
+// export const setHeaderVisibility = createAction(SET_HEADER_VISIBILITY,
+//     (visible:boolean)=> (visible)
+// ); // visible
 
 
 
@@ -87,7 +87,7 @@ const actions = {
     changePasswordInput,
     initializeLoginModal,
     tempLogin,
-    setHeaderVisibility
+    // setHeaderVisibility
 }
 
 export default  actions

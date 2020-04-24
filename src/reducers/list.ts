@@ -6,7 +6,7 @@ import actions, {LIST} from 'actions/list'
 
 export interface SateList {
     posts: Post[],
-    error: object,
+    error: Error,
     lastPage: number,
 }
 

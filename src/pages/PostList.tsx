@@ -1,7 +1,7 @@
 import React from 'react';
 import PageTemplate from '../components/common/PageTemplate';
 import ListWrapper from '../components/list/ListWrapper';
-import ListContainer from '../components/list/ListContainer';
+import PostListContainer from '../components/list/PostListContainer';
 
 /**
  * 
@@ -11,17 +11,17 @@ import ListContainer from '../components/list/ListContainer';
  */
 
 
-const ListPage  = () => {
+const PostList  = () => {
 
     // page의 기본 값을 1로 설정
     return (
         <PageTemplate>
             <ListWrapper>
-                <ListContainer />
+                <PostListContainer />
             </ListWrapper>
         </PageTemplate>
     );
 };
 
 
-export default ListPage;
+export default PostList;

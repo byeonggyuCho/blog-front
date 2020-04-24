@@ -41,14 +41,6 @@ export const LOGOUT = {
 }
 
 
-//auth/REGISTER'; // 이메일 가입
-// const LOGIN = 'auth/LOGIN'; // 이메일 로그인
-// const LOGOUT = 'auth/LOGOUT'; // 이메일 로그인
-
-
-
-
-
 export const checkEmailExists =  createAsyncAction(
     CHECK_EMAIL_EXISTS.REQUEST,
     CHECK_EMAIL_EXISTS.SUCCESS,

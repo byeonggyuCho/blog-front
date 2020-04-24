@@ -1,18 +1,15 @@
 import React, { useEffect } from 'react';
-import PostInfo from 'components/post/PostInfo';
-import PostBody from 'components/post/PostBody';
 import * as postActions from 'actions/post';
 import { useSelector, useDispatch} from 'react-redux';
 import { RootState} from 'reducers'
+import PostViewer from 'components/post/PostViewer'
+import {  useParams} from 'react-router'
 
 
-interface PostProp {
-    id : string
-}
+const PostViewerContainer: React.FC= ()=> {
 
-const Post: React.FC<PostProp> = (props)=> {
+    const { id } = useParams();
 
-    const {id} = props
     const dispatch = useDispatch();
     const {loading, title, tags, body, publishedDate } = useSelector(
         (state: RootState)=>({
@@ -32,11 +29,13 @@ const Post: React.FC<PostProp> = (props)=> {
     if(loading) return null;    // 로딩 중일 때는 아무것도 보여주지 않음.
 
     return (
-        <div>
-            <PostInfo title={title} publishedDate={publishedDate} tags={tags}/>
-            <PostBody body={body}/>
-        </div>
+
+        <PostViewer
+            title={title} publishedDate={publishedDate} tags={tags}
+            body={body}
+        />
+      
     )
 }
 
-export default Post
+export default PostViewerContainer

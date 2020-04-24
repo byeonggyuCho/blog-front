@@ -14,7 +14,7 @@ import {
 const logoutSaga = function*(action:PayloadAction<AsyncActionTypes<string,string,string>,any>){
 
     yield put(startLoading(LOGOUT.REQUEST))
-
+//api: PromiseCreatorFunction<Param, RES>
     try{
         const response = yield call(api.logout, action.payload);
 

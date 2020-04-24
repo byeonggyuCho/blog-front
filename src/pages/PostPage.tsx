@@ -1,15 +1,14 @@
 import React from 'react';
 import PageTemplate from 'components/common/PageTemplate'
-import Post from 'components/post/Post'
+import PostViewerContainer from 'containers/post/PostViewerContainer'
 import AskModalContainer from 'containers/modal/AskModalContainer';
 
-const PostPage = ({match}) => {
+const PostPage = () => {
 
     
-    const { id } = match.params;
     return (
         <PageTemplate>
-            <Post id = {id}/>
+            <PostViewerContainer />
             <AskModalContainer/>
         </PageTemplate>
     );

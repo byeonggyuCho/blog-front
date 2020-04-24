@@ -18,6 +18,12 @@ const Positioner = styled.div`
     ${shadow(1)}
 `;
 
+
+const UserInfo = styled.div`
+  font-weight: 800;
+  margin-right: 1rem;
+`;
+
 // 흰 배경, 내용 중간 정렬
 const WhiteBackground = styled.div`
     background: white;
@@ -77,21 +83,23 @@ interface HeaderInterface {
 
 interface ButtonContainerProp {
     user: any
-    logged: boolean
     handleLogout: () => void
 }
 
 
-const ButtonContainer:React.FC<ButtonContainerProp> = function({logged,user,handleLogout}){
+const ButtonContainer:React.FC<ButtonContainerProp> = function({user,handleLogout}){
 
     return (
-        logged ?
+        user ?
             <div className={cx('right')}>
+
+                <UserInfo>{user.loggedInfo.username}</UserInfo>
+                <Button onClick={handleLogout}>로그아웃</Button>
                 {
 
-                    <div>
-                          {user.getIn(['loggedInfo', 'username'])} <div onClick={handleLogout}>(로그아웃)</div>
-                    </div>
+                    // <div>
+                    //       {user.loggedInfo.username} <div onClick={handleLogout}>(로그아웃)</div>
+                    // </div>
                     // 조건에 따라 버튼 렌더링
                     // flex를 유지하려고 배열 형태로 랜더링합니다.
                     // postId && 
@@ -119,7 +127,7 @@ const Header = function(props: HeaderInterface) {
                 <HeaderContents>
                     <Logo  to="/">HEURM</Logo>
                     <Spacer/>
-                    <ButtonContainer logged={logged} handleLogout={onLogout} user={user}/>
+                    <ButtonContainer handleLogout={onLogout} user={user}/>
                 </HeaderContents>
             </WhiteBackground>
             <GradientBorder/>

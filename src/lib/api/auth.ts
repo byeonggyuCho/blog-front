@@ -16,7 +16,7 @@ interface checkLoginInterface {
 }
 
 export const login:loginInterface = ({email, password}) => client.post('/api/auth/login', { email, password });
-export const logout:logoutInterface = () => client.post('/api/auth/logout');
+export const logout:PromiseCreatorFunction<any, any> = () => client.post('/api/auth/logout');
 export const checkLogin:checkLoginInterface = () => client.get('/api/auth/check');
 
 

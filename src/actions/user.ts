@@ -34,10 +34,6 @@ export const CHECK_STATUS = {
 
 
 
-interface LogInfo {
-
-}
-
 
 export const setValidated = createAction( SET_VALIDATED, 
     action => (validated:boolean) => action(validated)

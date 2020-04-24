@@ -17,9 +17,6 @@ const EditorTemplate: React.FC<EditorTemplateProps> = (props) => {
 
     // separator 클릭 후 마우스를움직이면 그에 따라 leftPercentage 업데이터
     const handleMouseMove = (e) => {
-        // this.setState({
-        //     leftPercentage: e.clientX / window.innerWidth
-        // });
         setLeftPercentage( e.clientX / window.innerWidth)
     }
 
