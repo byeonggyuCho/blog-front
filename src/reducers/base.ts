@@ -16,7 +16,8 @@ import actions, {
     INITIALIZE_LOGIN_MODAL, 
     TEMP_LOGIN, 
     SHOW_MODAL,
-    HIDE_MODAL
+    HIDE_MODAL,
+    SET_HEADER_VISIBILITY
 } from 'actions/base'
 
 
@@ -35,6 +36,10 @@ export function* baseSaga(){
 
 
 export interface StateBase {
+
+    header : {
+        visible: boolean
+    },
     modal: {
         remove: boolean,
         login: boolean, // 추후 구현될 모달
@@ -51,6 +56,9 @@ export interface StateBase {
 
 // initial state
 const initialSate : StateBase = {
+    header : {
+        visible: false
+    },
     // 모달의 가시성 상태
     modal: {
         remove: false,
@@ -155,5 +163,9 @@ export default createReducer<StateBase, BaseAction>(initialSate, {
         // return state.set('error', payload.error)
         state.modal.error = !!payload;
     }, 
+    [SET_HEADER_VISIBILITY]: (state, action) => {
+        return state.header.visible = action.payload;
+        
+    }
   
 });

@@ -25,14 +25,16 @@ const BorderedButton = styled(Link)`
         /* 마우스 클릭시 아래로 미세하게 움직임 */
         transform: translateY(3px);
     }
-
-
 `;
 
-const LoginButton = () => (
+const LoginButton: React.FC = function() {
+    
+return(
     <BorderedButton to="/auth/login">
         로그인 / 가입
     </BorderedButton>
-);
+)};
+
+
 
 export default LoginButton;

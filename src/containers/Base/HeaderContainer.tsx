@@ -6,6 +6,7 @@ import {  useDispatch, useSelector } from 'react-redux';
 import { RootState  } from 'reducers'
 import { useParams} from'react-router'
 import { userInfo } from 'os';
+import storage from 'lib/storage'
 
 const  HeaderContainer: React.FC = ({visible}) => {
 
@@ -13,18 +14,20 @@ const  HeaderContainer: React.FC = ({visible}) => {
     const params = useParams();
     const {logged,user} = useSelector(
         (state : RootState) =>({
-            logged : state.base.logged
+            logged : state.base.logged,
             user: state.user
         })
     )
 
-    const handleRemove = () => {
-        dispatch( BaseActions.showModal('remove'));
-    }
 
-    const handleLogout = async () => {
+    //TODO
+    // const handleRemove = () => {
+    //     dispatch( BaseActions.showModal('remove'));
+    // }
+
+    const handleLogout = () => {
         try {
-            UserActions.logout();
+            dispatch(UserActions.logout.request());
         } catch (e) {
             console.log(e);
         }
@@ -39,9 +42,10 @@ const  HeaderContainer: React.FC = ({visible}) => {
         <Header
             postId={params.id}
             logged={logged}
-            onRemove={handleRemove}
+            user={user}
+            // onRemove={handleRemove}
             onLogout={handleLogout}
-            userName={user.loggedInfo.username}
+            // userName={user.loggedInfo.username}
         />
     );
 }

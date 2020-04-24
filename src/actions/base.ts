@@ -1,5 +1,15 @@
 import {createAction, createAsyncAction} from 'lib/reduxUtil'
 
+/**
+ * 
+ * 프로젝트의 기반에 관련된 상태를 관리한다.
+ * - 헤더 렝더링 여부
+ * - 유저 메뉴 나타남 여부
+ */
+
+
+
+
 export const LOGIN = {
     REQUEST: 'base/LOGIN_REQUEST',
     SUCCESS: 'base/LOGIN_SUCCESS',
@@ -17,6 +27,9 @@ export const CHECK_LOGIN = {
     SUCCESS: 'base/CHECK_LOGIN_SUCCESS',
     FAILURE: 'base/CHECK_LOGIN_FAILURE'
 } as const
+
+
+export const SET_HEADER_VISIBILITY = 'base/SET_HEADER_VISIBILITY' as const;// 헤더 렌더링 여부 설정
 
 export const CHANGE_PASSWORD_INPUT = 'base/CHAGE_PASSWORD_INPUT'as const;
 export const INITIALIZE_LOGIN_MODAL = 'base/INITALIZE_LOGIN_MODAL'as const;
@@ -38,6 +51,11 @@ export const changePasswordInput = createAction(CHANGE_PASSWORD_INPUT,
 )
 export const initializeLoginModal = createAction(INITIALIZE_LOGIN_MODAL);
 export const tempLogin = createAction(TEMP_LOGIN);
+
+export const setHeaderVisibility = createAction(SET_HEADER_VISIBILITY,
+    (visible:boolean)=> (visible)
+); // visible
+
 
 
 // Entity 선언.
@@ -69,6 +87,7 @@ const actions = {
     changePasswordInput,
     initializeLoginModal,
     tempLogin,
+    setHeaderVisibility
 }
 
 export default  actions

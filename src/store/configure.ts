@@ -1,10 +1,11 @@
-import {createStore, applyMiddleware,compose } from 'redux';
+import {createStore, Store, applyMiddleware,compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import createRootReducer from 'reducers';
 import rootSaga from 'sagas'
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { routerMiddleware as createRouterMiddleware} from "connected-react-router";
-import { createBrowserHistory } from 'history'
+import { createBrowserHistory, } from 'history'
+
 
 
 export const history = createBrowserHistory() 
@@ -21,7 +22,7 @@ const composeEnhancers = devtools || compose;
 // preloadedState는 추후 서버사이드 랜더링을 했을 때 전달받는 초기 상태이다.
 export default function configureStore (preloadedSate?)  {
     
-    const store = createStore(
+    const store:Store = createStore(
         // rootReducer, 
         createRootReducer(history), // root reducer with router state
         preloadedSate, 

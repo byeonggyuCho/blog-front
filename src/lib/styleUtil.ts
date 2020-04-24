@@ -9,11 +9,18 @@ export const sizes = {
 };
 
 
+// type meidaType = {
+//     wide: ()=>BaseThemedCssFunction<any>,
+//     desktop: ()=>BaseThemedCssFunction<any>,
+//     tablet: ()=>BaseThemedCssFunction<any>,
+//     phone: ()=>BaseThemedCssFunction<any>,
+// }
+
 type meidaType = {
-    wide: ()=>BaseThemedCssFunction<any>,
-    desktop: ()=>BaseThemedCssFunction<any>,
-    tablet: ()=>BaseThemedCssFunction<any>,
-    phone: ()=>BaseThemedCssFunction<any>,
+    wide: (arg)=>any,
+    desktop: (arg)=>any,
+    tablet: (arg)=>any,
+    phone: (arg)=>any
 }
 
 

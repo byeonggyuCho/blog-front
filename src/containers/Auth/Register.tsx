@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
 import { AuthContent, InputWithLabel, AuthButton, RightAlignedLink, AuthError } from 'components/Auth';
-import { connect,useDispatch,useSelector } from 'react-redux';
+import { useDispatch,useSelector } from 'react-redux';
 import { Dispatch} from 'redux';
 import * as authActions from 'actions/auth'
 import {isEmail, isLength, isAlphanumeric} from 'validator';
-import auth from 'reducers/auth';
 import {RootState} from 'reducers'
 import debounce from 'lodash/debounce';
 import {useHistory} from 'react-router'
@@ -16,14 +15,17 @@ const  Register:React.FC  = function(props) {
     const dispatch:Dispatch = useDispatch();
     const history = useHistory();
 
-    const  {form, error,result,exists } = useSelector((state:RootState=>{
+    const  {form, error,result,exists } = useSelector((state:RootState)=>{
         return {
-            form : state.auth.register.from,
+            form : state.auth.register.form,
             error : state.auth.register.error,
-            exists : state.auth.register.exists
+            exists : state.auth.register.exists,
             result : state.auth.result
         }
     })
+
+    const { email, username, password, passwordConfirm } = form;
+
 
 
     useEffect(()=>{
@@ -32,11 +34,10 @@ const  Register:React.FC  = function(props) {
 
 
     const  setError = (message) => {
-        const { AuthActions } = props;
-        AuthActions.setError({
+        dispatch(authActions.setError({
             form: 'register',
             message
-        });
+        }));
     }
 
     const  validate = {
@@ -63,7 +64,7 @@ const  Register:React.FC  = function(props) {
             return true;
         },
         passwordConfirm: (value) => {
-            if(props.form.get('password') !== value) {
+            if( form.password !== value) {
                 setError('비밀번호확인이 일치하지 않습니다.');
                 return false;
             }
@@ -76,7 +77,6 @@ const  Register:React.FC  = function(props) {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-
 
         dispatch(authActions.changeInput({
             name,
@@ -97,8 +97,8 @@ const  Register:React.FC  = function(props) {
 
     const checkUsernameExists =  debounce((username) => {
         try {
-            dispatch(authActions.checkUsernameExists(username));
-            if(exists.get('username')) {
+            dispatch(authActions.checkUsernameExists.request(username));
+            if(exists.username) {
                 setError('이미 존재하는 아이디입니다.');
             } else {
                 setError(null);
@@ -111,9 +111,9 @@ const  Register:React.FC  = function(props) {
 
 
 
-    const    checkEmailExists =  debounce((email) => {
+    const checkEmailExists =  debounce((email) => {
         try {
-             dispatch(authActions.checkEmailExists(email));
+             dispatch(authActions.checkEmailExists.request(email));
             if(exists['email']) {
                 setError('이미 존재하는 이메일입니다.');
             } else {
@@ -125,9 +125,7 @@ const  Register:React.FC  = function(props) {
     })
 
 
-    const  handleLocalRegister =  () => {
-        const { email, username, password, passwordConfirm } = form.toJS();
-
+    const  handleRegister =  () => {
         const { validate } = this;
 
         if(error) return; // 현재 에러가 있는 상태라면 진행하지 않음
@@ -141,22 +139,23 @@ const  Register:React.FC  = function(props) {
 
         try {
             
-            dispatch(authActions.localRegister({
+            dispatch(authActions.register.request({
                 email, username, password
-            })
+            }))
 
             // TODO: 로그인 정보 저장 (로컬스토리지/스토어)
-            history.push('/'); // 회원가입 성공시 홈페이지로 이동
+            // history.push('/'); // 회원가입 성공시 홈페이지로 이동
         } catch(e) {
             // 에러 처리하기
             if(e.response.status === 409) {
-                const { key } = e.response.data;
-                const message = key === 'email' ? '이미 존재하는 이메일입니다.' : '이미 존재하는 아이디입니다.';
+                const { error } = e.response.data;
+                const message = error.key === 'email' ? '이미 존재하는 이메일입니다.' : '이미 존재하는 아이디입니다.';
                 return this.setError(message);
             }
-            this.setError('알 수 없는 에러가 발생했습니다.')
+            setError('알 수 없는 에러가 발생했습니다.')
         }
-    }    
+    }  
+      
 
 
     return (
@@ -175,7 +174,7 @@ const  Register:React.FC  = function(props) {
                 {
                     error && <AuthError>{error}</AuthError>
                 }
-                <AuthButton>회원가입</AuthButton>
+                <AuthButton onClick={handleRegister}>회원가입</AuthButton>
                 <RightAlignedLink to="/auth/login">로그인</RightAlignedLink>
         </AuthContent>
     );

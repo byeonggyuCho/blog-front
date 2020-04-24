@@ -3,17 +3,21 @@ import {createAction , createAsyncAction} from 'typesafe-actions'
 
 
 
-export const SET_VALIDATED = 'user/SET_VALIDATED'; // validated 값 설정
-
 
 
 // // validated 값 설정
-export const SET_LOGGED_INFO = {
-    REQUEST: 'user/SET_VALIDATED_REQUEST',
-    SUCCESS: 'user/SET_VALIDATED_SUCCESS',
-    FAILURE: 'user/SET_VALIDATED_FAILURE',
-} as const
-//'user/SET_LOGGED_INFO'; // 로그인 정보 설정
+// export const SET_LOGGED_INFO = {
+//     REQUEST: 'user/SET_LOGGED_INFO_REQUEST',
+//     SUCCESS: 'user/SET_LOGGED_INFO_SUCCESS',
+//     FAILURE: 'user/SET_LOGGED_INFO_FAILURE',
+// } as const
+
+
+export const SET_VALIDATED = 'user/SET_VALIDATED'; // validated 값 설정
+export const SET_LOGGED_INFO = 'user/SET_LOGGED_INFO' // 로그인 정보 설정
+
+
+
 export const LOGOUT = {
     REQUEST: 'user/LOGOUT_REQUEST',
     SUCCESS: 'user/LOGOUT_SUCCESS',
@@ -35,31 +39,45 @@ interface LogInfo {
 }
 
 
-export const setValidate = createAction(SET_VALIDATED); //ET_VALIDATED
+export const setValidated = createAction( SET_VALIDATED, 
+    action => (validated:boolean) => action(validated)
+    
+); //ET_VALIDATED
 
-export const setLoggedInfo = createAsyncAction(
-    SET_LOGGED_INFO.REQUEST,
-    SET_LOGGED_INFO.FAILURE,
-    SET_LOGGED_INFO.SUCCESS
-)<LogInfo, void, Error >();
+export const setLoggedInfo = createAction(SET_LOGGED_INFO, 
+    action =>  (loggedInfo: any) => action(loggedInfo)
+);
+
+// export const setLoggedInfo = createAsyncAction(
+//     SET_LOGGED_INFO.REQUEST,
+//     SET_LOGGED_INFO.FAILURE,
+//     SET_LOGGED_INFO.SUCCESS
+// )<LogInfo, void, Error >();
 
 
 export const logout = createAsyncAction(
     LOGOUT.REQUEST,
-    LOGOUT.FAILURE,
     LOGOUT.SUCCESS,
+    LOGOUT.FAILURE,
 )<null, boolean, Error >();
+
+
+interface UserInfo {
+    thumbnail:string,  
+    username: string
+}
 
 
 export const checkStatus = createAsyncAction(
     CHECK_STATUS.REQUEST,
-    CHECK_STATUS.FAILURE,
     CHECK_STATUS.SUCCESS,
-)<string, boolean, Error >();
+    CHECK_STATUS.FAILURE,
+)<null, UserInfo, Error >();
 
 
 const actions = {
-    setValidate,
+    setValidated,
+    setLoggedInfo,
     logout,
     checkStatus
 }

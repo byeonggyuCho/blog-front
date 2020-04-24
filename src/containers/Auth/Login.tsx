@@ -1,15 +1,16 @@
 import React,{useEffect} from 'react';
-import { AuthContent, InputWithLabel, AuthButton, RightAlignedLink } from 'components/Auth';
+import { AuthContent, InputWithLabel, AuthButton, RightAlignedLink,AuthError } from 'components/Auth';
 import * as authActions from 'actions/auth'
+import * as userActions from 'actions/user'
 import {useDispatch, useSelector } from 'react-redux'
 import {Dispatch} from 'redux'
 import {RootState} from 'reducers'
+import storage from 'lib/storage'
 
 const Login:React.FC = function () {
 
 
     const dispatch:Dispatch = useDispatch();
-
     const {form,result,error} = useSelector((state:RootState)=>{
         return {
             form : state.auth.login.form,
@@ -17,6 +18,8 @@ const Login:React.FC = function () {
             result : state.auth.result,
         }
     })
+
+    const {email, password } = form;
 
 
     useEffect(()=>{
@@ -36,19 +39,18 @@ const Login:React.FC = function () {
 
     const handleLogin = () => {
         const { email, password } = form
-        const loggedInfo = result
 
         try {
-            dispatch(authActions.login({email, password}))
-            
-            dispatch(authActions.setLoggedInfo(loggedInfo))
+            dispatch(authActions.login.request({email, password}))
 
-            history.push('/');
-            storage.set('loggedInfo', loggedInfo);
+            // 이 부분을 saga로
+            // dispatch(userActions.setLoggedInfo(loggedInfo))
+            // history.push('/');
+            // storage.set('loggedInfo', loggedInfo);
 
         } catch (e) {
             console.log('a');
-            this.setError('잘못된 계정정보입니다.');
+            setError('잘못된 계정정보입니다.');
         }
     }
 
@@ -58,7 +60,6 @@ const Login:React.FC = function () {
             form: 'login',
             message
         }))
-    }
         return false;
     }
 
@@ -84,7 +85,7 @@ const Login:React.FC = function () {
             {
                 error && <AuthError>{error}</AuthError>
             }
-            <AuthButton onClick={handleLocalLogin}>로그인</AuthButton>
+            <AuthButton onClick={handleLogin}>로그인</AuthButton>
             <RightAlignedLink to="/auth/register">회원가입</RightAlignedLink>
         </AuthContent>
     );

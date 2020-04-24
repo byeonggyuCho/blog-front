@@ -6,7 +6,7 @@ import Button from 'components/common/Button'
 import styled from 'styled-components';
 import oc from 'open-color';
 import { shadow, media } from 'lib/styleUtil';
-import LoginButton from 'components/Base/LoginButton'
+import LoginButton from 'components/Base/Header/LoginButton'
 
 // 상단 고정, 그림자
 const Positioner = styled.div`
@@ -70,15 +70,48 @@ const cx = classNames.bind(styles);
 interface HeaderInterface {
     postId: string
     logged: boolean
-    userName? : string
-    onRemove: () => void
-    onLogout: ()=>void
+    user? : any
+    onLogout?: ()=>void
+}
+
+
+interface ButtonContainerProp {
+    user: any
+    logged: boolean
+    handleLogout: () => void
+}
+
+
+const ButtonContainer:React.FC<ButtonContainerProp> = function({logged,user,handleLogout}){
+
+    return (
+        logged ?
+            <div className={cx('right')}>
+                {
+
+                    <div>
+                          {user.getIn(['loggedInfo', 'username'])} <div onClick={handleLogout}>(로그아웃)</div>
+                    </div>
+                    // 조건에 따라 버튼 렌더링
+                    // flex를 유지하려고 배열 형태로 랜더링합니다.
+                    // postId && 
+                    //[// 이 버튼은 Post를 관리하는 컴포넌트로 이동해야함..
+                        // <Button key="edit" theme="outline" to={`/editor?id=${postId}`}>수정</Button>,
+                        // <Button key="remove" theme="outline" onClick={onRemove}>삭제</Button>
+                    //]
+
+
+                }
+                {/* <Button theme="outline" to="/editor">새 포스트</Button> */}
+            </div>
+       : <LoginButton/> 
+    )
 }
 
 
 const Header = function(props: HeaderInterface) {
 
-    const {postId, onRemove, logged,onLogout,userName} = props
+    const {onLogout, logged,user} = props
 
     return (
         <Positioner>
@@ -86,20 +119,7 @@ const Header = function(props: HeaderInterface) {
                 <HeaderContents>
                     <Logo  to="/">HEURM</Logo>
                     <Spacer/>
-                    logged ?
-                        <div className={cx('right')}>
-                            {
-                                // 조건에 따라 버튼 렌더링
-                                // flex를 유지하려고 배열 형태로 랜더링합니다.
-                                postId && 
-                                [
-                                    <Button key="edit" theme="outline" to={`/editor?id=${postId}`}>수정</Button>,
-                                    <Button key="remove" theme="outline" onClick={onRemove}>삭제</Button>
-                                ]
-                            }
-                            <Button theme="outline" to="/editor">새 포스트</Button>
-                      </div>
-                    : <LoginButton/> 
+                    <ButtonContainer logged={logged} handleLogout={onLogout} user={user}/>
                 </HeaderContents>
             </WhiteBackground>
             <GradientBorder/>

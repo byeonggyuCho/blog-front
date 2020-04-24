@@ -46,7 +46,7 @@ const AuthWrapper:React.FC = ({children}) => (
     <Positioner>
         <ShadowedBox>
             <LogoWrapper>
-                <Logo to="/">HEURM</Logo>
+                <Logo to="/">BLOG</Logo>
             </LogoWrapper>
             <Contents>
                 {children}
