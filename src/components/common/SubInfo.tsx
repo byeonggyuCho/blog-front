@@ -6,11 +6,11 @@ import palette from '../../lib/styles/palette';
 
 
 interface SubInfoBlockProp {
-  hasMarginTop: boolean
+  hasMarginTop?: boolean
 }
 
-
-const SubInfoBlock:StyledComponent<SubInfoBlockProp> = styled.div`
+// custom props
+const SubInfoBlock= styled.div<SubInfoBlockProp>`
   ${props =>
     props.hasMarginTop &&
     css`
@@ -30,8 +30,8 @@ const SubInfoBlock:StyledComponent<SubInfoBlockProp> = styled.div`
 
 interface SubInfoProp {
   username: string
-   publishedDate: string 
-   hasMarginTop : boolean
+   publishedDate: Date 
+   hasMarginTop? : boolean
 }
 
 const SubInfo:React.FC<SubInfoProp> = ({ username, publishedDate, hasMarginTop }) => {

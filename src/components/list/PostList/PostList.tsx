@@ -47,12 +47,12 @@ const PostItemBlock = styled.div`
   }
 `;
 
-interface PostItemInterface extends Post {
-    user : any
+interface PostItemProps {
+  post : Post
 }
 
 
-const PostItem:React.FC<PostItemInterface>=  function (post)  {
+const PostItem:React.FC<PostItemProps>=  function ({post})  {
 
     const { publishedDate, user, tags, title, body, _id } = post;
     const tagList = tags.map(
@@ -84,22 +84,9 @@ interface Props {
 
 const PostList = ({posts}: Props) => {
 
-    const postList = posts.map(
-        (post,i)=> {
-            const { _id, title, body, publishedDate, tags } = post;
-
-            return (
-                <PostItem
-                    title={title}
-                    body={body}
-                    publishedDate={publishedDate}
-                    tags={tags}
-                    key={_id}
-                    id={_id}
-                />
-            )
-        }
-    );
+    const postList = posts.map(post => (
+      <PostItem post={post} key={post._id} />
+    ))
 
     return (
         <div className={cx('post-list')}>

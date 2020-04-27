@@ -1,4 +1,4 @@
-import {Meta, RequestPayload} from 'models'
+import {RequestPayload} from 'models'
 import {  createAsyncAction } from 'typesafe-actions' 
 
 
@@ -14,7 +14,7 @@ export const listPosts = createAsyncAction(
     LIST.REQUEST,
     LIST.SUCCESS, 
     LIST.FAILURE, 
-)<RequestPayload, any, Meta>();
+)<RequestPayload, any, Error>();
 
 
 export default {

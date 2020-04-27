@@ -4,13 +4,13 @@ import {Post} from 'models'
 import actions, {LIST} from 'actions/list'
 
 
-export interface SateList {
+export interface SatePostList {
     posts: Post[],
     error: Error,
     lastPage: number,
 }
 
-const initialSate: SateList = {
+const initialSate: SatePostList = {
     posts: [],
     error: null,
     lastPage: 1,
@@ -19,7 +19,7 @@ const initialSate: SateList = {
 type ListAction = ActionType<typeof actions>;
 
 // reducer
-const list = createReducer<SateList,ListAction >(initialSate, {
+const list = createReducer<SatePostList,ListAction >(initialSate, {
         [LIST.SUCCESS]: (state, action) => ({
             ...state,
             posts: action.payload,

@@ -7,6 +7,7 @@ export interface Post {
     markdown?: string,
     body?: string,
     publishedDate?: string
+    user? : any
 }
 
 export interface RequestPayload {

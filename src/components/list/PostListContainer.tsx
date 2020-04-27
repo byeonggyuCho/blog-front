@@ -13,10 +13,10 @@ const ListContainer = () => {
     const dispatch:Dispatch = useDispatch();
     const location = useLocation();
     const params = useParams();
-    const { posts, loading,user,error} = useSelector(
-        ({ posts, loading,user,error } :RootState) => ({
-            posts: list.posts,
-            error: list.error,
+    const { postList, loading,user,error} = useSelector(
+        ({ postList, loading,user } :RootState) => ({
+            postList: postList.posts,
+            error: postList.error,
             loading: loading['list/LIST_POSTS_REQUEST'],
             user: user.loggedInfo,
         }),
@@ -39,7 +39,7 @@ const ListContainer = () => {
 
     return (
         <PostList
-            posts={list}
+            posts={postList}
             loading={loading}
             error={error}
             showWriteButton={!!user}

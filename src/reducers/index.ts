@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import { History } from 'history'
 import loading, {StateLoading} from './loading'
 import post, { StatePost} from './post'
-import list, { SateList} from './list'
+import list, { SatePostList} from './postList'
 import editor, {StateEditor} from './editor'
 import base , { StateBase} from './base';
 import auth , {StateAuth} from './auth'
@@ -15,7 +15,7 @@ import { connectRouter } from 'connected-react-router';
 export interface RootState {
     base : StateBase,
     editor: StateEditor,
-    list : SateList,
+    postList : SatePostList,
     loading : StateLoading
     post : StatePost,
     auth : StateAuth,
