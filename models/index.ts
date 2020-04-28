@@ -4,7 +4,7 @@ export interface Post {
     body: string
     tags: string[] 
     user:User
-    publishedDate:string
+    publishedDate:Date
 }
 
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Header from '../../components/common/Header';
 import { logout } from '../../actions/user';
-import {RootState} from '../../reducders'
+import {RootState} from '../../reducers'
 
 const HeaderContainer = () => {
   const { user } = useSelector(({ user }:RootState) => ({ user: user.user }));

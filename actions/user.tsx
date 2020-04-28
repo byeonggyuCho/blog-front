@@ -23,9 +23,7 @@ export const check = createAsyncAction(
 
 
 export const tempSetUser = createAction(TEMP_SET_USER, user => user)();
-export const logout = createAction(LOGOUT, 
-  (id: string)=>id 
-)();
+export const logout = createAction(LOGOUT)();
 
 const actions = {
   tempSetUser,

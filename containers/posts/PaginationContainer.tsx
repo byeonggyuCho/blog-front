@@ -3,9 +3,10 @@ import Pagination from '../../components/posts/Pagination';
 import { useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import qs from 'qs';
+import {RootState}from '../../reducers'
 
 const PaginationContainer = ({ location, match }) => {
-  const { lastPage, posts, loading } = useSelector(({ posts, loading }) => ({
+  const { lastPage, posts, loading } = useSelector(({ posts, loading }:RootState) => ({
     lastPage: posts.lastPage,
     posts: posts.posts,
     loading: loading['posts/LIST_POSTS'],
