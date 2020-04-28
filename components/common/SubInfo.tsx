@@ -3,7 +3,13 @@ import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 import palette from '../../lib/styles/palette';
 
-const SubInfoBlock = styled.div`
+interface SubInfoBlockProps {
+  hasMarginTop: boolean
+}
+
+
+
+const SubInfoBlock= styled.div<SubInfoBlockProps>`
   ${props =>
     props.hasMarginTop &&
     css`
@@ -20,7 +26,14 @@ const SubInfoBlock = styled.div`
   }
 `;
 
-const SubInfo = ({ username, publishedDate, hasMarginTop }) => {
+
+interface SubInfoProps {
+  username:string 
+  publishedDate:Date 
+  hasMarginTop?: boolean
+}
+
+const SubInfo:React.FC<SubInfoProps> = ({ username, publishedDate, hasMarginTop }) => {
   return (
     <SubInfoBlock hasMarginTop={hasMarginTop}>
       <span>

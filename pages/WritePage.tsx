@@ -5,7 +5,7 @@ import TagBoxContainer from '../containers/write/TagBoxContainer';
 import WriteActionButtonsContainer from '../containers/write/WriteActionButtonsContainer';
 import { Helmet } from 'react-helmet-async';
 
-const WritePage = () => {
+const WritePage:React.FC = () => {
   return (
     <Responsive>
       <Helmet>

@@ -16,9 +16,7 @@ export const readPost = createAsyncAction(
   [READ_POST.SUCCESS, (res:Post)=>res],
   [READ_POST.FAILURE, (err:Error)=>err]
 )()
-export const unloadPost = createAction(UNLOAD_POST,
-  (id:string)=>id
-)();
+export const unloadPost = createAction(UNLOAD_POST)();
 
 
 const actions = {

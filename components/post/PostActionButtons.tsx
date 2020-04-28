@@ -28,7 +28,13 @@ const ActionButton = styled.button`
   }
 `;
 
-const PostActionButtons = ({ onEdit, onRemove }) => {
+interface PostActionButtonsProps {
+  onEdit : ()=>void
+  onRemove: ()=>void
+}
+
+
+const PostActionButtons:React.FC<PostActionButtonsProps> = ({ onEdit, onRemove }) => {
   const [modal, setModal] = useState(false);
   const onRemoveClick = () => {
     setModal(true);

@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeField, initializeForm, register } from '../../modules/auth';
+import { changeField, initializeForm, register } from '../../actions/auth';
 import AuthForm from '../../components/auth/AuthForm';
-import { check } from '../../modules/user';
-import { withRouter } from 'react-router-dom';
+import { check } from '../../actions/user';
+import { useHistory } from 'react-router-dom';
+import {RootState} from '../../reducers'
 
-const RegisterForm = ({ history }) => {
+const RegisterForm = () => {
+
+
+  const history  = useHistory()
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
-  const { form, auth, authError, user } = useSelector(({ auth, user }) => ({
+  const { form, auth, authError, user } = useSelector(({ auth, user }:RootState) => ({
     form: auth.register,
     auth: auth.auth,
     authError: auth.authError,
@@ -44,7 +48,7 @@ const RegisterForm = ({ history }) => {
       );
       return;
     }
-    dispatch(register({ username, password }));
+    dispatch(register.request({ username, password }));
   };
 
   // 컴포넌트가 처음 렌더링 될 때 form 을 초기화함
@@ -68,7 +72,7 @@ const RegisterForm = ({ history }) => {
     if (auth) {
       console.log('회원가입 성공');
       console.log(auth);
-      dispatch(check());
+      dispatch(check.request());
     }
   }, [auth, authError, dispatch]);
 
@@ -95,4 +99,4 @@ const RegisterForm = ({ history }) => {
   );
 };
 
-export default withRouter(RegisterForm);
+export default RegisterForm

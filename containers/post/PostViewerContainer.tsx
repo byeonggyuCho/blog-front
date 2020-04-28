@@ -1,18 +1,21 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import { readPost, unloadPost } from '../../reducders/post';
+import { withRouter, useParams, useHistory } from 'react-router-dom';
+import { readPost, unloadPost } from '../../actions/post';
 import PostViewer from '../../components/post/PostViewer';
 import PostActionButtons from '../../components/post/PostActionButtons';
-import { setOriginalPost } from '../../reducders/write';
+import { setOriginalPost } from '../../actions/write';
 import { removePost } from '../../lib/api/posts';
+import {RootState} from '../../reducers'
 
-const PostViewerContainer = ({ match, history }) => {
+const PostViewerContainer = () => {
+
+  const history = useHistory();
   // 처음 마운트될 때 포스트 읽기 API 요청
-  const { postId } = match.params;
+  const { postId } = useParams();
   const dispatch = useDispatch();
   const { post, error, loading, user } = useSelector(
-    ({ post, loading, user }) => ({
+    ({ post, loading, user }:RootState) => ({
       post: post.post,
       error: post.error,
       loading: loading['post/READ_POST'],
@@ -21,7 +24,7 @@ const PostViewerContainer = ({ match, history }) => {
   );
 
   useEffect(() => {
-    dispatch(readPost(postId));
+    dispatch(readPost.request(postId));
     // 언마운트될 때 리덕스에서 포스트 데이터 없애기
     return () => {
       dispatch(unloadPost());

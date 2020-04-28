@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import { changeField, initializeForm, login } from '../../reducders/auth';
+import { changeField, initializeForm, login } from '../../actions/auth';
 import AuthForm from '../../components/auth/AuthForm';
-import { check } from '../../reducders/user';
+import { check } from '../../actions/user';
+import {RootState} from '../../reducers'
+import {useHistory } from 'react-router-dom'
 
-const LoginForm = ({ history }) => {
+const LoginForm = () => {
+
+  const history  = useHistory()
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
-  const { form, auth, authError, user } = useSelector(({ auth, user }) => ({
+  const { form, auth, authError, user } = useSelector(({ auth, user }:RootState) => ({
     form: auth.login,
     auth: auth.auth,
     authError: auth.authError,
@@ -30,7 +33,7 @@ const LoginForm = ({ history }) => {
   const onSubmit = e => {
     e.preventDefault();
     const { username, password } = form;
-    dispatch(login({ username, password }));
+    dispatch(login.request({ username, password }));
   };
 
   // 컴포넌트가 처음 렌더링 될 때 form 을 초기화함
@@ -47,7 +50,7 @@ const LoginForm = ({ history }) => {
     }
     if (auth) {
       console.log('로그인 성공');
-      dispatch(check());
+      dispatch(check.request());
     }
   }, [auth, authError, dispatch]);
 
@@ -73,4 +76,4 @@ const LoginForm = ({ history }) => {
   );
 };
 
-export default withRouter(LoginForm);
+export default LoginForm

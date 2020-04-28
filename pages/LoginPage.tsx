@@ -2,7 +2,7 @@ import React from 'react';
 import AuthTemplate from '../components/auth/AuthTemplate';
 import LoginForm from '../containers/auth/LoginForm';
 
-const LoginPage = () => {
+const LoginPage:React.FC = () => {
   return (
     <AuthTemplate>
       <LoginForm />

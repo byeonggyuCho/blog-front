@@ -42,7 +42,7 @@ export const writePost =  createAsyncAction(
   }],
   [WRITE_POST.SUCCESS, (res:Post)=>res],
   [WRITE_POST.FAILURE, (err:Error)=>err],
-); // 포스트 작성
+)(); // 포스트 작성
 
 
 export const setOriginalPost = createAction(SET_ORIGINAL_POST,
@@ -51,9 +51,9 @@ export const setOriginalPost = createAction(SET_ORIGINAL_POST,
 
 export const updatePost = createAsyncAction(
   [UPDATE_POST.REQUEST,(req: Post)=>req],
-  [UPDATE_POST.SUCCESS,(res: boolean)=>res],
+  [UPDATE_POST.SUCCESS,(res: Post)=>res],
   [UPDATE_POST.FAILURE,(err:Error)=>err],
-)
+)()
 
 const actions = {
   initilize,

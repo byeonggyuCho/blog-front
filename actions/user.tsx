@@ -14,7 +14,7 @@ export const LOGOUT = 'user/LOGOUT' as const;
 
 // 회원 정보 확인
 export const check = createAsyncAction(
-  [CHECK.REQUEST, (req:LoginInfo)=> req], 
+  [CHECK.REQUEST, ()=>{}], 
   [CHECK.SUCCESS, (res:User)=>res],
   [CHECK.FAILURE, (err:Error )=>err],
 )()
