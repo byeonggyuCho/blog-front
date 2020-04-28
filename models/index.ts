@@ -1,10 +1,10 @@
 export interface Post {
-    id : string
+    id? : string
     title: string 
     body: string
     tags: string[] 
-    user:User
-    publishedDate:Date
+    user?:User
+    publishedDate?:Date
 }
 
 

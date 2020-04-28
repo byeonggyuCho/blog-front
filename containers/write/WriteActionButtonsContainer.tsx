@@ -2,12 +2,13 @@ import React, { useEffect } from 'react';
 import WriteActionButtons from '../../components/write/WriteActionButtons';
 import { useSelector, useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { writePost, updatePost } from '../../modules/write';
+import { writePost, updatePost } from '../../actions/write';
+import {RootState} from '../../reducers'
 
 const WriteActionButtonsContainer = ({ history }) => {
   const dispatch = useDispatch();
   const { title, body, tags, post, postError, originalPostId } = useSelector(
-    ({ write }) => ({
+    ({ write }:RootState) => ({
       title: write.title,
       body: write.body,
       tags: write.tags,
@@ -20,11 +21,11 @@ const WriteActionButtonsContainer = ({ history }) => {
   // 포스트 등록
   const onPublish = () => {
     if (originalPostId) {
-      dispatch(updatePost({ title, body, tags, id: originalPostId }));
+      dispatch(updatePost.request({ title, body, tags, id: originalPostId }));
       return;
     }
     dispatch(
-      writePost({
+      writePost.request({
         title,
         body,
         tags,
@@ -40,8 +41,8 @@ const WriteActionButtonsContainer = ({ history }) => {
   // 성공 혹은 실패시 할 작업
   useEffect(() => {
     if (post) {
-      const { _id, user } = post;
-      history.push(`/@${user.username}/${_id}`);
+      const { id, user } = post;
+      history.push(`/@${user.username}/${id}`);
     }
     if (postError) {
       console.log(postError);

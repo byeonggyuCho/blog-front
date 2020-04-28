@@ -3,12 +3,12 @@ import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 import palette from '../../lib/styles/palette';
 
-interface ButtonProps {
-  fullWidth: boolean
-  cyan: boolean
+interface CommonProps {
+  fullWidth?: boolean
+  cyan?: number
 }
 
-const buttonStyle = css<ButtonProps>`
+const buttonStyle = css<CommonProps>`
   border: none;
   border-radius: 4px;
   font-size: 1rem;
@@ -52,13 +52,21 @@ const StyledButton = styled.button`
   ${buttonStyle}
 `;
 
-const StyledLink = styled(Link)`
+const StyledLink = styled(Link)<CommonProps>`
   ${buttonStyle}
 `;
 
-const Button = props => {
+
+interface ButtonProps extends CommonProps{
+  to?: string
+  onClick?: ()=>void
+}
+
+
+
+const Button:React.FC<ButtonProps> = props => {
   return props.to ? (
-    <StyledLink {...props} cyan={props.cyan ? 1 : 0} />
+    <StyledLink {...props} to={props.to} cyan={props.cyan ? 1 : 0} />
   ) : (
     <StyledButton {...props} />
   );

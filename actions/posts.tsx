@@ -18,7 +18,7 @@ export const listPosts = createAsyncAction(
   [LIST_POSTS.REQUEST, (req:PostRequest)=>req],
   [LIST_POSTS.SUCCESS, (res:Post[])=>res],
   [LIST_POSTS.FAILURE, (err:Error)=>err]
-)
+)()
 
 const actions = {
   listPosts

@@ -3,10 +3,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import Header from '../../components/common/Header';
 import { logout } from '../../actions/user';
 import {RootState} from '../../reducers'
+import {Dispatch} from'redux'
 
 const HeaderContainer = () => {
   const { user } = useSelector(({ user }:RootState) => ({ user: user.user }));
-  const dispatch = useDispatch();
+  const dispatch:Dispatch = useDispatch();
   const onLogout = () => {
     dispatch(logout());
   };

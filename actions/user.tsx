@@ -1,5 +1,5 @@
 import { createAsyncAction,createAction } from 'typesafe-actions';
-import {LoginInfo, User} from '../models';
+import { User} from '../models';
 
 export  const TEMP_SET_USER = 'user/TEMP_SET_USER' as const; // 새로고침 이후 임시 로그인 처리
 

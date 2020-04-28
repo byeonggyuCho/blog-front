@@ -1,7 +1,6 @@
 import {createAsyncAction} from 'typesafe-actions'
 import {User, LoginInfo} from '../models'
 import { createAction } from 'typesafe-actions';
-import { string } from 'prop-types';
 
 export const CHANGE_FIELD = 'auth/CHANGE_FIELD' as const;
 export const INITIALIZE_FORM = 'auth/INITIALIZE_FORM' as const;
@@ -21,9 +20,6 @@ export const LOGIN = {
 } as const;
 
 
-// form: 'login',
-// key: name,
-// value,
 
 export const changeField = createAction(CHANGE_FIELD,
   (form:{form:string,key:string,value:string})=> form  

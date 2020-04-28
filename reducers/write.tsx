@@ -14,7 +14,7 @@ export interface StateWrite {
   tags: string[],
   post: Post,
   postError: Error,
-  originalPostId: String,
+  originalPostId: string,
 }
 
 const initialState:StateWrite = {

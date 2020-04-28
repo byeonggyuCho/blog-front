@@ -2,10 +2,11 @@ import React, { useEffect, useCallback } from 'react';
 import Editor from '../../components/write/Editor';
 import { useSelector, useDispatch } from 'react-redux';
 import { changeField, initialize } from '../../actions/write';
+import {RootState} from '../../reducers'
 
 const EditorContainer = () => {
   const dispatch = useDispatch();
-  const { title, body } = useSelector(({ write }) => ({
+  const { title, body } = useSelector(({ write }:RootState) => ({
     title: write.title,
     body: write.body,
   }));
