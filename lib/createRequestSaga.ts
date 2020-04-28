@@ -1,7 +1,7 @@
 import { call, put } from 'redux-saga/effects';
-import { startLoading, finishLoading } from '../reducders/loading';
+import { startLoading, finishLoading } from '../actions/loading';
 
-export const createRequestActionTypes = type => {
+export const createRequestActionTypes =( type:string) => {
   const SUCCESS = `${type}_SUCCESS`;
   const FAILURE = `${type}_FAILURE`;
   return [type, SUCCESS, FAILURE];

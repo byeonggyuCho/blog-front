@@ -1,6 +1,10 @@
 import produce from 'immer';
 import {createReducer, ActionType} from 'typesafe-actions'
-import actions, {CHANGE_FIELD,INITIALIZE_FORM, REGISTER,LOGIN} from '../actions/auth'
+import actions, {
+  CHANGE_FIELD,
+  INITIALIZE_FORM, 
+  REGISTER,LOGIN
+} from '../actions/auth'
 
 
 export interface StateAuth {

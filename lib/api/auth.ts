@@ -1,11 +1,13 @@
 import client from './client';
+import {LoginInfo} from '../../models'
+
 
 // 로그인
-export const login = ({ username, password }) =>
+export const login = ({ username, password }:LoginInfo) =>
   client.post('/api/auth/login', { username, password });
 
 // 회원가입
-export const register = ({ username, password }) =>
+export const register = ({ username, password }:LoginInfo) =>
   client.post('/api/auth/register', { username, password });
 
 // 로그인 상태 확인

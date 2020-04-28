@@ -1,4 +1,4 @@
-import {createAsyncAction,createAction} from 'typesafe-actions'
+import {createAsyncAction} from 'typesafe-actions'
 import {Post} from '../models';
 
 
@@ -19,4 +19,10 @@ export const listPosts = createAsyncAction(
   [LIST_POSTS.SUCCESS, (res:Post[])=>res],
   [LIST_POSTS.FAILURE, (err:Error)=>err]
 )
+
+const actions = {
+  listPosts
+}
+
+export default actions;
 

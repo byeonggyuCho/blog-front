@@ -1,13 +1,16 @@
 export interface Post {
-
+    id : string
+    title: string 
+    body: string
+    tags: string[] 
 }
 
 
 export interface LoginInfo {
-    id : string
-    pw : string
+    username : string
+    password : string
 }
 
-export interface UserInfo {
+export interface User {
     
 }

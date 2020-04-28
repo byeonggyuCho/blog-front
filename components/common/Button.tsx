@@ -3,7 +3,12 @@ import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 import palette from '../../lib/styles/palette';
 
-const buttonStyle = css`
+interface ButtonProps {
+  fullWidth: boolean
+  cyan: boolean
+}
+
+const buttonStyle = css<ButtonProps>`
   border: none;
   border-radius: 4px;
   font-size: 1rem;
