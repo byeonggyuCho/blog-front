@@ -24,8 +24,8 @@ export const UPDATE_POST = {
 // 포스트 수정
 
 
-export const initilize = createAction(INITIALIZE)();
-export const chageField = createAction(CHANGE_FIELD,
+export const initialize = createAction(INITIALIZE)();
+export const changeField = createAction(CHANGE_FIELD,
   (form:{key:string, value: string})=> form  
 )();
 
@@ -56,8 +56,8 @@ export const updatePost = createAsyncAction(
 )()
 
 const actions = {
-  initilize,
-  chageField,
+  initialize,
+  changeField,
   setOriginalPost,
   writePost,
   updatePost

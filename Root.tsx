@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
@@ -16,7 +15,7 @@ function loadUser() {
       if (!user) return; // 로그인 상태가 아니라면 아무것도 안함
   
       store.dispatch(tempSetUser(user));
-      store.dispatch(check());
+      store.dispatch(check.request());
     } catch (e) {
       console.log('localStorage is not working');
     }

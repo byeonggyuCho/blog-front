@@ -1,11 +1,12 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import TagBox from '../../components/write/TagBox';
-import { changeField } from '../../modules/write';
+import { changeField } from '../../actions/write';
+import {RootState} from '../../reducers'
 
 const TagBoxContainer = () => {
   const dispatch = useDispatch();
-  const tags = useSelector(state => state.write.tags);
+  const tags = useSelector((state:RootState )=> state.write.tags);
 
   const onChangeTags = nextTags => {
     dispatch(
