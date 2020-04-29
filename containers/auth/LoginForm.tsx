@@ -5,12 +5,13 @@ import AuthForm from '../../components/auth/AuthForm';
 import { check } from '../../actions/user';
 import {RootState} from '../../reducers'
 import {useHistory } from 'react-router-dom'
+import {Dispatch} from 'redux'
 
 const LoginForm = () => {
 
   const history  = useHistory()
   const [error, setError] = useState(null);
-  const dispatch = useDispatch();
+  const dispatch:Dispatch = useDispatch();
   const { form, auth, authError, user } = useSelector(({ auth, user }:RootState) => ({
     form: auth.login,
     auth: auth.auth,

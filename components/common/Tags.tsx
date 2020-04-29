@@ -16,7 +16,12 @@ const TagsBlock = styled.div`
   }
 `;
 
-const Tags = ({ tags }) => {
+
+interface TagsProps {
+  tags : string[]
+}
+
+const Tags:React.FC<TagsProps> = ({ tags }) => {
   return (
     <TagsBlock>
       {tags.map(tag => (

@@ -47,9 +47,9 @@ export const login = createAsyncAction(
 
 
 const actions = {
-  login,
   changeField,
   initializeForm,
+  login,
   register
 }
 

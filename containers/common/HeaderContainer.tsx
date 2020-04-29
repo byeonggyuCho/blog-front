@@ -6,8 +6,8 @@ import {RootState} from '../../reducers'
 import {Dispatch} from'redux'
 
 const HeaderContainer = () => {
-  const { user } = useSelector(({ user }:RootState) => ({ user: user.user }));
   const dispatch:Dispatch = useDispatch();
+  const { user } = useSelector(({ user }:RootState) => ({ user: user.user }));
   const onLogout = () => {
     dispatch(logout());
   };

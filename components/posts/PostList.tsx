@@ -6,6 +6,7 @@ import palette from '../../lib/styles/palette';
 import SubInfo from '../common/SubInfo';
 import Tags from '../common/Tags';
 import { Link } from 'react-router-dom';
+import {Post} from '../../models'
 
 const PostListBlock = styled(Responsive)`
   margin-top: 3rem;
@@ -58,7 +59,16 @@ const PostItem = ({ post }) => {
   );
 };
 
-const PostList = ({ posts, loading, error, showWriteButton }) => {
+
+
+interface PostListProps {
+  posts: Post[]
+  loading: boolean
+  error:Error
+  showWriteButton:React.ReactElement
+}
+
+const PostList:React.FC<PostListProps> = ({ posts, loading, error, showWriteButton }) => {
   // 에러 발생 시
   if (error) {
     return <PostListBlock>에러가 발생했습니다.</PostListBlock>;
@@ -68,7 +78,7 @@ const PostList = ({ posts, loading, error, showWriteButton }) => {
     <PostListBlock>
       <WritePostButtonWrapper>
         {showWriteButton && (
-          <Button cyan to="/write">
+          <Button cyan={0} to="/write">
             새 글 작성하기
           </Button>
         )}
@@ -77,7 +87,7 @@ const PostList = ({ posts, loading, error, showWriteButton }) => {
       {!loading && posts && (
         <div>
           {posts.map(post => (
-            <PostItem post={post} key={post._id} />
+            <PostItem post={post} key={post.id} />
           ))}
         </div>
       )}

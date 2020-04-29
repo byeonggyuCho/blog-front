@@ -50,7 +50,12 @@ const Footer = styled.div`
   }
 `;
 
-const ButtonWithMarginTop = styled(Button)`
+interface ButtonWithMarginTopProps {
+  cyan: number
+  style: any
+}
+
+const ButtonWithMarginTop = styled(Button)<ButtonWithMarginTopProps>`
   margin-top: 1rem;
 `;
 
@@ -101,7 +106,7 @@ const AuthForm = ({ type, form, onChange, onSubmit, error }) => {
           />
         )}
         {error && <ErrorMessage>{error}</ErrorMessage>}
-        <ButtonWithMarginTop cyan fullWidth style={{ marginTop: '1rem' }}>
+        <ButtonWithMarginTop cyan={0} fullWidth style={{ marginTop: '1rem' }}>
           {text}
         </ButtonWithMarginTop>
       </form>

@@ -60,6 +60,7 @@ const StyledLink = styled(Link)<CommonProps>`
 interface ButtonProps extends CommonProps{
   to?: string
   onClick?: ()=>void
+  disabled?: boolean 
 }
 
 

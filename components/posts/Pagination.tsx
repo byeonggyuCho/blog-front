@@ -17,7 +17,15 @@ const buildLink = ({ username, tag, page }) => {
   return username ? `/@${username}?${query}` : `/?${query}`;
 };
 
-const Pagination = ({ page, lastPage, username, tag }) => {
+
+interface PaginationProps {
+  page: number
+  lastPage: number
+  username: number
+  tag: string
+}
+
+const Pagination:React.FC<PaginationProps> = ({ page, lastPage, username, tag }) => {
   return (
     <PaginationBlock>
       <Button
