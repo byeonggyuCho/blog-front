@@ -1,10 +1,18 @@
 export interface Post {
-    id? : string
+    _id? : string
     title: string 
     body: string
     tags: string[] 
-    user?:User
+    user?:UserInfo
     publishedDate?:Date
+}
+
+export interface UserInfo {
+    _id: string
+    profile: {
+        username:string,
+        thumbnail:string
+    }
 }
 
 

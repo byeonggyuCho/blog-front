@@ -17,7 +17,7 @@ interface PostRequest {
 // meta type지정
 export const listPosts = createAsyncAction(
   [LIST_POSTS.REQUEST, (req:PostRequest)=>req],
-  [LIST_POSTS.SUCCESS, (res:Post[])=>res, (res:Post[])=>'meta'],
+  [LIST_POSTS.SUCCESS, (res:Post[]|Response)=>res as Post[], (res:Response)=>res],
   [LIST_POSTS.FAILURE, (err:Error)=>err]
 )()
 

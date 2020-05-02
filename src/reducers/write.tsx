@@ -43,7 +43,7 @@ const write = createReducer<StateWrite,AC>(initialState,
       title: post.title,
       body: post.body,
       tags: post.tags,
-      originalPostId: post.id,
+      originalPostId: post._id,
     }),
     
     [WRITE_POST.REQUEST]: (state,action) => ({

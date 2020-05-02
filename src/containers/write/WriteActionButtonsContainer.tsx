@@ -21,7 +21,7 @@ const WriteActionButtonsContainer = ({ history }) => {
   // 포스트 등록
   const onPublish = () => {
     if (originalPostId) {
-      dispatch(updatePost.request({ title, body, tags, id: originalPostId }));
+      dispatch(updatePost.request({ title, body, tags, _id: originalPostId }));
       return;
     }
     dispatch(
@@ -41,8 +41,8 @@ const WriteActionButtonsContainer = ({ history }) => {
   // 성공 혹은 실패시 할 작업
   useEffect(() => {
     if (post) {
-      const { id, user } = post;
-      history.push(`/@${user.username}/${id}`);
+      const { _id, user } = post;
+      history.push(`/@${user.profile.username}/${_id}`);
     }
     if (postError) {
       console.log(postError);

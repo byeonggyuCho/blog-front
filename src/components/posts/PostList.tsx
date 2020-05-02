@@ -43,14 +43,19 @@ const PostItemBlock = styled.div`
 `;
 
 const PostItem = ({ post }) => {
-  const { publishedDate, user={}, tags, title, body, _id } = post;
+  const { publishedDate, user={profile:{username:'unknown'}}, tags, title, body, _id } = post;
+
+  if(!user.profile){
+    debugger
+  }
+
   return (
     <PostItemBlock>
       <h2>
-        <Link to={`/@${user.username}/${_id}`}>{title}</Link>
+        <Link to={`/@${user.profile.username}/${_id}`}>{title}</Link>
       </h2>
       <SubInfo
-        username={user.username}
+        username={user.profile.username}
         publishedDate={new Date(publishedDate)}
       />
       <Tags tags={tags} />
@@ -87,7 +92,7 @@ const PostList:React.FC<PostListProps> = ({ posts, loading, error, showWriteButt
       {!loading && posts && (
         <div>
           {posts.map(post => (
-            <PostItem post={post} key={post.id} />
+            <PostItem post={post} key={post._id} />
           ))}
         </div>
       )}

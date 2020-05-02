@@ -6,7 +6,7 @@ import {
 } from '../actions/post'
 
 
-const readPostSaga = createRequestSaga(READ_POST.REQUEST, postsAPI.readPost);
+const readPostSaga = createRequestSaga(READ_POST, postsAPI.readPost);
 export function* postSaga() {
   yield takeLatest(READ_POST.REQUEST, readPostSaga);
 }

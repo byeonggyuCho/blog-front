@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
-import auth,{StateAuth} from './auth';
+import auth from './auth';
 import loading from './loading';
-import user,{StateUser} from './user';
-import write,{StateWrite}  from './write';
-import post,{StatePost} from './post';
-import posts,{StatePosts} from './posts';
+import user from './user';
+import write  from './write';
+import post from './post';
+import posts from './posts';
 
 const rootReducer = combineReducers({
   auth,

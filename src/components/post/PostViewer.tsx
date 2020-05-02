@@ -58,7 +58,7 @@ const PostViewer:React.FC<PostViewerProps> = ({ post, error, loading, actionButt
       <PostHead>
         <h1>{title}</h1>
         <SubInfo
-          username={user.username}
+          username={user.profile.username}
           publishedDate={publishedDate}
           hasMarginTop
         />
