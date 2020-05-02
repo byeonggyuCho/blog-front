@@ -69,8 +69,9 @@ const RegisterForm = () => {
       return;
     }
 
+
+    // 회원가입할때 로그인여부 체크를 왜하는지...?
     if (auth) {
-      console.log('회원가입 성공');
       console.log(auth);
       dispatch(check.request());
     }

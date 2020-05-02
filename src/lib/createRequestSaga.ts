@@ -1,5 +1,6 @@
 import { call, put } from 'redux-saga/effects';
 import { startLoading, finishLoading } from '../actions/loading';
+import { push } from 'connected-react-router';
 
 export const createRequestActionTypes =( type:string) => {
   const SUCCESS = `${type}_SUCCESS`;
@@ -7,11 +8,13 @@ export const createRequestActionTypes =( type:string) => {
   return [type, SUCCESS, FAILURE];
 };
 
-export default function createRequestSaga(type, request) {
+export function createRequestSaga(type, request) {
 
   return function*(action) {
-    yield put(startLoading(type)); // 로딩 시작
+    yield put(startLoading(type.REQUEST)); // 로딩 시작
     try {
+
+      console.log('createRequestSaga', type.REQUEST,action.payload)
       const response = yield call(request, action.payload);
       yield put({
         type: type.SUCCESS,
@@ -25,6 +28,33 @@ export default function createRequestSaga(type, request) {
         error: true,
       });
     }
-    yield put(finishLoading(type)); // 로딩 끝
+    yield put(finishLoading(type.REQUEST)); // 로딩 끝
+  };
+}
+
+
+
+
+export  function createRequestSagaAndRedirection(type, request,url) {
+
+  return function*(action) {
+    yield put(startLoading(type.REQUEST)); // 로딩 시작
+    try {
+      const response = yield call(request, action.payload);
+      yield put({
+        type: type.SUCCESS,
+        payload: response.data,
+        meta: response,
+      });
+
+      yield put(push(url));
+    } catch (e) {
+      yield put({
+        type: type.FAILURE,
+        payload: e,
+        error: true,
+      });
+    }
+    yield put(finishLoading(type.REQUEST)); // 로딩 끝
   };
 }

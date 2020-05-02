@@ -2,8 +2,14 @@ import qs from 'qs';
 import client from './client';
 import {Post} from '../../models'
 
-export const writePost = ({ title, body, tags }:Post) =>
-  client.post('/api/posts', { title, body, tags });
+export const writePost = ({ title, body, tags }:Post) =>{
+  console.log('writePost',title, body, tags );
+
+  return  client.post('/api/posts', { title, body, tags });;
+}
+
+
+//  client.post('/api/posts', { title, body, tags });
 
 export const readPost = id => client.get(`/api/posts/${id}`);
 

@@ -1,5 +1,7 @@
 import { takeLatest } from 'redux-saga/effects';
-import createRequestSaga from '../lib/createRequestSaga';
+import {createRequestSaga, createRequestSagaAndRedirection} from '../lib/createRequestSaga';
+
+
 import * as authAPI from '../lib/api/auth';
 import {
   REGISTER,
@@ -9,8 +11,8 @@ import {
 
 
 // saga 생성
-const registerSaga = createRequestSaga(REGISTER.REQEUST, authAPI.register);
-const loginSaga = createRequestSaga(LOGIN.REQEUST, authAPI.login);
+const registerSaga = createRequestSaga(REGISTER, authAPI.register);
+const loginSaga = createRequestSagaAndRedirection(LOGIN, authAPI.login,'/');
 export function* authSaga() {
   yield takeLatest(REGISTER.REQEUST, registerSaga);
   yield takeLatest(LOGIN.REQEUST, loginSaga);

@@ -5,8 +5,11 @@ import user from './user';
 import write  from './write';
 import post from './post';
 import posts from './posts';
+import { connectRouter } from 'connected-react-router'
 
-const rootReducer = combineReducers({
+
+const createRootReducer = (history)=>combineReducers({
+  router: connectRouter(history),
   auth,
   loading,
   user,
@@ -16,7 +19,7 @@ const rootReducer = combineReducers({
 });
 
 
-export type RootState = ReturnType<typeof rootReducer>;
+export type RootState = ReturnType<ReturnType<typeof createRootReducer>>;
 
 
-export default rootReducer;
+export default createRootReducer;

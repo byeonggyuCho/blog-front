@@ -1,13 +1,14 @@
 import React from 'react';
 import './index.css';
 import App from './App';
-import { BrowserRouter } from 'react-router-dom';
+// import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { tempSetUser, check } from './actions/user';
 import { HelmetProvider } from 'react-helmet-async';
-import storeBuiler from './store/configureStore'
+import configureStore,{history} from './store/configureStore'
+import { ConnectedRouter } from 'connected-react-router'
 
-const store = storeBuiler();
+const store = configureStore(history);
 
 function loadUser() {
     try {
@@ -29,11 +30,13 @@ const Root:React.FC = function(){
 
     return (
         <Provider store={store}>
-            <BrowserRouter>
-            <HelmetProvider>
-                <App />
-            </HelmetProvider>
-            </BrowserRouter>
+            {/* <BrowserRouter> */}
+            <ConnectedRouter history={history}>
+              <HelmetProvider>
+                  <App />
+              </HelmetProvider>
+            </ConnectedRouter>
+            {/* </BrowserRouter> */}
         </Provider>
     )
 }

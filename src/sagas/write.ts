@@ -1,4 +1,4 @@
-import createRequestSaga  from '../lib/createRequestSaga';
+import {createRequestSaga}  from '../lib/createRequestSaga';
 import * as postsAPI from '../lib/api/posts';
 import { takeLatest } from 'redux-saga/effects';
 import {
@@ -8,8 +8,8 @@ import {
 
 
 // saga 생성
-const writePostSaga = createRequestSaga(WRITE_POST.REQUEST, postsAPI.writePost);
-const updatePostSaga = createRequestSaga(UPDATE_POST.REQUEST, postsAPI.updatePost);
+const writePostSaga = createRequestSaga(WRITE_POST, postsAPI.writePost);
+const updatePostSaga = createRequestSaga(UPDATE_POST, postsAPI.updatePost);
 
 export function* writeSaga() {
   yield takeLatest(WRITE_POST.REQUEST, writePostSaga);

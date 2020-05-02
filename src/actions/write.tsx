@@ -31,15 +31,7 @@ export const changeField = createAction(CHANGE_FIELD,
 
 
 export const writePost =  createAsyncAction(
-  [WRITE_POST.REQUEST, (post:Post)=>{
-
-    let postError:Error;
-
-    return {
-      post,
-      postError
-    }
-  }],
+  [WRITE_POST.REQUEST, (post:Post)=>post],
   [WRITE_POST.SUCCESS, (res:Post)=>res],
   [WRITE_POST.FAILURE, (err:Error)=>err],
 )(); // 포스트 작성

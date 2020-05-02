@@ -5,7 +5,7 @@ import {
   LOGOUT
 }from '../actions/user'
 
-import createRequestSaga from '../lib/createRequestSaga';
+import {createRequestSaga} from '../lib/createRequestSaga';
 
 function checkFailureSaga() {
   try {

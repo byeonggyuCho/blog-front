@@ -8,7 +8,7 @@ import { setOriginalPost } from '../../actions/write';
 import { removePost } from '../../lib/api/posts';
 import {RootState} from '../../reducers'
 
-const PostViewerContainer = () => {
+const PostViewerContainer:React.FC = () => {
 
   const history = useHistory();
   // 처음 마운트될 때 포스트 읽기 API 요청
@@ -59,4 +59,4 @@ const PostViewerContainer = () => {
   );
 };
 
-export default withRouter(PostViewerContainer);
+export default PostViewerContainer
