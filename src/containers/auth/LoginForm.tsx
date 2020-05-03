@@ -44,9 +44,7 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (authError) {
-      console.log('오류 발생');
-      console.log(authError);
-      setError('로그인 실패');
+      setError(authError);
       return;
     }
     if (auth) {

@@ -69,7 +69,7 @@ const Editor = ({ title, body, onChangeField }) => {
     quillInstance.current.root.innerHTML = body;
   }, [body]);
 
-  const onChangeTitle = e => {
+  const onChangeTitle = (e:React.ChangeEvent<HTMLInputElement>): void => {
     onChangeField({ key: 'title', value: e.target.value });
   };
 

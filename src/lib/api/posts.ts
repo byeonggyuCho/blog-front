@@ -19,6 +19,8 @@ export const listPosts = ({ page, username, tag }) => {
     username,
     tag,
   });
+
+  console.log('[listPosts]', queryString)
   return client.get(`/api/posts?${queryString}`);
 };
 

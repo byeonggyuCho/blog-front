@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useCallback} from 'react';
 import styled from 'styled-components';
 import Responsive from '../common/Responsive';
 import Button from '../common/Button';
@@ -45,9 +45,8 @@ const PostItemBlock = styled.div`
 const PostItem = ({ post }) => {
   const { publishedDate, user={profile:{username:'unknown'}}, tags, title, body, _id } = post;
 
-  if(!user.profile){
-    debugger
-  }
+
+
 
   return (
     <PostItemBlock>
@@ -59,7 +58,7 @@ const PostItem = ({ post }) => {
         publishedDate={new Date(publishedDate)}
       />
       <Tags tags={tags} />
-      <p>{body}</p>
+      <p>{(body)}</p>
     </PostItemBlock>
   );
 };

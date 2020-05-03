@@ -8,19 +8,32 @@ export const createRequestActionTypes =( type:string) => {
   return [type, SUCCESS, FAILURE];
 };
 
+
+
 export function createRequestSaga(type, request) {
 
   return function*(action) {
     yield put(startLoading(type.REQUEST)); // 로딩 시작
     try {
 
-      console.log('createRequestSaga', type.REQUEST,action.payload)
       const response = yield call(request, action.payload);
-      yield put({
-        type: type.SUCCESS,
-        payload: response.data,
-        meta: response,
-      });
+
+      console.log('createRequestSaga_', response.status.toString())
+
+      if(response.status.toString().startsWith(4)){
+        yield put({
+          type: type.FAILURE,
+          payload: response.data,
+          error: true,
+        });
+      }else{
+        yield put({
+          type: type.SUCCESS,
+          payload: response.data,
+          meta: response,
+        });
+      }
+     
     } catch (e) {
       yield put({
         type: type.FAILURE,
@@ -41,6 +54,15 @@ export  function createRequestSagaAndRedirection(type, request,url) {
     yield put(startLoading(type.REQUEST)); // 로딩 시작
     try {
       const response = yield call(request, action.payload);
+
+      if(response.status.startwith(4)){
+        yield put({
+          type: type.FAILURE,
+          payload: response.data,
+          error: true,
+        });
+      }
+
       yield put({
         type: type.SUCCESS,
         payload: response.data,
