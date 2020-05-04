@@ -22,7 +22,7 @@ const posts = createReducer<StatePosts,Actions>(initialState,
     [LIST_POSTS.SUCCESS]: (state, { payload: posts, meta }) => ({
       ...state,
       posts,
-      lastPage: parseInt(meta.headers['lastPage'], 10), // 문자열을 숫자로 변환
+      lastPage: parseInt(meta.headers['lastpage'], 10), // 문자열을 숫자로 변환
     }),
     [LIST_POSTS.FAILURE]: (state, { payload: error }) => ({
       ...state,

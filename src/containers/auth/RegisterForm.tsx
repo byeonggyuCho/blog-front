@@ -60,12 +60,12 @@ const RegisterForm = () => {
   useEffect(() => {
     if (authError) {
       // 계정명이 이미 존재할 때
-      if (authError.response.status === 409) {
-        setError('이미 존재하는 계정명입니다.');
-        return;
-      }
+      // if (authError.response.status === 409) {
+      //   setError('이미 존재하는 계정명입니다.');
+      //   return;
+      // }
       // 기타 이유
-      setError('회원가입 실패');
+      setError(authError);
       return;
     }
 

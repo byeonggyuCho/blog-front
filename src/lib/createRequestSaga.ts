@@ -17,21 +17,18 @@ export function createRequestSaga(type, request) {
     try {
 
       const response = yield call(request, action.payload);
+      const {data, status,message} = response.data;
 
-      console.log('createRequestSaga_', response.status.toString())
+      console.log('[CRS]',response.data)
 
-      if(response.status.toString().startsWith(4)){
-        yield put({
-          type: type.FAILURE,
-          payload: response.data,
-          error: true,
-        });
-      }else{
+      if(status === 'S'){
         yield put({
           type: type.SUCCESS,
-          payload: response.data,
+          payload: data,
           meta: response,
         });
+      }else{
+        throw new Error(message)
       }
      
     } catch (e) {
@@ -54,26 +51,25 @@ export  function createRequestSagaAndRedirection(type, request,url) {
     yield put(startLoading(type.REQUEST)); // 로딩 시작
     try {
       const response = yield call(request, action.payload);
+      const {data, status,message} = response.data;
 
-      if(response.status.startwith(4)){
+      console.log('[CRS]',response.data)
+
+      if(status === 'S'){
         yield put({
-          type: type.FAILURE,
-          payload: response.data,
-          error: true,
+          type: type.SUCCESS,
+          payload: data,
+          meta: response,
         });
+      }else{
+        throw new Error(message)
       }
-
-      yield put({
-        type: type.SUCCESS,
-        payload: response.data,
-        meta: response,
-      });
 
       yield put(push(url));
     } catch (e) {
       yield put({
         type: type.FAILURE,
-        payload: e,
+        payload: e.message,
         error: true,
       });
     }

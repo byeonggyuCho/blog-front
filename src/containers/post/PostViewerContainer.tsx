@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { withRouter, useParams, useHistory } from 'react-router-dom';
+import {  useParams, useHistory } from 'react-router-dom';
 import { readPost, unloadPost } from '../../actions/post';
 import PostViewer from '../../components/post/PostViewer';
 import PostActionButtons from '../../components/post/PostActionButtons';
