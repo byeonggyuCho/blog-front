@@ -37,7 +37,7 @@ export default createReducer<StateUser,Actions>(initialState,
       user: null,
       checkError: error,
     }),
-    [LOGOUT]: state => ({
+    [LOGOUT.SUCCESS]: state => ({
       ...state,
       user: null,
     }),

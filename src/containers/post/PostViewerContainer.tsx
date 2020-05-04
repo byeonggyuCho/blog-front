@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {  useParams, useHistory } from 'react-router-dom';
-import { readPost, unloadPost } from '../../actions/post';
+import { readPost, unloadPost,removePost } from '../../actions/post';
 import PostViewer from '../../components/post/PostViewer';
 import PostActionButtons from '../../components/post/PostActionButtons';
 import { setOriginalPost } from '../../actions/write';
-import { removePost } from '../../lib/api/posts';
+// import { removePost } from '../../lib/api/posts';
 import {RootState} from '../../reducers'
 
 const PostViewerContainer:React.FC = () => {
@@ -36,10 +36,11 @@ const PostViewerContainer:React.FC = () => {
     history.push('/write');
   };
 
-  const onRemove = async () => {
+  const onRemove = () => {
     try {
-      await removePost(postId);
-      history.push('/'); // 홈으로 이동
+      dispatch(removePost.request(postId))
+      // await removePost(postId);
+      // history.push('/'); // 홈으로 이동
     } catch (e) {
       console.log(e);
     }
@@ -58,5 +59,7 @@ const PostViewerContainer:React.FC = () => {
     />
   );
 };
+
+
 
 export default PostViewerContainer

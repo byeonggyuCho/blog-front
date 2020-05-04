@@ -4,12 +4,13 @@ import {
   CHECK,
   LOGOUT
 }from '../actions/user'
+import storage from '../lib/storeage'
 
 import {createRequestSaga} from '../lib/createRequestSaga';
 
 function checkFailureSaga() {
   try {
-    localStorage.removeItem('user'); // localStorage 에서 user 제거하고
+    storage.remove('user')
   } catch (e) {
     console.log('localStorage is not working');
   }
@@ -19,17 +20,13 @@ function checkFailureSaga() {
 const checkSaga = createRequestSaga(CHECK, authAPI.check);
 
 
-function* logoutSaga() {
-  try {
-    yield call(authAPI.logout); // logout API 호출
-    localStorage.removeItem('user'); // localStorage 에서 user 제거
-  } catch (e) {
-    console.log(e);
-  }
-}
+
+const logoutSaga = createRequestSaga(LOGOUT, authAPI.logout, ()=>{
+  storage.remove('user')
+})
 
 export function* userSaga() {
   yield takeLatest(CHECK.REQUEST, checkSaga);
   yield takeLatest(CHECK.FAILURE, checkFailureSaga);
-  yield takeLatest(LOGOUT, logoutSaga);
+  yield takeLatest(LOGOUT.REQUEST, logoutSaga);
 }

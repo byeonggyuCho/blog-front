@@ -10,7 +10,12 @@ export const createRequestActionTypes =( type:string) => {
 
 
 
-export function createRequestSaga(type, request) {
+interface CreateRequestSaga{
+  (type:any, request:any, callback?:any ) : any
+}
+
+
+export const createRequestSaga:CreateRequestSaga  =  function (type, request, callback) {
 
   return function*(action) {
     yield put(startLoading(type.REQUEST)); // 로딩 시작
@@ -19,7 +24,8 @@ export function createRequestSaga(type, request) {
       const response = yield call(request, action.payload);
       const {data, status,message} = response.data;
 
-      console.log('[CRS]',response.data)
+
+      console.log(type.REQUEST, response.data)
 
       if(status === 'S'){
         yield put({
@@ -30,11 +36,15 @@ export function createRequestSaga(type, request) {
       }else{
         throw new Error(message)
       }
+
+      if(typeof callback === 'function'){
+        yield callback();
+      }
      
     } catch (e) {
       yield put({
         type: type.FAILURE,
-        payload: e,
+        payload: e.message,
         error: true,
       });
     }

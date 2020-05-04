@@ -26,7 +26,7 @@ const storage = {
             return localStorage[key];
         }
     },
-    remove: (key) => {
+    remove: (key:string) => {
         if(!localStorage) return null;
 
         if(localStorage[key]) {

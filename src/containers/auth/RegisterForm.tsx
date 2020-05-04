@@ -5,6 +5,7 @@ import AuthForm from '../../components/auth/AuthForm';
 import { check } from '../../actions/user';
 import { useHistory } from 'react-router-dom';
 import {RootState} from '../../reducers'
+import storage from '../../lib/storeage'
 
 const RegisterForm = () => {
 
@@ -82,7 +83,7 @@ const RegisterForm = () => {
     if (user) {
       history.push('/'); // 홈 화면으로 이동
       try {
-        localStorage.setItem('user', JSON.stringify(user));
+        storage.set('user',JSON.stringify(user));
       } catch (e) {
         console.log('localStorage is not working');
       }

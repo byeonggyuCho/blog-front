@@ -18,8 +18,8 @@ const LoginForm = () => {
     authError: auth.authError,
     user: user.user,
   }));
-  // 인풋 변경 이벤트 핸들러
-  const onChange = e => {
+  // 인풋 변경 이벤트 핸들러(event: React.ChangeEvent<HTMLInputElement>) => void
+  const onChange = (e:React.ChangeEvent<HTMLInputElement> )=> {
     const { value, name } = e.target;
     dispatch(
       changeField({
@@ -30,8 +30,10 @@ const LoginForm = () => {
     );
   };
 
+
+  
   // 폼 등록 이벤트 핸들러
-  const onSubmit = e => {
+  const onSubmit = (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { username, password } = form;
     dispatch(login.request({ username, password }));

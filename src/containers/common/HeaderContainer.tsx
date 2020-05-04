@@ -9,10 +9,9 @@ const HeaderContainer = () => {
   const dispatch:Dispatch = useDispatch();
   const { user } = useSelector(({ user }:RootState) => ({ user: user.user }));
   const onLogout = () => {
-    dispatch(logout());
+    dispatch(logout.request());
   };
 
-  console.log("headerContainer", user)
   return <Header user={user} onLogout={onLogout} />;
 };
 

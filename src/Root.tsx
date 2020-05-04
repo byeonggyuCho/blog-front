@@ -7,12 +7,14 @@ import { tempSetUser, check } from './actions/user';
 import { HelmetProvider } from 'react-helmet-async';
 import configureStore,{history} from './store/configureStore'
 import { ConnectedRouter } from 'connected-react-router'
+import storage from 'lib/storeage'
+
 
 const store = configureStore(history);
 
 function loadUser() {
     try {
-      const user = localStorage.getItem('user');
+      const user = storage.get('user');
       if (!user) return; // 로그인 상태가 아니라면 아무것도 안함
   
       store.dispatch(tempSetUser(user));
@@ -20,9 +22,9 @@ function loadUser() {
     } catch (e) {
       console.log('localStorage is not working');
     }
-  }
+}
   
-  loadUser();
+loadUser();
   
 
 

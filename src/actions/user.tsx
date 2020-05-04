@@ -10,7 +10,12 @@ export const CHECK = {
 } as const;
 
 
-export const LOGOUT = 'user/LOGOUT' as const;
+// export const LOGOUT = 'user/LOGOUT' as const;
+export const LOGOUT = {
+  REQUEST:'user/LOGOUT_REQUEST',
+  SUCCESS:'user/LOGOUT_SUCCESS',
+  FAILURE:'user/LOGOUT_FAILURE',
+} as const;
 
 // 회원 정보 확인
 export const check = createAsyncAction(
@@ -23,7 +28,12 @@ export const check = createAsyncAction(
 
 
 export const tempSetUser = createAction(TEMP_SET_USER, user => user)();
-export const logout = createAction(LOGOUT)();
+// export const logout = createAction(LOGOUT)();
+export const logout = createAsyncAction(
+  [LOGOUT.REQUEST, ()=>{}],
+  [LOGOUT.SUCCESS, ()=>{}],
+  [LOGOUT.FAILURE, (errorMsg:string)=>errorMsg],
+)();
 
 const actions = {
   tempSetUser,
