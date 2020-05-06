@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import WriteActionButtons from '../../components/write/WriteActionButtons';
 import { useSelector, useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -22,15 +22,9 @@ const WriteActionButtonsContainer = ({ history }) => {
   const onPublish = () => {
     if (originalPostId) {
       dispatch(updatePost.request({ title, body, tags, _id: originalPostId }));
-      return;
+    }else{
+      dispatch( writePost.request({ title, body, tags }) );
     }
-    dispatch(
-      writePost.request({
-        title,
-        body,
-        tags,
-      }),
-    );
   };
 
   // 취소
@@ -39,15 +33,16 @@ const WriteActionButtonsContainer = ({ history }) => {
   };
 
   // 성공 혹은 실패시 할 작업
-  useEffect(() => {
-    if (post) {
-      const { _id, user } = post;
-      history.push(`/@${user.profile.username}/${_id}`);
-    }
-    if (postError) {
-      console.log(postError);
-    }
-  }, [history, post, postError]);
+  // saga에서 처리해야함.
+  // useEffect(() => {
+    // if (post) {
+    //   const { _id, user } = post;
+    //   history.push(`/@${user.profile.username}/${_id}`);
+    // }
+    // if (postError) {
+    //   console.log(postError);
+    // }
+  // }, [history, post, postError]);
   return (
     <WriteActionButtons
       onPublish={onPublish}

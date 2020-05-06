@@ -18,7 +18,13 @@ const StyledButton = styled(Button)`
   }
 `;
 
-const WriteActionButtons = ({ onCancel, onPublish, isEdit }) => {
+interface WriteActionButtonsProps {
+  onCancel: ()=>void
+  onPublish:()=>void
+  isEdit: boolean
+}
+
+const WriteActionButtons:React.FC<WriteActionButtonsProps> = ({ onCancel, onPublish, isEdit }) => {
   return (
     <WriteActionButtonsBlock>
       <StyledButton cyan={0} onClick={onPublish}>

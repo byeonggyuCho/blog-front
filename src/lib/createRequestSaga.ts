@@ -1,4 +1,4 @@
-import { call, put } from 'redux-saga/effects';
+import { call, put,fork } from 'redux-saga/effects';
 import { startLoading, finishLoading } from '../actions/loading';
 import { push } from 'connected-react-router';
 
@@ -25,8 +25,6 @@ export const createRequestSaga:CreateRequestSaga  =  function (type, request, ca
       const {data, status,message} = response.data;
 
 
-      console.log(type.REQUEST, response.data)
-
       if(status === 'S'){
         yield put({
           type: type.SUCCESS,
@@ -38,7 +36,7 @@ export const createRequestSaga:CreateRequestSaga  =  function (type, request, ca
       }
 
       if(typeof callback === 'function'){
-        yield callback();
+        yield fork(callback, data);
       }
      
     } catch (e) {
@@ -62,8 +60,6 @@ export  function createRequestSagaAndRedirection(type, request,url) {
     try {
       const response = yield call(request, action.payload);
       const {data, status,message} = response.data;
-
-      console.log('[CRS]',response.data)
 
       if(status === 'S'){
         yield put({

@@ -88,7 +88,13 @@ const TagList = React.memo<TagListProps>(({ tags, onRemove }) => (
   </TagListBlock>
 ));
 
-const TagBox = ({ tags, onChangeTags }) => {
+interface TagBoxProps {
+  tags: string[]
+  onChangeTags : (tags:string[])=>void
+}
+
+
+const TagBox:React.FC<TagBoxProps> = ({ tags, onChangeTags }) => {
   const [input, setInput] = useState('');
   const [localTags, setLocalTags] = useState([]);
 
@@ -112,12 +118,12 @@ const TagBox = ({ tags, onChangeTags }) => {
     [localTags, onChangeTags],
   );
 
-  const onChange = useCallback(e => {
+  const onChange = useCallback((e:React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
   }, []);
 
   const onSubmit = useCallback(
-    e => {
+    (e: React.FormEvent<HTMLFormElement> )=> {
       e.preventDefault();
       insertTag(input.trim()); // 앞뒤 공백 없앤 후 등록
       setInput(''); // input 초기화

@@ -6,6 +6,7 @@ import { check } from '../../actions/user';
 import {RootState} from '../../reducers'
 import {useHistory } from 'react-router-dom'
 import {Dispatch} from 'redux'
+import storage from '../../lib/storeage'
 
 const LoginForm = () => {
 
@@ -59,7 +60,7 @@ const LoginForm = () => {
     if (user) {
       history.push('/');
       try {
-        localStorage.setItem('user', JSON.stringify(user));
+        storage.set('user', JSON.stringify(user));
       } catch (e) {
         console.log('localStorage is not working');
       }
