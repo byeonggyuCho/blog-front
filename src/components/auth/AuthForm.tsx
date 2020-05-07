@@ -74,7 +74,20 @@ const ErrorMessage = styled.div`
   margin-top: 1rem;
 `;
 
-const AuthForm = ({ type, form, onChange, onSubmit, error }) => {
+interface AuthFormProps {
+  type: 'register' | 'login'
+  form:{
+    username:string, 
+    password:string, 
+    passwordConfirm: string
+  }
+  onChange: ()=>void 
+  onSubmit: ()=>void
+  error: Error
+}
+
+
+const AuthForm:React.FC<AuthFormProps> = ({ type, form, onChange, onSubmit, error }) => {
   const text = textMap[type];
   return (
     <AuthFormBlock>

@@ -45,15 +45,29 @@ const StyledButton = styled(Button)<StyledButtonProp>`
   }
 `;
 
-const AskModal = ({
-  visible,
-  title,
-  description,
-  confirmText = '확인',
-  cancelText = '취소',
-  onConfirm,
-  onCancel,
-}) => {
+
+interface AskModalProps {
+  visible: boolean
+  title:string
+  description:string
+  confirmText:string
+  cancelText?:string
+  onConfirm:()=>void
+  onCancel:()=>void
+}
+
+const AskModal:React.FC<AskModalProps> = (props) => {
+
+  const {
+    visible,
+    title,
+    description,
+    confirmText = '확인',
+    cancelText = '취소',
+    onConfirm,
+    onCancel,
+  } = props
+
   if (!visible) return null;
   return (
     <Fullscreen>

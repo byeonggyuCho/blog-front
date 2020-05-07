@@ -31,10 +31,13 @@ interface PostViewerProps {
   error: any
   loading: boolean
   actionButtons: React.ReactElement
-  ownPost?: any
+  ownPost?: boolean
 }
 
-const PostViewer:React.FC<PostViewerProps> = ({ post, error, loading, actionButtons, ownPost }) => {
+const PostViewer:React.FC<PostViewerProps> = ({ post, error, loading, actionButtons }) => {
+
+
+
   // 에러 발생 시
   if (error) {
     if (error.response && error.response.status === 404) {

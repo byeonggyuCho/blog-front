@@ -15,7 +15,6 @@ const store = configureStore(history);
 function loadUser() {
     try {
       const user = storage.get('user');
-      console.log('loadUser', user)
 
       if (!user) return; // 로그인 상태가 아니라면 아무것도 안함
   

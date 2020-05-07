@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Responsive from './Responsive';
 import Button from './Button';
+import {User} from '../../models'
 
 const HeaderBlock = styled.div`
   position: fixed;
@@ -42,7 +43,12 @@ const UserInfo = styled.div`
   margin-right: 1rem;
 `;
 
-const Header = ({ user, onLogout }) => {
+interface HeaderProps {
+  user:User
+  onLogout:()=>void
+}
+
+const Header:React.FC<HeaderProps> = ({ user, onLogout }) => {
   return (
     <>
       <HeaderBlock>

@@ -32,7 +32,14 @@ const QuillWrapper = styled.div`
   }
 `;
 
-const Editor = ({ title, body, onChangeField }) => {
+
+interface EditorProps {
+  title: string
+  body: string
+  onChangeField: (form:{key:string, value:string})=>void
+}
+
+const Editor:React.FC<EditorProps> = ({ title, body, onChangeField }) => {
   const quillElement = useRef(null); // Quill을 적용할 DivElement를 설정
   const quillInstance = useRef(null); // Quill 인스턴스를 설정
 
