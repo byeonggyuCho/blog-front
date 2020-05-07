@@ -1,4 +1,4 @@
-import { takeLatest, call } from 'redux-saga/effects';
+import { takeLatest } from 'redux-saga/effects';
 import * as authAPI from '../lib/api/auth';
 import {
   CHECK,

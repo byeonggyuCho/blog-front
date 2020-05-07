@@ -33,7 +33,7 @@ const PostViewerContainer:React.FC = () => {
 
   const onEdit = () => {
     dispatch(setOriginalPost(post));
-    history.push('/write');
+    // history.push('/write');
   };
 
   const onRemove = () => {
@@ -46,7 +46,7 @@ const PostViewerContainer:React.FC = () => {
     }
   };
 
-  const ownPost = (user && user._id) === (post &&post.user  && post.user._id);
+  const ownPost = (user && user.username) === (post &&post.user  && post.user.profile.username);
 
   return (
     <PostViewer

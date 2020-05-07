@@ -10,8 +10,31 @@ export const createRequestActionTypes =( type:string) => {
 
 
 
+interface AsyncAPI<reqData, resData> {
+  (req?:reqData): Promise<resData>
+}
+
+
+
 interface CreateRequestSaga{
-  (type:any, request:any, callback?:any ) : any
+  (type:any, request:AsyncAPI<any,any>, callback?:any ) : (action:Action) => any
+}
+
+
+interface Action {
+  payload: any
+  type: string
+  meta?: any
+}
+
+
+
+export const createRedirectionSaga = function(path:string){
+
+  return function*(){
+    yield put(push(path))
+  }
+
 }
 
 

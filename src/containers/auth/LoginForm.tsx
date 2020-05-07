@@ -11,7 +11,7 @@ import storage from '../../lib/storeage'
 const LoginForm = () => {
 
   const history  = useHistory()
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string>(null);
   const dispatch:Dispatch = useDispatch();
   const { form, auth, authError, user } = useSelector(({ auth, user }:RootState) => ({
     form: auth.login,
@@ -21,6 +21,7 @@ const LoginForm = () => {
   }));
   // 인풋 변경 이벤트 핸들러(event: React.ChangeEvent<HTMLInputElement>) => void
   const onChange = (e:React.ChangeEvent<HTMLInputElement> )=> {
+
     const { value, name } = e.target;
     dispatch(
       changeField({
@@ -60,6 +61,8 @@ const LoginForm = () => {
     if (user) {
       history.push('/');
       try {
+
+        // @ts-ignore
         storage.set('user', JSON.stringify(user));
       } catch (e) {
         console.log('localStorage is not working');

@@ -9,9 +9,8 @@ import storage from '../../lib/storeage'
 
 const RegisterForm = () => {
 
-
   const history  = useHistory()
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string>(null);
   const dispatch = useDispatch();
   const { form, auth, authError, user } = useSelector(({ auth, user }:RootState) => ({
     form: auth.register,
@@ -20,7 +19,7 @@ const RegisterForm = () => {
     user: user.user,
   }));
   // 인풋 변경 이벤트 핸들러
-  const onChange = e => {
+  const onChange = (e:React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
     dispatch(
       changeField({
@@ -32,7 +31,7 @@ const RegisterForm = () => {
   };
 
   // 폼 등록 이벤트 핸들러
-  const onSubmit = e => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { username, password, passwordConfirm } = form;
     // 하나라도 비어있다면
@@ -83,6 +82,7 @@ const RegisterForm = () => {
     if (user) {
       history.push('/'); // 홈 화면으로 이동
       try {
+        // @ts-ignore
         storage.set('user',JSON.stringify(user));
       } catch (e) {
         console.log('localStorage is not working');

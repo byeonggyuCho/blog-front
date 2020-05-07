@@ -1,9 +1,10 @@
-import {createRequestSaga, createRequestSagaAndRedirection}  from '../lib/createRequestSaga';
+import {createRequestSaga,createRedirectionSaga}  from '../lib/createRequestSaga';
 import * as postsAPI from '../lib/api/posts';
 import { takeLatest } from 'redux-saga/effects';
 import {
   WRITE_POST,
   UPDATE_POST,
+  SET_ORIGINAL_POST
 } from '../actions/write'
 import { push } from 'connected-react-router';
 import {put} from'redux-saga/effects'
@@ -20,8 +21,13 @@ const updatePostSaga = createRequestSaga(UPDATE_POST, postsAPI.updatePost, funct
 });
 
 
+const setOriginalPostSaga = createRedirectionSaga('/write');
+
+
+
 
 export function* writeSaga() {
   yield takeLatest(WRITE_POST.REQUEST, writePostSaga);
   yield takeLatest(UPDATE_POST.REQUEST, updatePostSaga);
+  yield takeLatest(SET_ORIGINAL_POST, setOriginalPostSaga);
 }
