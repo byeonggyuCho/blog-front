@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { changeField, initializeForm, login } from '../../actions/auth';
 import AuthForm from '../../components/auth/AuthForm';
-import { check } from '../../actions/user';
 import {RootState} from '../../reducers'
-import {useHistory } from 'react-router-dom'
 import {Dispatch} from 'redux'
-import storage from '../../lib/storeage'
+// import { check } from '../../actions/user';
+// import {useHistory } from 'react-router-dom'
+// import storage from '../../lib/storage'
 
 const LoginForm = () => {
 
-  const history  = useHistory()
+  // const history  = useHistory()
   const [error, setError] = useState<string>(null);
   const dispatch:Dispatch = useDispatch();
   const { form, auth, authError, user } = useSelector(({ auth, user }:RootState) => ({
@@ -51,24 +51,24 @@ const LoginForm = () => {
       setError(authError);
       return;
     }
-    if (auth) {
-      console.log('로그인 성공');
-      dispatch(check.request());
-    }
+    // if (auth) {
+    //   console.log('로그인 성공');
+    //   dispatch(check.request());
+    // }
   }, [auth, authError, dispatch]);
 
-  useEffect(() => {
-    if (user) {
-      history.push('/');
-      try {
+  // useEffect(() => {
+  //   if (user) {
+  //     // history.push('/');
+  //     try {
 
-        // @ts-ignore
-        storage.set('user', JSON.stringify(user));
-      } catch (e) {
-        console.log('localStorage is not working');
-      }
-    }
-  }, [history, user]);
+  //       // @ts-ignore
+  //       storage.set('user', JSON.stringify(user));
+  //     } catch (e) {
+  //       console.log('localStorage is not working');
+  //     }
+  //   }
+  // }, [history, user]);
 
   return (
     <AuthForm

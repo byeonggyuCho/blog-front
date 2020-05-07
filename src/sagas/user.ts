@@ -4,7 +4,7 @@ import {
   CHECK,
   LOGOUT
 }from '../actions/user'
-import storage from '../lib/storeage'
+import storage from '../lib/storage'
 
 import {createRequestSaga} from '../lib/createRequestSaga';
 

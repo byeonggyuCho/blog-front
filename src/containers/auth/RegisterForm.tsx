@@ -5,7 +5,7 @@ import AuthForm from '../../components/auth/AuthForm';
 import { check } from '../../actions/user';
 import { useHistory } from 'react-router-dom';
 import {RootState} from '../../reducers'
-import storage from '../../lib/storeage'
+import storage from '../../lib/storage'
 
 const RegisterForm = () => {
 
