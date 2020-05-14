@@ -2,21 +2,21 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeField, initializeForm, register } from '../../actions/auth';
 import AuthForm from '../../components/auth/AuthForm';
-import { check } from '../../actions/user';
-import { useHistory } from 'react-router-dom';
+import { check } from '../../actions/auth';
+// import { useHistory } from 'react-router-dom';
 import {RootState} from '../../reducers'
-import storage from '../../lib/storage'
+// import storage from '../../lib/storage'
 
 const RegisterForm = () => {
 
-  const history  = useHistory()
+  // const history  = useHistory()
   const [error, setError] = useState<string>(null);
   const dispatch = useDispatch();
-  const { form, auth, authError, user } = useSelector(({ auth, user }:RootState) => ({
+  const { form, auth, authError } = useSelector(({ auth }:RootState) => ({
     form: auth.register,
     auth: auth.auth,
     authError: auth.authError,
-    user: user.user,
+    // user: user.user,
   }));
   // 인풋 변경 이벤트 핸들러
   const onChange = (e:React.ChangeEvent<HTMLInputElement>) => {
@@ -78,17 +78,17 @@ const RegisterForm = () => {
   }, [auth, authError, dispatch]);
 
   // user 값이 잘 설정되었는지 확인
-  useEffect(() => {
-    if (user) {
-      history.push('/'); // 홈 화면으로 이동
-      try {
-        // @ts-ignore
-        storage.set('user',JSON.stringify(user));
-      } catch (e) {
-        console.log('localStorage is not working');
-      }
-    }
-  }, [history, user]);
+  // useEffect(() => {
+  //   if (auth) {
+  //     history.push('/'); // 홈 화면으로 이동
+  //     try {
+  //       // @ts-ignore
+  //       storage.set('user',JSON.stringify(auth));
+  //     } catch (e) {
+  //       console.log('localStorage is not working');
+  //     }
+  //   }
+  // }, [history, user]);
 
   return (
     <AuthForm

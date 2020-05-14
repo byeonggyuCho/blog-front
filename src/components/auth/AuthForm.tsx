@@ -79,11 +79,11 @@ interface AuthFormProps {
   form:{
     username:string, 
     password:string, 
-    passwordConfirm: string
+    passwordConfirm?: string
   }
-  onChange: ()=>void 
-  onSubmit: ()=>void
-  error: Error
+  onChange: (e:React.ChangeEvent<HTMLInputElement> )=>void 
+  onSubmit: (e:React.FormEvent<HTMLFormElement>)=>void
+  error: string
 }
 
 

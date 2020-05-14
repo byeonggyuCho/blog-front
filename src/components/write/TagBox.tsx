@@ -8,7 +8,7 @@ const TagBoxBlock = styled.div`
   padding-top: 2rem;
 
   h4 {
-    color: ${palette.gray[8]}
+    color: ${palette.gray[8]};
     margin-top: 0;
     margin-bottom: 0.5rem;
   }

@@ -8,18 +8,18 @@ import {Dispatch} from 'redux'
 // import {useHistory } from 'react-router-dom'
 // import storage from '../../lib/storage'
 
-const LoginForm = () => {
+const LoginForm:React.FC = () => {
 
   // const history  = useHistory()
   const [error, setError] = useState<string>(null);
   const dispatch:Dispatch = useDispatch();
-  const { form, auth, authError, user } = useSelector(({ auth, user }:RootState) => ({
+  const { form, auth, authError } = useSelector(({ auth }:RootState) => ({
     form: auth.login,
     auth: auth.auth,
     authError: auth.authError,
-    user: user.user,
+    // user: user.user,
   }));
-  // 인풋 변경 이벤트 핸들러(event: React.ChangeEvent<HTMLInputElement>) => void
+  // 인풋 변경 이벤트 핸들러
   const onChange = (e:React.ChangeEvent<HTMLInputElement> )=> {
 
     const { value, name } = e.target;

@@ -1,19 +1,20 @@
 import React from 'react';
 import WriteActionButtons from '../../components/write/WriteActionButtons';
 import { useSelector, useDispatch } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { useHistory } from 'react-router-dom'
 import { writePost, updatePost } from '../../actions/write';
 import {RootState} from '../../reducers'
 
-const WriteActionButtonsContainer = ({ history }) => {
+const WriteActionButtonsContainer = () => {
   const dispatch = useDispatch();
-  const { title, body, tags, post, postError, originalPostId } = useSelector(
+  const history = useHistory();
+  const { title, body, tags, originalPostId } = useSelector(
     ({ write }:RootState) => ({
       title: write.title,
       body: write.body,
       tags: write.tags,
-      post: write.post,
-      postError: write.postError,
+      // post: write.post,
+      // postError: write.postError,
       originalPostId: write.originalPostId,
     }),
   );
@@ -52,4 +53,4 @@ const WriteActionButtonsContainer = ({ history }) => {
   );
 };
 
-export default withRouter(WriteActionButtonsContainer);
+export default (WriteActionButtonsContainer);

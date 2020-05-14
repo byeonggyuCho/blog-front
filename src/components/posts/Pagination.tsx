@@ -21,7 +21,7 @@ const buildLink = ({ username, tag, page }) => {
 interface PaginationProps {
   page: number
   lastPage: number
-  username: number
+  username: string
   tag: string
 }
 

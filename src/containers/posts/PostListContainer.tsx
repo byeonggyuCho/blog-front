@@ -10,11 +10,11 @@ const PostListContainer:React.FC = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const { posts, error, loading, user } = useSelector(
-    ({ posts, loading, user }:RootState) => ({
+    ({ posts, loading, auth }:RootState) => ({
       posts: posts.posts,
       error: posts.error,
       loading: loading['posts/LIST_POSTS'],
-      user: user.user,
+      user: auth.auth,
     }),
   );
   const { username } = useParams();

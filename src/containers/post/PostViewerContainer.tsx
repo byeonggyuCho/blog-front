@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {  useParams, useHistory } from 'react-router-dom';
-import { readPost, unloadPost,removePost } from '../../actions/post';
+import {  useParams } from 'react-router-dom';
+import { readPost, unloadPost, removePost } from '../../actions/post';
 import PostViewer from '../../components/post/PostViewer';
 import PostActionButtons from '../../components/post/PostActionButtons';
 import { setOriginalPost } from '../../actions/write';
@@ -10,16 +10,16 @@ import {RootState} from '../../reducers'
 
 const PostViewerContainer:React.FC = () => {
 
-  const history = useHistory();
+  // const history = useHistory();
   // 처음 마운트될 때 포스트 읽기 API 요청
   const { postId } = useParams();
   const dispatch = useDispatch();
   const { post, error, loading, user } = useSelector(
-    ({ post, loading, user }:RootState) => ({
+    ({ post, loading, auth }:RootState) => ({
       post: post.post,
       error: post.error,
       loading: loading['post/READ_POST'],
-      user: user.user,
+      user: auth.auth,
     }),
   );
 

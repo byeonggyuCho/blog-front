@@ -21,6 +21,25 @@ export const LOGIN = {
 
 
 
+export  const TEMP_SET_USER = 'auth/TEMP_SET_USER' as const; // 새로고침 이후 임시 로그인 처리
+
+export const CHECK = {
+  REQUEST:"auth/CHECK_REQUEST",
+  SUCCESS:"auth/CHECK_SUCCESS",
+  FAILURE:"auth/CHECK_FAILURE",
+} as const;
+
+
+// export const LOGOUT = 'user/LOGOUT' as const;
+export const LOGOUT = {
+  REQUEST:'auth/LOGOUT_REQUEST',
+  SUCCESS:'auth/LOGOUT_SUCCESS',
+  FAILURE:'auth/LOGOUT_FAILURE',
+} as const;
+
+
+
+
 export const changeField = createAction(CHANGE_FIELD,
   (form:{form:string,key:string,value:string})=> form  
 )();
@@ -45,12 +64,33 @@ export const login = createAsyncAction(
   [LOGIN.FAILURE, (err:Error)=>err ]
 )()
 
+// 회원 정보 확인
+export const check = createAsyncAction(
+  [CHECK.REQUEST, ()=>{}], 
+  [CHECK.SUCCESS, (res:User)=>res],
+  [CHECK.FAILURE, (err:Error )=>err],
+)()
+
+  
+
+
+export const tempSetUser = createAction(TEMP_SET_USER, user => user)();
+// export const logout = createAction(LOGOUT)();
+export const logout = createAsyncAction(
+  [LOGOUT.REQUEST, ()=>{}],
+  [LOGOUT.SUCCESS, ()=>{}],
+  [LOGOUT.FAILURE, (errorMsg:string)=>errorMsg],
+)();
+
 
 const actions = {
   changeField,
   initializeForm,
   login,
-  register
+  register,
+  tempSetUser,
+  check,
+  logout
 }
 
 export default actions;

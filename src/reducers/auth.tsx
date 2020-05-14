@@ -3,7 +3,11 @@ import {createReducer, ActionType} from 'typesafe-actions'
 import actions, {
   CHANGE_FIELD,
   INITIALIZE_FORM, 
-  REGISTER,LOGIN
+  REGISTER,
+  LOGIN,
+  LOGOUT,
+  CHECK,
+  TEMP_SET_USER,
 } from '../actions/auth'
 
 
@@ -27,11 +31,11 @@ const initialState:StateAuth = {
     password: '',
     passwordConfirm: ''
   },
-  login: {
+  login: {        // 로그인 요청시 아이디 페스워드 (암호화)저장
     username: '',
     password: ''
   },
-  auth: null,
+  auth: null,     // 로그인 정보
   authError: null
 };
 
@@ -52,6 +56,7 @@ const auth = createReducer<StateAuth, AuthAction>(initialState,
     // 회원가입 성공
     [REGISTER.SUCCESS]: (state, { payload: auth }) => ({
       ...state,
+      register: initialState.register,
       authError: null,
       auth
     }),
@@ -64,13 +69,32 @@ const auth = createReducer<StateAuth, AuthAction>(initialState,
     [LOGIN.SUCCESS]: (state, { payload: auth }) => ({
       ...state,
       authError: null,
+      login:initialState.login,  // 초기화.
       auth
     }),
     // 로그인 실패
     [LOGIN.FAILURE]: (state, { payload: error }) => ({
       ...state,
       authError: error
-    })
+    }),
+    [TEMP_SET_USER]: (state, { payload: auth }) => ({
+      ...state,
+      auth,
+    }),
+    [CHECK.SUCCESS]: (state, { payload: auth }) => ({
+      ...state,
+      auth,
+      checkError: null,
+    }),
+    [CHECK.FAILURE]: (state, { payload: error }) => ({
+      ...state,
+      auth: null,
+      checkError: error,
+    }),
+    [LOGOUT.SUCCESS]: state => ({
+      ...state,
+      auth: null,
+    }),
   }
 );
 

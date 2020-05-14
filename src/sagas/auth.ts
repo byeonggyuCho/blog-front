@@ -8,8 +8,29 @@ import * as authAPI from '../lib/api/auth';
 import {
   REGISTER,
   LOGIN,
+  CHECK,
+  LOGOUT
 } from '../actions/auth'
 
+
+
+
+function checkFailureSaga() {
+  try {
+    storage.remove('user')
+  } catch (e) {
+    console.log('localStorage is not working');
+  }
+}
+
+
+const checkSaga = createRequestSaga(CHECK, authAPI.check);
+
+
+
+const logoutSaga = createRequestSaga(LOGOUT, authAPI.logout, ()=>{
+  storage.remove('user')
+})
 
 // storage.set('user', JSON.stringify(user));
 // saga 생성
@@ -26,4 +47,7 @@ const loginSaga = createRequestSaga(LOGIN, authAPI.login, function*(user){
 export function* authSaga() {
   yield takeLatest(REGISTER.REQEUST, registerSaga);
   yield takeLatest(LOGIN.REQEUST, loginSaga);
+  yield takeLatest(CHECK.REQUEST, checkSaga);
+  yield takeLatest(CHECK.FAILURE, checkFailureSaga);
+  yield takeLatest(LOGOUT.REQUEST, logoutSaga);
 }
