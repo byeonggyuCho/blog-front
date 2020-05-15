@@ -1,0 +1,39 @@
+.ui.raised.segments.pushable.Sidebar{
+    transform: none!important;
+}
+
+.ui.raised.segments.pushable.custom {
+    flex-direction: column;
+    position: relative;
+    margin: 0rem 0;
+    border: 0px;
+    border-radius:unset;
+    box-shadow:unset;
+    transform:none;
+    z-index: 0;
+}
+
+
+.ui.inverted.icon.menu .item  {
+    color: black;
+}
+
+
+/* rgb(110, 130, 127); */
+.dropdown.item:hover, .ui.inverted.menu .link.item:hover, .ui.inverted.menu a.item:hover, .ui.link.inverted.menu .item:hover {
+    background:gray;
+    /* color: #fff; */
+}
+
+
+.ui.visible.right.overlay.sidebar.custom {
+    transform: translate3d(0,0,0);
+    position: fixed;
+    /* margin-top: auto; */
+    top: 56px;
+}
+
+
+.ui.inverted.menu {
+    background: white;
+}

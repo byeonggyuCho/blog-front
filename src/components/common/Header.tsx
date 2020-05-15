@@ -4,12 +4,15 @@ import { Link } from 'react-router-dom';
 import Responsive from './Responsive';
 import Button from './Button';
 import {User} from '../../models'
+import palette from '../../lib/styles/palette'
+import Hamburger from '../common/Hamburger'
 
 const HeaderBlock = styled.div`
   position: fixed;
   width: 100%;
   background: white;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
+  z-index:1;
 `;
 
 /**
@@ -42,13 +45,63 @@ const UserInfo = styled.div`
   font-weight: 800;
   margin-right: 1rem;
 `;
+/* 
+
+const HamburgerIcon = styled.div`
+width: 20px;
+height: 20px;
+position: relative;
+z-index: 4;
+top: 30%;
+cursor: pointer;
+
+&::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: ${palette.gray[6]};
+
+}
+
+div {
+    position: absolute;
+    top: 13px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: ${palette.gray[6]};
+}
+
+&::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: ${palette.gray[6]};
+
+}
+`
+
+const Hamburger = ()=>(
+<HamburgerIcon>
+  <div />
+</HamburgerIcon>
+)
+ */
 
 interface HeaderProps {
   user:User
+  isMenuShow: boolean
   onLogout:()=>void
+  onMenuShow:(v:boolean)=>void
 }
 
-const Header:React.FC<HeaderProps> = ({ user, onLogout }) => {
+const Header:React.FC<HeaderProps> = ({ user, onLogout,onMenuShow,isMenuShow }) => {
   return (
     <>
       <HeaderBlock>
@@ -56,16 +109,22 @@ const Header:React.FC<HeaderProps> = ({ user, onLogout }) => {
           <Link to="/" className="logo">
             REACTERS
           </Link>
-          {user ? (
+          {/* {user ? (
             <div className="right">
               <UserInfo>{user.username}</UserInfo>
               <Button onClick={onLogout}>로그아웃</Button>
             </div>
-          ) : (
+          ) : ( */}
             <div className="right">
-              <Button to="/login">로그인</Button>
+              {/* <Button to="/login">로그인</Button> */}
+              {user &&  <UserInfo>{user.username}</UserInfo>}
+              <Hamburger
+                onShow={onMenuShow}
+                show={isMenuShow}
+              />
+              
             </div>
-          )}
+          {/* )} */}
         </Wrapper>
       </HeaderBlock>
       <Spacer />

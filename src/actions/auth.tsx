@@ -1,6 +1,5 @@
-import {createAsyncAction} from 'typesafe-actions'
+import {createAsyncAction,createAction} from 'typesafe-actions'
 import {User, LoginInfo} from '../models'
-import { createAction } from 'typesafe-actions';
 
 export const CHANGE_FIELD = 'auth/CHANGE_FIELD' as const;
 export const INITIALIZE_FORM = 'auth/INITIALIZE_FORM' as const;

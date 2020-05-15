@@ -5,6 +5,7 @@ import loading from './loading';
 import write  from './write';
 import post from './post';
 import posts from './posts';
+import base from './base'
 import { connectRouter } from 'connected-react-router'
 
 
@@ -12,9 +13,10 @@ import { connectRouter } from 'connected-react-router'
 
 const createRootReducer = (history)=>combineReducers({
   router: connectRouter(history),
+  // user,
   auth,
   loading,
-  // user,
+  base,
   write,
   post,
   posts,

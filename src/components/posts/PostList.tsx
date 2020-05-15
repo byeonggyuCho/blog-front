@@ -95,7 +95,7 @@ const PostList:React.FC<PostListProps> = ({ posts, loading, error, showWriteButt
           ))}
         </div>
       )}
-    </PostListBlock>
+     </PostListBlock>
   );
 };
 
