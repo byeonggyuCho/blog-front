@@ -6,8 +6,15 @@
  * let foo = storage.get('foo'); // bar
  * storage.remove('foo');
  */
+type Storage = {
+    set(key: string, value: any): void,
+    get(key: string): any,
+    remove(key: string): void,
+    clear(): void,
+  };
+
 // 로컬 스토리지에 JSON 형태로 저장 / 불러오기 / 삭제 헬퍼
-const storage = {
+const storage:Storage = {
     set: (key:string, object:any) => {
         if(!localStorage) return;
         localStorage[key] = (typeof object) === 'string' ? object : JSON.stringify(object);
@@ -33,6 +40,11 @@ const storage = {
             localStorage.removeItem(key);
         }
     }
+    ,clear() {
+        if (localStorage.clear) {
+            localStorage.clear();
+        }
+      },
 };
 
 export default storage;
