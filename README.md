@@ -1,32 +1,36 @@
 ## ReadMe
 
 
+## 버그
 
-1. 드롭다운을 만들것.(햄버거 버튼)
-3. 양식을 마크다운으로 전환할것.
+
+
 4. 이미지 업로드를 구현할것.
     - 마크다운에 이미지를 업로드.
 5. 번들링 프로세스에 대해서 이해할것.    
-    - 
 6. https
 7. 소셜로그인
-8. 이미지 업로드
-9. 스크롤 제어에 따른 데이터 요청
-    - 무한스크롤
-
+9. 무한스크롤
 
 
 ## 개선사항
-3. 포스트 로딩속도가 살짝 느림
-6. 네비게이션이 상세보기에서 이동한다. 
-    - 스크롤바.
-
+- dimm문제
+- 페이네이션을 cashing처리를 해서 빨리 할 순없을까?
+- top으로 올려주는 버튼 추가하기.
+- about페이지.
 
 ## 벤치마크
 1. 벨로그
     - [velog](https://velog.io/@_uchanlee/Semantic-UI%EC%8B%9C%EB%A7%A8%ED%8B%B1-UI-%EB%A7%9B%EB%B3%B4%EA%B8%B0)
         - 포스트 쓰기
     - [참고](https://blog.woolta.com/)
+2. react-editor
+    - [참고](https://github.com/nhn/tui.editor/tree/master/apps/react-editor)
+3. sementic-UI
+    - [참고](https://react.semantic-ui.com/)
+
+- [벨로퍼트와 함께 하는 모던 리액트](https://react.vlpt.us/basic/01-concept.html)
+- [벨로퍼트와 함께 하는 백엔드](https://backend-intro.vlpt.us/6/04.html)
 
 
 ## feat
@@ -35,7 +39,6 @@
     - JWT ([참고](https://github.com/velopert/nodejs-jwt-example))
         - [참고2](https://backend-intro.vlpt.us/4/01.html)
 4. 네비
-    - 햄버거버튼으로 카테고리 나누기.
     - 검색바 
       - [참고](https://blog.woolta.com/)
 5. 윙배너
@@ -74,11 +77,8 @@
 10. 최적화
     - onchange시 여러번 호출되는것 최적화하기.
 14. 컴포넌트 설계와 구성을 어떻게 할 것인지?
-16. 디버깅
-    - 리덕스 디버깅툴을 이용해 Dispatch를 날리는 것
 17. 배포
     - 정적파일로 만들어서 서버에 배포하는것.
-
 
 
 # 질문
@@ -87,7 +87,3 @@
     - 왜 프론트에서 라우팅 처리를 할까?
     - 어떤 차이가 있나?
 
-
-## REF
-- [벨로퍼트와 함께 하는 모던 리액트](https://react.vlpt.us/basic/01-concept.html)
-- [벨로퍼트와 함께 하는 백엔드](https://backend-intro.vlpt.us/6/04.html)

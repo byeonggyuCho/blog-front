@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useRef,useEffect} from 'react';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 import Responsive from '../common/Responsive';
@@ -6,6 +6,16 @@ import SubInfo from '../common/SubInfo';
 import Tags from '../common/Tags';
 import { Helmet } from 'react-helmet-async';
 import {Post} from '../../models'
+import Viewer from '@toast-ui/editor/dist/toastui-editor-viewer';
+import '@toast-ui/editor/dist/toastui-editor-viewer.css';
+
+
+// const viewer = new Viewer({
+//   el: document.querySelector('#viewer'),
+//   height: '600px',
+//   initialValue: '# hello'
+// });
+
 
 const PostViewerBlock = styled(Responsive)`
   margin-top: 4rem;
@@ -36,6 +46,26 @@ interface PostViewerProps {
 
 const PostViewer:React.FC<PostViewerProps> = ({ post, error, loading, actionButtons }) => {
 
+  const viewerEle = useRef(null)
+  
+
+  // useEffect(()=>{
+  //   console.log(11)
+  // },[])
+
+
+  
+  useEffect(()=>{
+
+    if(viewerEle.current){
+      new Viewer({
+        el: viewerEle.current,
+        initialValue: post.body
+      });
+    }
+
+  },[viewerEle.current])
+
 
 
   // 에러 발생 시
@@ -51,7 +81,17 @@ const PostViewer:React.FC<PostViewerProps> = ({ post, error, loading, actionButt
     return null;
   }
 
+
+  
   const { title, body, user, publishedDate, tags } = post;
+
+
+
+
+
+
+
+
   return (
     <PostViewerBlock>
       <Helmet>
@@ -68,7 +108,10 @@ const PostViewer:React.FC<PostViewerProps> = ({ post, error, loading, actionButt
         <Tags tags={tags} />
       </PostHead>
       {actionButtons}
-      <PostContent dangerouslySetInnerHTML={{ __html: body }} />
+      <div 
+        ref={viewerEle}
+        />
+      {/* <PostContent dangerouslySetInnerHTML={{ __html: body }} /> */}
     </PostViewerBlock>
   );
 };

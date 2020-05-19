@@ -1520,6 +1520,21 @@
   resolved "https://registry.yarnpkg.com/@testing-library/user-event/-/user-event-7.2.1.tgz#2ad4e844175a3738cb9e7064be5ea070b8863a1c"
   integrity sha512-oZ0Ib5I4Z2pUEcoo95cT1cr6slco9WY7yiPpG+RGNkj8YcYgJnM7pXmYmorNOReh8MIGcKSqXyeGjxnr8YiZbA==
 
+"@toast-ui/editor@^2.1.2":
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/@toast-ui/editor/-/editor-2.1.2.tgz#0472431bd039ae70882d77910e83f0ad222d0b1c"
+  integrity sha512-yoWRVyp2m1dODH+bmzJaILUgl2L57GCQJ8c8+XRgJMwfxb/TFz5U+oT8JGAU5VwozIzKF0SyVMs8AEePwwhIIA==
+  dependencies:
+    "@types/codemirror" "0.0.71"
+    codemirror "^5.48.4"
+
+"@toast-ui/react-editor@^2.1.2":
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/@toast-ui/react-editor/-/react-editor-2.1.2.tgz#f712f0a86189b7bf171d2d51e0f5aadded28a91f"
+  integrity sha512-yNe0SEYmX/EjrKZp/ZlTtTM8JVASWgGb0S4WBnUgtL8Y6mHShcLHlpCWsOhTYGN5N+iH9xWDK5olqrDUiDSJ/Q==
+  dependencies:
+    "@toast-ui/editor" "^2.1.2"
+
 "@types/axios@^0.14.0":
   version "0.14.0"
   resolved "https://registry.yarnpkg.com/@types/axios/-/axios-0.14.0.tgz#ec2300fbe7d7dddd7eb9d3abf87999964cafce46"
@@ -1564,6 +1579,13 @@
   version "2.2.10"
   resolved "https://registry.yarnpkg.com/@types/classnames/-/classnames-2.2.10.tgz#cc658ca319b6355399efc1f5b9e818f1a24bf999"
   integrity sha512-1UzDldn9GfYYEsWWnn/P4wkTlkZDH7lDb0wBMGbtIQc9zXEQq7FlKBdZUn6OBqD8sKZZ2RQO2mAjGpXiDGoRmQ==
+
+"@types/codemirror@0.0.71":
+  version "0.0.71"
+  resolved "https://registry.yarnpkg.com/@types/codemirror/-/codemirror-0.0.71.tgz#861f1bcb3100c0a064567c5400f2981cf4ae8ca7"
+  integrity sha512-b2oEEnno1LIGKMR7uBEsr40al1UijF1HEpRn0+Yf1xOLl24iQgB7DBpZVMM7y54G5wCNoclDrRO65E6KHPNO2w==
+  dependencies:
+    "@types/tern" "*"
 
 "@types/codemirror@^0.0.88":
   version "0.0.88"
@@ -3469,6 +3491,11 @@ code-point-at@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
   integrity sha1-DQcLTQQ6W+ozovGkDi7bPZpMz3c=
+
+codemirror@^5.48.4:
+  version "5.53.2"
+  resolved "https://registry.yarnpkg.com/codemirror/-/codemirror-5.53.2.tgz#9799121cf8c50809cca487304e9de3a74d33f428"
+  integrity sha512-wvSQKS4E+P8Fxn/AQ+tQtJnF1qH5UOlxtugFLpubEZ5jcdH2iXTVinb+Xc/4QjshuOxRm4fUsU2QPF1JJKiyXA==
 
 codemirror@^5.51.0:
   version "5.52.2"
