@@ -10,14 +10,12 @@ import {Dispatch} from 'redux'
 
 const LoginForm:React.FC = () => {
 
-  // const history  = useHistory()
   const [error, setError] = useState<string>(null);
   const dispatch:Dispatch = useDispatch();
   const { form, auth, authError } = useSelector(({ auth }:RootState) => ({
     form: auth.login,
     auth: auth.auth,
     authError: auth.authError,
-    // user: user.user,
   }));
   // 인풋 변경 이벤트 핸들러
   const onChange = (e:React.ChangeEvent<HTMLInputElement> )=> {

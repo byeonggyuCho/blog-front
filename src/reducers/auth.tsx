@@ -31,7 +31,7 @@ const initialState:StateAuth = {
     password: '',
     passwordConfirm: ''
   },
-  login: {        // 로그인 요청시 아이디 페스워드 (암호화)저장
+  login: {        // 로그인 요청시 
     username: '',
     password: ''
   },

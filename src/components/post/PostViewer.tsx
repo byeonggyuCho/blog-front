@@ -21,6 +21,7 @@ const PostViewerBlock = styled(Responsive)`
   margin-top: 4rem;
   height:100%;
 `;
+
 const PostHead = styled.div`
   border-bottom: 1px solid ${palette.gray[2]};
   padding-bottom: 3rem;

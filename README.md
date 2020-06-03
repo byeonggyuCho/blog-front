@@ -7,13 +7,25 @@ react와 typescript 기반의 블로그
 ## skill
 
 ### react
-- styled Component로 css모듈화
 - hooks기반의 함수형 컴포넌트로 상태관리
 - 렌더링 최적화를 위한 컴포넌트 분리
+- sementic-UI와 styled component로 디자인.
+```js
+const PostHead = styled.div`
+  border-bottom: 1px solid ${palette.gray[2]};
+  padding-bottom: 3rem;
+  margin-bottom: 3rem;
+  h1 {
+    font-size: 3rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+`;
+```
 
 
 ## redux
-- saga를 이용한 비동기처리
+- saga를 이용한 side effect관리.
 - router middlerware를 이용한 리다렉션 처리.
 ```js
 const logoutSaga = createRequestSaga(LOGOUT, authAPI.logout, ()=>{
@@ -22,17 +34,55 @@ const logoutSaga = createRequestSaga(LOGOUT, authAPI.logout, ()=>{
 ```
 
 ### typescript
-- redux reducer, 컴포넌트 props, 서버api에 타입 체크 적용.
+1. Container Component
+```js
+const LoginForm:React.FC = () => {
+
+  const [error, setError] = useState<string>(null);
+  const dispatch:Dispatch = useDispatch();
+  const { form, auth, authError } = useSelector(({ auth }:RootState) => ({
+    form: auth.login,
+    auth: auth.auth,
+    authError: auth.authError,
+  }));
+
+  ...
+}
+```
+2. Presentational component
+```js
+
+interface AuthFormProps {
+  type: 'register' | 'login'
+  form:{
+    username:string, 
+    password:string, 
+    passwordConfirm?: string
+  }
+  onChange: (e:React.ChangeEvent<HTMLInputElement> )=>void 
+  onSubmit: (e:React.FormEvent<HTMLFormElement>)=>void
+  error: string
+}
+
+
+const AuthForm:React.FC<AuthFormProps> = ({ type, form, onChange, onSubmit, error }) => {
+    ...
+}
+```
+3. reducer에서 action 별 payload 타입 검증.
+```js
+const base = createReducer<StateBase, AuthAction>(initialState, {
+    [SHOW_MENUE]:(state, { payload })=>({
+        ...state,
+        showSlide:payload
+    })
+})
+```
 
 
 ### 최적화
 - PureComponent와 React.memo를 이용한 렌터링 최적화.
 
-
-### etc.
-- JWT을 이용한 로그인처리
-- sementic-UI와 styled component로 디자인.
-- toast editor작용.
 
 
 ## 참고

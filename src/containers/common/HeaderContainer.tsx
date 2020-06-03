@@ -13,8 +13,6 @@ const HeaderContainer = () => {
     slideShow: base.showSlide
   }));
 
-  // rgb(110, 130, 127)
-
   const onLogout = () => {
    dispatch(logout.request()); 
   };
