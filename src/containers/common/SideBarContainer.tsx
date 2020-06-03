@@ -1,5 +1,5 @@
 // import { useBooleanKnob } from '@stardust-ui/docs-components'
-import React,{useState, useEffect} from 'react'
+import React from 'react'
 // import {  Menu,Segment, Sidebar } from 'semantic-ui-react'
 import {useSelector} from 'react-redux'
 import {RootState} from '../../reducers'

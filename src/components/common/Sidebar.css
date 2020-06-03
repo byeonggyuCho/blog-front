@@ -39,3 +39,8 @@
 .ui.inverted.menu {
     background: white;
 }
+
+
+.pushable>.pusher.custom{
+    height: 100%;
+}

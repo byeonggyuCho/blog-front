@@ -38,10 +38,8 @@ const registerSaga = createRequestSaga(REGISTER, authAPI.register);
 // const loginSaga = createRequestSagaAndRedirection(LOGIN, authAPI.login,'/');
 const loginSaga = createRequestSaga(LOGIN, authAPI.login, function*(user){
 
-
   storage.set('user', JSON.stringify(user));
   yield put(push('/'))
-
 
 });
 export function* authSaga() {

@@ -10,6 +10,7 @@ import {Post} from '../../models'
 
 const PostListBlock = styled(Responsive)`
   margin-top: 3rem;
+  height:100%;
 `;
 
 const WritePostButtonWrapper = styled.div`

@@ -7,7 +7,7 @@ const PostPage:React.FC = () => {
     <>
       <HeaderContainer />
       <SidebarContainer>
-      <PostViewerContainer />
+        <PostViewerContainer />
       </SidebarContainer>
     </>
   );

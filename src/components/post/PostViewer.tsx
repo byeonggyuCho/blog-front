@@ -19,6 +19,7 @@ import '@toast-ui/editor/dist/toastui-editor-viewer.css';
 
 const PostViewerBlock = styled(Responsive)`
   margin-top: 4rem;
+  height:100%;
 `;
 const PostHead = styled.div`
   border-bottom: 1px solid ${palette.gray[2]};
@@ -48,11 +49,6 @@ const PostViewer:React.FC<PostViewerProps> = ({ post, error, loading, actionButt
 
   const viewerEle = useRef(null)
   
-
-  // useEffect(()=>{
-  //   console.log(11)
-  // },[])
-
 
   
   useEffect(()=>{
@@ -87,11 +83,6 @@ const PostViewer:React.FC<PostViewerProps> = ({ post, error, loading, actionButt
 
 
 
-
-
-
-
-
   return (
     <PostViewerBlock>
       <Helmet>
@@ -109,6 +100,7 @@ const PostViewer:React.FC<PostViewerProps> = ({ post, error, loading, actionButt
       </PostHead>
       {actionButtons}
       <div 
+        id="viewer"
         ref={viewerEle}
         />
       {/* <PostContent dangerouslySetInnerHTML={{ __html: body }} /> */}
