@@ -24,17 +24,85 @@ const PostHead = styled.div`
 ```
 
 
-## redux
-- saga를 이용한 side effect관리.
-- router middlerware를 이용한 리다렉션 처리.
+### redux
+#### 1. redux-saga를 이용한 side effect관리.
+
 ```js
-const logoutSaga = createRequestSaga(LOGOUT, authAPI.logout, ()=>{
-  storage.remove('user')
-})
+// lib/creatRequestSaga.ts
+export const createRequestSaga:CreateRequestSaga  =  function (type, request, callback) {
+
+  return function*(action) {
+    yield put(startLoading(type.REQUEST)); // 로딩 시작
+    try {
+
+      const response = yield call(request, action.payload);
+      const {data, status,message} = response.data;
+
+      if(status === 'S'){
+        yield put({
+          type: type.SUCCESS,
+          payload: data,
+          meta: response,
+        });
+      }else{
+        throw new Error(message)
+      }
+
+      if(typeof callback === 'function'){
+        yield fork(callback, data);
+      }
+     
+    } catch (e) {
+      yield put({
+        type: type.FAILURE,
+        payload: e.message,
+        error: true,
+      });
+    }
+    yield put(finishLoading(type.REQUEST)); // 로딩 끝
+  };
+}
+```
+#### 2. router middlerware를 이용한 리다렉션 처리.
+
+```ts
+// sagas/posts.ts
+const removePostSaga = createRequestSagaAndRedirection(REMOVE_POST, postsAPI.removePost,'/');
+
+// lib/createRequestSaga.ts
+export  function createRequestSagaAndRedirection(type, request,url) {
+
+  return function*(action) {
+    yield put(startLoading(type.REQUEST)); // 로딩 시작
+    try {
+      const response = yield call(request, action.payload);
+      const {data, status,message} = response.data;
+
+      if(status === 'S'){
+        yield put({
+          type: type.SUCCESS,
+          payload: data,
+          meta: response,
+        });
+      }else{
+        throw new Error(message)
+      }
+
+      yield put(push(url));
+    } catch (e) {
+      yield put({
+        type: type.FAILURE,
+        payload: e.message,
+        error: true,
+      });
+    }
+    yield put(finishLoading(type.REQUEST)); // 로딩 끝
+  };
+}
 ```
 
 ### typescript
-1. Container Component
+#### 1. Container Component
 ```js
 const LoginForm:React.FC = () => {
 
@@ -49,7 +117,7 @@ const LoginForm:React.FC = () => {
   ...
 }
 ```
-2. Presentational component
+#### 2. Presentational component
 ```js
 
 interface AuthFormProps {
@@ -69,7 +137,7 @@ const AuthForm:React.FC<AuthFormProps> = ({ type, form, onChange, onSubmit, erro
     ...
 }
 ```
-3. reducer에서 action 별 payload 타입 검증.
+#### 3. reducer에서 action 별 payload 타입 검증.
 ```js
 const base = createReducer<StateBase, AuthAction>(initialState, {
     [SHOW_MENUE]:(state, { payload })=>({

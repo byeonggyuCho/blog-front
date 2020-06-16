@@ -47,7 +47,6 @@ export const createRequestSaga:CreateRequestSaga  =  function (type, request, ca
       const response = yield call(request, action.payload);
       const {data, status,message} = response.data;
 
-
       if(status === 'S'){
         yield put({
           type: type.SUCCESS,
